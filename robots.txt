@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /D2L/
+Disallow: /D2L/atelier.html
+Disallow: /D2L/studio.html
+Sitemap: https://guy2b.github.io/D2L/sitemap.xml

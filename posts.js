@@ -631,14 +631,14 @@ window.BLOG_POSTS = [
       },
       {
         "type": "image",
-        "image": "assets/articles/shanghai-airport.jpg",
+        "image": "assets/articles/shanghai-airport.webp",
         "alt": "Terminal moderne de l’aéroport international de Pudong à Shanghai.",
         "caption": "Pu dông Intl. Airport.",
         "credit": "© Die 2 Lap"
       },
       {
         "type": "image",
-        "image": "assets/articles/shanghai-skyline.jpg",
+        "image": "assets/articles/shanghai-skyline.webp",
         "alt": "Vue du quartier de Pudong et de la tour de la Perle de l’Orient.",
         "caption": "Pudong, Shanghai.",
         "credit": "© Die 2 Lap"
@@ -649,7 +649,7 @@ window.BLOG_POSTS = [
       },
       {
         "type": "image",
-        "image": "assets/articles/shanghai-neon.jpg",
+        "image": "assets/articles/shanghai-neon.webp",
         "alt": "Ardoise lumineuse avec caractères chinois dans un restaurant à Shanghai.",
         "caption": "Éclats de cuisine et de nuit.",
         "credit": "© Die 2 Lap"
@@ -660,7 +660,7 @@ window.BLOG_POSTS = [
       },
       {
         "type": "image",
-        "image": "assets/articles/shanghai-metro.jpg",
+        "image": "assets/articles/shanghai-metro.webp",
         "alt": "Station de métro moderne et lumineuse à Shanghai.",
         "caption": "Le métro de Shanghai.",
         "credit": "© Die 2 Lap"
@@ -671,7 +671,7 @@ window.BLOG_POSTS = [
       },
       {
         "type": "image",
-        "image": "assets/articles/shanghai-temple.jpg",
+        "image": "assets/articles/shanghai-temple.webp",
         "alt": "Temple illuminé de nuit à Shanghai.",
         "caption": "Shanghai, de nuit.",
         "credit": "© Die 2 Lap"
@@ -681,7 +681,7 @@ window.BLOG_POSTS = [
         "text": "La croissance à deux chiffres et le développement corollaire de cette ville cosmopolite ne finissent plus d’attirer le monde entier: étudiants, chercheurs, entreprises, débrouillards… On est loin du pays dénigré qui manufacturait tout pour tout le monde à moindre coût… Les étrangers du monde entier viennent désormais les rêves plein les yeux… L’Occident s’y retrouve comme l’Afrique en Occident. En quelques décennies ce pays-continent a su rééquilibrer voire inverser le rapport de forces avec ses prétendants de l’époque: Ils ont réussi là où nous Africain n’arrêtons d’échouer…"
       }
     ],
-    "image": "assets/articles/shanghai-skyline.jpg",
+    "image": "assets/articles/shanghai-skyline.webp",
     "imageAlt": "Skyline de Shanghai vu depuis le Bund.",
     "imageCredit": "© Die 2 Lap",
     "order": 19,

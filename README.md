@@ -82,3 +82,19 @@ Quand le contenu est prêt, cliquez sur **Exporter custom-content.js**, puis rem
 
 ### v15
 This version updates the featured image for `Artifices de petit prince` using the latest file provided by the author.
+
+## V21 - audit du site public
+
+- Bibliothèque, portes d'entrée et romans pré-rendus dans le HTML pour une meilleure indexation.
+- SEO : canonical, Open Graph, Twitter Cards et Schema.org.
+- `sitemap.xml`, `robots.txt` et page `404.html` ajoutés.
+- Métadonnées sociales des articles améliorées.
+- Photos Shanghai converties en WebP pour réduire le poids du site.
+- Voir `AUDIT_V21.md` pour le détail.
+
+
+## V22
+
+- Impressum mis à jour avec les informations éditoriales fournies par l’auteur.
+- Contact ajouté : die2lap@gmail.com.
+- Hébergement conservé avec la mention `in progress` en attendant les informations définitives.

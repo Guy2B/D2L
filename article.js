@@ -101,6 +101,19 @@
     `${post.title}, ${post.category}. Un texte de Die 2 Lap sur Chroniques d’ailleurs.`
   );
 
+  const absoluteArticleUrl = new URL(`article.html?id=${encodeURIComponent(post.id)}`, window.location.href).href;
+  const absoluteImageUrl = post.image ? new URL(post.image, window.location.href).href : new URL("assets/die2lap-portrait.jpg", window.location.href).href;
+  const socialDescription = `${post.title}, ${post.category}. Un texte de Die 2 Lap sur Chroniques d’ailleurs.`;
+  const setMeta = (selector, value) => document.querySelector(selector)?.setAttribute("content", value);
+  setMeta('meta[property="og:title"]', post.title);
+  setMeta('meta[property="og:description"]', socialDescription);
+  setMeta('meta[property="og:url"]', absoluteArticleUrl);
+  setMeta('meta[property="og:image"]', absoluteImageUrl);
+  setMeta('meta[name="twitter:title"]', post.title);
+  setMeta('meta[name="twitter:description"]', socialDescription);
+  setMeta('meta[name="twitter:image"]', absoluteImageUrl);
+  document.querySelector('link[rel="canonical"]')?.setAttribute("href", absoluteArticleUrl);
+
   const minutes = readMinutes(post);
   document.querySelector("#article-category").textContent = post.category;
   document.querySelector("#article-title").textContent = post.title;

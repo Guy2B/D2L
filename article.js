@@ -12,7 +12,7 @@
     likes: "die2lap:likes:v11",
     comments: "die2lap:comments:v11",
     theme: "die2lap:theme:v11",
-    font: "die2lap:reading-font:v11"
+    font: "die2lap:reading-font:v29"
   };
 
   const safeParse = (value, fallback) => {
@@ -251,52 +251,218 @@
   }
 
   const likeButton = document.querySelector(".like-button");
+  const likeCluster = document.querySelector(".like-cluster");
   const heart = document.querySelector(".heart");
+  const likeLabel = document.querySelector(".like-label");
   const likeCount = document.querySelector(".like-count");
+  const likeScope = document.querySelector(".like-scope");
+  const afterLikeShare = document.querySelector(".after-like-share");
+  const likesApi = window.D2LLikesAPI || { isConfigured: false };
   const savedLike = likesState[post.id] || { liked: false };
+  let globalLikeCount = null;
+  let globalLikesReady = false;
+  let likeSyncing = false;
+
+  const setLikeScope = text => {
+    if (likeScope) likeScope.textContent = text;
+  };
 
   const updateLike = () => {
     const liked = Boolean(savedLike.liked);
     likeButton.classList.toggle("is-liked", liked);
+    likeCluster?.classList.toggle("is-liked", liked);
     likeButton.setAttribute("aria-pressed", String(liked));
     heart.textContent = liked ? "♥" : "♡";
-    likeCount.textContent = Number(post.baseLikes || 0) + (liked ? 1 : 0);
-  };
+    if (likeLabel) likeLabel.textContent = liked ? "Aimé" : "J’aime";
 
-  likeButton.addEventListener("click", () => {
-    savedLike.liked = !savedLike.liked;
-    likesState[post.id] = savedLike;
-    saveObject(STORAGE.likes, likesState);
-    updateLike();
-  });
-  updateLike();
+    const localFallback = Number(post.baseLikes || 0) + (liked ? 1 : 0);
+    const displayedCount = Number.isFinite(globalLikeCount) ? globalLikeCount : localFallback;
+    likeCount.textContent = Math.max(0, Number(displayedCount) || 0);
+  };
 
   const shareToggle = document.querySelector(".share-toggle");
   const shareMenu = document.querySelector(".share-menu");
-  const pageUrl = window.location.href;
-  document.querySelector(".share-x").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(pageUrl)}`;
-  document.querySelector(".share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-  document.querySelector(".share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(`${post.title} - ${pageUrl}`)}`;
+  const shareNative = document.querySelector(".share-native");
+  const afterLikeNative = document.querySelector(".after-like-native");
+  const pageUrl = new URL(window.location.href);
+  pageUrl.hash = "";
+  const canonicalUrl = pageUrl.href;
+  const shareText = `${post.title} - Chroniques d’ailleurs`;
 
-  shareToggle.addEventListener("click", () => {
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(canonicalUrl)}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${canonicalUrl}`)}`;
+
+  document.querySelector(".share-x").href = xUrl;
+  document.querySelector(".share-facebook").href = facebookUrl;
+  document.querySelector(".share-whatsapp").href = whatsappUrl;
+  document.querySelector(".after-like-x").href = xUrl;
+  document.querySelector(".after-like-whatsapp").href = whatsappUrl;
+
+  async function nativeShare() {
+    if (!navigator.share) return false;
+    try {
+      await navigator.share({
+        title: post.title,
+        text: `« ${post.title} » sur Chroniques d’ailleurs`,
+        url: canonicalUrl
+      });
+      return true;
+    } catch (error) {
+      if (error?.name !== "AbortError") console.warn("Partage interrompu", error);
+      return false;
+    }
+  }
+
+  if (navigator.share) {
+    shareNative.hidden = false;
+    afterLikeNative.hidden = false;
+    shareNative.addEventListener("click", async () => {
+      shareMenu.hidden = true;
+      shareToggle.setAttribute("aria-expanded", "false");
+      await nativeShare();
+    });
+    afterLikeNative.addEventListener("click", nativeShare);
+  }
+
+  async function copyShareLink(button) {
+    try {
+      await navigator.clipboard.writeText(canonicalUrl);
+      const old = button.textContent;
+      button.textContent = "Copié ✓";
+      setTimeout(() => button.textContent = old, 1400);
+    } catch {
+      window.prompt("Copiez ce lien :", canonicalUrl);
+    }
+  }
+
+  async function synchronizeDesiredLikeState() {
+    const remoteLiked = typeof savedLike.remoteLiked === "boolean" ? savedLike.remoteLiked : false;
+    const desiredLiked = Boolean(savedLike.liked);
+    if (desiredLiked === remoteLiked) return;
+
+    const result = await likesApi.vote(post.id, post.title, desiredLiked);
+    if (Number.isFinite(result?.count)) globalLikeCount = Math.max(0, Number(result.count));
+    if (result?.sent) {
+      savedLike.remoteLiked = desiredLiked;
+      likesState[post.id] = savedLike;
+      saveObject(STORAGE.likes, likesState);
+    }
+  }
+
+  async function loadGlobalLikes() {
+    if (!likesApi.isConfigured) {
+      setLikeScope("enregistré sur cet appareil");
+      updateLike();
+      return;
+    }
+
+    likeSyncing = true;
+    likeButton.disabled = true;
+    try {
+      setLikeScope("synchronisation...");
+      const result = await likesApi.getCount(post.id, post.title);
+      if (!result?.ok) throw new Error("Service de Likes indisponible");
+      globalLikesReady = true;
+      if (Number.isFinite(result?.count)) globalLikeCount = Math.max(0, Number(result.count));
+      updateLike();
+
+      if (typeof savedLike.remoteLiked !== "boolean") {
+        savedLike.remoteLiked = false;
+      }
+
+      const needsSync = Boolean(savedLike.liked) !== Boolean(savedLike.remoteLiked);
+      if (needsSync) {
+        if (Number.isFinite(globalLikeCount)) {
+          globalLikeCount = Math.max(0, globalLikeCount + (savedLike.liked ? 1 : -1));
+          updateLike();
+        }
+        await synchronizeDesiredLikeState();
+      } else {
+        likesState[post.id] = savedLike;
+        saveObject(STORAGE.likes, likesState);
+      }
+
+      setLikeScope(savedLike.liked ? "partagé avec les lecteurs" : "compteur partagé");
+      updateLike();
+    } catch {
+      globalLikesReady = false;
+      setLikeScope("enregistré sur cet appareil");
+      updateLike();
+    } finally {
+      likeSyncing = false;
+      likeButton.disabled = false;
+    }
+  }
+
+  likeButton.addEventListener("click", async () => {
+    if (likeSyncing) return;
+
+    const becomingLiked = !Boolean(savedLike.liked);
+    const remoteLiked = typeof savedLike.remoteLiked === "boolean" ? savedLike.remoteLiked : false;
+    savedLike.liked = becomingLiked;
+    likesState[post.id] = savedLike;
+    saveObject(STORAGE.likes, likesState);
+
+    const shouldSendVote = likesApi.isConfigured && globalLikesReady && becomingLiked !== remoteLiked;
+    if (shouldSendVote && Number.isFinite(globalLikeCount)) {
+      globalLikeCount = Math.max(0, globalLikeCount + (becomingLiked ? 1 : -1));
+    }
+
+    updateLike();
+
+    likeButton.classList.remove("like-pop");
+    void likeButton.offsetWidth;
+    likeButton.classList.add("like-pop");
+    setTimeout(() => likeButton.classList.remove("like-pop"), 450);
+
+    if (afterLikeShare) {
+      afterLikeShare.hidden = !becomingLiked;
+      if (becomingLiked) {
+        window.setTimeout(() => afterLikeShare.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
+      }
+    }
+
+    if (!shouldSendVote) {
+      setLikeScope(globalLikesReady ? "partagé avec les lecteurs" : "enregistré sur cet appareil");
+      return;
+    }
+
+    likeSyncing = true;
+    likeButton.disabled = true;
+    setLikeScope("synchronisation...");
+
+    try {
+      await synchronizeDesiredLikeState();
+      setLikeScope(becomingLiked ? "partagé avec les lecteurs" : "compteur partagé");
+    } catch {
+      setLikeScope("enregistré sur cet appareil");
+    } finally {
+      likeSyncing = false;
+      likeButton.disabled = false;
+      updateLike();
+    }
+  });
+
+  updateLike();
+  loadGlobalLikes();
+
+  shareToggle.addEventListener("click", async () => {
+    if (navigator.share && window.matchMedia("(max-width: 820px)").matches) {
+      await nativeShare();
+      return;
+    }
     const open = shareToggle.getAttribute("aria-expanded") === "true";
     shareToggle.setAttribute("aria-expanded", String(!open));
     shareMenu.hidden = open;
   });
 
-  document.querySelector(".share-copy").addEventListener("click", async event => {
-    try {
-      await navigator.clipboard.writeText(pageUrl);
-      const old = event.currentTarget.textContent;
-      event.currentTarget.textContent = "Lien copié ✓";
-      setTimeout(() => event.currentTarget.textContent = old, 1400);
-    } catch {
-      window.prompt("Copiez ce lien :", pageUrl);
-    }
-  });
+  document.querySelector(".share-copy").addEventListener("click", event => copyShareLink(event.currentTarget));
+  document.querySelector(".after-like-copy-link").addEventListener("click", event => copyShareLink(event.currentTarget));
 
   document.addEventListener("click", event => {
-    if (!document.querySelector(".share").contains(event.target)) {
+    const shareRoot = document.querySelector(".share");
+    if (shareRoot && !shareRoot.contains(event.target)) {
       shareMenu.hidden = true;
       shareToggle.setAttribute("aria-expanded", "false");
     }
@@ -428,9 +594,12 @@
   updateProgress();
 
   const root = document.documentElement;
-  const fontSizes = [0.98, 1.06, 1.12, 1.2, 1.28];
-  let fontIndex = Number(localStorage.getItem(STORAGE.font));
-  if (!Number.isFinite(fontIndex) || fontIndex < 0 || fontIndex >= fontSizes.length) fontIndex = 2;
+  const fontSizes = [1.04, 1.125, 1.20, 1.30, 1.40];
+  const storedFont = localStorage.getItem(STORAGE.font);
+  let fontIndex = storedFont === null ? (window.matchMedia("(max-width: 820px)").matches ? 1 : 2) : Number(storedFont);
+  if (!Number.isFinite(fontIndex) || fontIndex < 0 || fontIndex >= fontSizes.length) {
+    fontIndex = window.matchMedia("(max-width: 820px)").matches ? 1 : 2;
+  }
 
   function applyFontSize() {
     root.style.setProperty("--reading-size", `${fontSizes[fontIndex]}rem`);

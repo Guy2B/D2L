@@ -124,3 +124,32 @@ This version updates the featured image for `Artifices de petit prince` using th
 ## V28 - Relecture complète des textes
 
 Les 44 publications ont fait l’objet d’une relecture linguistique complète. Orthographe, accords, conjugaison, ponctuation, typographie et erreurs syntaxiques évidentes ont été corrigés tout en conservant la voix, les figures littéraires et la structure des poèmes. Voir `CORRECTIONS_TEXTES_V28.md` pour le périmètre et les contrôles effectués.
+
+## V29 - Lecture et partage
+
+- Corps des articles agrandi : environ 19,2 px par défaut sur ordinateur et 18 px sur mobile.
+- Extraits de la bibliothèque et métadonnées légèrement agrandis.
+- Réglage A-/A+ conservé avec une plage plus confortable.
+- Interaction J'aime retravaillée avec micro-animation et mémorisation locale.
+- Après un J'aime, invitation discrète au partage.
+- Partage natif du téléphone activé lorsque le navigateur le permet.
+- X, Facebook, WhatsApp et copie du lien restent disponibles.
+- Les J'aime restent locaux au navigateur dans cette version statique GitHub Pages. Un compteur global partagé entre visiteurs nécessite un service de données externe.
+
+
+## V30 - Likes globaux avec Google Sheets
+
+La V30 ajoute une couche optionnelle de compteur partagé pour les boutons « J’aime » :
+
+- `likes-config.js` contient l’URL du service à renseigner ;
+- `likes-api.js` gère la lecture du compteur et la synchronisation ;
+- `GOOGLE_LIKES_CODE.gs` contient le code Apps Script prêt à coller ;
+- `CONFIGURER_LIKES_GOOGLE.md` donne la procédure complète ;
+- si le service n’est pas configuré ou indisponible, le site revient automatiquement au comportement local de la V29 ;
+- les Likes déjà présents dans le navigateur sont repris et synchronisés lors de la première visite après activation du service.
+
+Le partage social de la V29 est conservé.
+
+## V31 - Likes globaux activés
+
+Le point d’accès Google Apps Script fourni par le propriétaire du site est maintenant intégré dans `likes-config.js`. Les pages d’article tentent donc automatiquement de lire et mettre à jour le compteur partagé. En cas d’indisponibilité du service Google, le site conserve le fonctionnement local comme solution de repli.

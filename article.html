@@ -12,6 +12,8 @@
 <link href="styles.css" rel="stylesheet"/>
 <script defer="" src="posts.js"></script>
 <script defer="" src="custom-content.js"></script>
+<script defer="" src="likes-config.js"></script>
+<script defer="" src="likes-api.js"></script>
 <script defer="" src="article.js"></script>
 <link href="https://guy2b.github.io/D2L/article.html" rel="canonical"/><meta content="article" property="og:type"/><meta content="Chroniques d’ailleurs" property="og:site_name"/><meta content="Chroniques d’ailleurs | Lecture" property="og:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." property="og:description"/><meta content="https://guy2b.github.io/D2L/article.html" property="og:url"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Chroniques d’ailleurs | Lecture" name="twitter:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="twitter:description"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" name="twitter:image"/></head>
 <body class="reading-page">
@@ -84,10 +86,14 @@
 <h2>Historique de publication</h2>
 </div>
 <footer class="post-actions article-actions">
-<button aria-pressed="false" class="like-button" type="button"><span aria-hidden="true" class="heart">♡</span><span>J’aime</span><span class="like-count">0</span></button>
+<div class="like-cluster">
+<button aria-pressed="false" class="like-button" type="button"><span aria-hidden="true" class="heart">♡</span><span class="like-label">J’aime</span><span class="like-count">0</span></button>
+<span class="like-scope">enregistré sur cet appareil</span>
+</div>
 <div class="share">
 <button aria-expanded="false" class="share-toggle" type="button"><span aria-hidden="true">↗</span> Partager</button>
 <div class="share-menu" hidden="">
+<button class="share-native" type="button" hidden="">Partager avec mon téléphone</button>
 <a class="share-x" href="#" rel="noopener noreferrer" target="_blank">X / Twitter</a>
 <a class="share-facebook" href="#" rel="noopener noreferrer" target="_blank">Facebook</a>
 <a class="share-whatsapp" href="#" rel="noopener noreferrer" target="_blank">WhatsApp</a>
@@ -95,6 +101,16 @@
 </div>
 </div>
 </footer>
+<div class="after-like-share" hidden="" role="status" aria-live="polite">
+<span class="after-like-icon" aria-hidden="true">♥</span>
+<div class="after-like-copy"><strong>Ce texte reste avec vous.</strong><span>Vous souhaitez le partager ?</span></div>
+<div class="after-like-actions">
+<button class="after-like-native" type="button" hidden="">Partager</button>
+<a class="after-like-whatsapp" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<a class="after-like-x" href="#" target="_blank" rel="noopener noreferrer">X</a>
+<button class="after-like-copy-link" type="button">Copier</button>
+</div>
+</div>
 <section aria-label="Commentaires" class="comments">
 <button aria-expanded="false" class="comments-toggle" type="button">Commentaires <span class="comments-count">0</span></button>
 <div class="comments-panel" hidden="">

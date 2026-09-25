@@ -98,3 +98,29 @@ This version updates the featured image for `Artifices de petit prince` using th
 - Impressum mis à jour avec les informations éditoriales fournies par l’auteur.
 - Contact ajouté : die2lap@gmail.com.
 - Hébergement conservé avec la mention `in progress` en attendant les informations définitives.
+
+
+## V23
+
+- La citation du hero a été transformée en véritable bulle de parole, attachée visuellement au portrait.
+- Ajustement léger du positionnement sur desktop et mobile.
+
+
+## V24
+
+- Citation du hero déplacée hors du visage.
+- Bulle type animé/manga placée sur le côté.
+- Trois petites bulles progressives relient le portrait à la citation.
+- Ajustements responsive desktop et mobile.
+
+## V25
+
+- Les trois petites bulles de pensée sont maintenant de vrais éléments visibles, et non plus de simples ombres CSS.
+- Elles grossissent progressivement du visage vers la grande bulle de citation.
+- La citation ne recouvre plus le visage.
+- La signature « Die 2 Lap » est alignée à droite dans la bulle.
+
+
+## V28 - Relecture complète des textes
+
+Les 44 publications ont fait l’objet d’une relecture linguistique complète. Orthographe, accords, conjugaison, ponctuation, typographie et erreurs syntaxiques évidentes ont été corrigés tout en conservant la voix, les figures littéraires et la structure des poèmes. Voir `CORRECTIONS_TEXTES_V28.md` pour le périmètre et les contrôles effectués.

@@ -419,6 +419,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .hero-art::before {
@@ -450,25 +451,79 @@ textarea:focus-visible {
 
 .hero-quote {
   position: absolute;
-  right: -10px;
-  bottom: 50px;
-  width: min(280px, 72%);
+  top: 118px;
+  right: -118px;
+  bottom: auto;
+  width: 272px;
   margin: 0;
-  padding: 20px 22px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--surface-solid) 92%, transparent);
-  box-shadow: var(--shadow-soft);
+  padding: 22px 24px;
+  border: 1.25px solid color-mix(in srgb, var(--text) 20%, var(--line));
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--surface-solid) 99%, transparent);
+  box-shadow: 0 20px 48px rgba(36, 24, 12, .10);
   backdrop-filter: blur(14px);
-  font: italic 1rem/1.6 var(--serif);
+  font: italic .98rem/1.62 var(--serif);
+  text-align: left;
+  z-index: 5;
+  transform: none;
 }
-.hero-quote cite {
+.hero-quote::before {
+  content: none;
+}
+.hero-quote::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  border-radius: 24px;
+  pointer-events: none;
+}
+.hero-quote span {
+  position: relative;
+  z-index: 1;
   display: block;
-  margin-top: 10px;
-  color: var(--text-soft);
-  font: 700 .65rem/1 var(--sans);
-  letter-spacing: .12em;
-  text-transform: uppercase;
+}
+
+.hero-thought-trail {
+  position: absolute;
+  top: 248px;
+  right: 86px;
+  width: 168px;
+  height: 116px;
+  z-index: 6;
+  pointer-events: none;
+}
+.thought-dot {
+  position: absolute;
+  display: block;
+  border: 1.25px solid color-mix(in srgb, var(--text) 22%, var(--line));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface-solid) 99%, transparent);
+  box-shadow: 0 9px 20px rgba(36, 24, 12, .08);
+}
+.thought-dot-1 {
+  left: 8px;
+  bottom: 6px;
+  width: 11px;
+  height: 11px;
+}
+.thought-dot-2 {
+  left: 44px;
+  bottom: 28px;
+  width: 18px;
+  height: 18px;
+}
+.thought-dot-3 {
+  left: 92px;
+  bottom: 62px;
+  width: 28px;
+  height: 28px;
+}
+
+@media (min-width: 821px) {
+  .hero-portrait {
+    transform: translate(-46px, 38px) rotate(-1.5deg);
+  }
 }
 
 /* Featured */
@@ -1457,7 +1512,13 @@ body.focus-reading .article-shell { padding-top: 24px; }
   .hero h1 { font-size: clamp(4.5rem, 16vw, 7.3rem); }
   .hero-art { min-height: 460px; }
   .hero-portrait { width: min(360px, 76vw); }
-  .hero-quote { right: max(0px, 4vw); }
+  .hero-quote {
+    top: 70px;
+    right: 0;
+    bottom: auto;
+    width: min(252px, 56vw);
+    padding: 20px 22px;
+  }
   .library-controls {
     position: static;
     align-items: stretch;
@@ -2013,3 +2074,31 @@ body.studio-locked { overflow: hidden; }
   backdrop-filter: blur(22px) saturate(120%);
 }
 .studio-gate-overlay .studio-gate-card { width: min(100%, 520px); }
+
+
+@media (max-width: 560px) {
+  .hero-art {
+    min-height: 575px;
+    padding-top: 138px;
+  }
+  .hero-portrait {
+    width: min(330px, 78vw);
+    transform: translateX(-30px) rotate(-1.5deg);
+  }
+  .hero-quote {
+    top: 46px;
+    right: -2px;
+    width: min(216px, 62vw);
+    padding: 16px 18px 14px;
+    font-size: .84rem;
+  }
+  .hero-thought-trail {
+    top: 214px;
+    right: 70px;
+    width: 118px;
+    height: 92px;
+  }
+  .thought-dot-1 { left: 6px; bottom: 2px; width: 8px; height: 8px; }
+  .thought-dot-2 { left: 34px; bottom: 18px; width: 12px; height: 12px; }
+  .thought-dot-3 { left: 66px; bottom: 42px; width: 18px; height: 18px; }
+}

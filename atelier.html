@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Atelier auteur | Chroniques d’ailleurs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="custom-content.js" defer></script>
+  <script>
+    window.D2LStudioUnlock = function (event) {
+      if (event && event.preventDefault) event.preventDefault();
+      const ACCESS_CODE = "210815";
+      const gate = document.getElementById("studio-gate");
+      const input = document.getElementById("studio-gate-input");
+      const error = document.getElementById("studio-gate-error");
+      const app = document.getElementById("studio-app");
+      const value = String(input && input.value || "").trim();
+
+      if (value !== ACCESS_CODE) {
+        if (error) error.hidden = false;
+        if (input) { input.setAttribute("aria-invalid", "true"); input.focus(); input.select(); }
+        return false;
+      }
+
+      if (error) error.hidden = true;
+      if (input) input.removeAttribute("aria-invalid");
+      document.body.classList.remove("studio-locked");
+      if (gate) { gate.style.display = "none"; gate.setAttribute("aria-hidden", "true"); }
+      if (app) { app.removeAttribute("aria-hidden"); if ("inert" in app) app.inert = false; }
+      try { sessionStorage.setItem("die2lap:studio-access:v20", "ok"); } catch (_) {}
+      window.dispatchEvent(new CustomEvent("d2l-studio-unlocked"));
+      return false;
+    };
+
+    window.addEventListener("DOMContentLoaded", function () {
+      const app = document.getElementById("studio-app");
+      const input = document.getElementById("studio-gate-input");
+      if (app && "inert" in app) app.inert = true;
+      let granted = false;
+      try { granted = sessionStorage.getItem("die2lap:studio-access:v20") === "ok"; } catch (_) {}
+      if (granted) {
+        if (input) input.value = "210815";
+        D2LStudioUnlock();
+      } else if (input) {
+        input.focus();
+      }
+    });
+  </script>
+  <script src="studio.js" defer></script>
+</head>
+<body class="studio-page studio-locked">
+  <section id="studio-gate" class="studio-gate studio-gate-overlay" aria-modal="true" role="dialog">
+    <div class="studio-gate-card">
+      <p class="section-kicker">Accès protégé</p>
+      <h1>Atelier roman</h1>
+      <p>Cet espace d’écriture est protégé par un code d’accès.</p>
+      <form id="studio-gate-form" class="studio-gate-form" autocomplete="off" onsubmit="return D2LStudioUnlock(event)">
+        <label>
+          <span>Code</span>
+          <input id="studio-gate-input" type="password" inputmode="numeric" placeholder="Entrez le code" aria-describedby="studio-gate-help" required />
+        </label>
+        <button class="button button-primary" type="submit">Entrer</button>
+      </form>
+      <p id="studio-gate-help" class="studio-help">Accès réservé à l’auteur.</p>
+      <p id="studio-gate-error" class="studio-gate-error" hidden>Code incorrect.</p>
+      <p><a class="text-link" href="index.html">Retour au site</a></p>
+      <p class="studio-legal-links"><a class="text-link" href="disclaimer.html">Disclaimer</a> · <a class="text-link" href="impressum.html">Impressum</a></p>
+    </div>
+  </section>
+
+  <div id="studio-app" aria-hidden="true">
+    <header class="studio-header shell">
+      <a class="brand" href="index.html"><span class="brand-avatar"><img src="assets/die2lap-avatar.jpg" alt="" /></span><span class="brand-copy"><strong>Atelier auteur</strong><small>Chroniques d’ailleurs</small></span></a>
+      <a class="button button-ghost" href="index.html">Voir le site</a>
+    </header>
+    <main class="shell studio-main">
+      <section class="studio-intro">
+        <p class="section-kicker">Sans toucher au code</p>
+        <h1>Publier un nouveau texte ou un nouveau roman.</h1>
+        <p>Créez le contenu ici, vérifiez l’aperçu, puis exportez <code>custom-content.js</code>. Remplacez ensuite le fichier du même nom dans le dossier du site et publiez le dossier mis à jour sur votre hébergement.</p>
+        <div class="studio-steps"><span>1. Écrire</span><span>2. Prévisualiser</span><span>3. Exporter</span><span>4. Remplacer le fichier</span></div>
+      </section>
+
+      <div class="studio-tabs" role="tablist" aria-label="Type de contenu">
+        <button class="studio-tab is-active" type="button" data-tab="text" aria-selected="true">Nouveau texte</button>
+        <button class="studio-tab" type="button" data-tab="book" aria-selected="false">Nouveau roman</button>
+        <button class="studio-tab" type="button" data-tab="manage" aria-selected="false">Contenu ajouté</button>
+      </div>
+
+      <section class="studio-panel" data-panel="text">
+        <form id="post-form" class="studio-form">
+          <div class="field-grid">
+            <label><span>Type</span><select name="category" required><option>Poèmes</option><option value="Chroniques">Chroniques / récits</option><option>Nouvelles</option><option>Histoires de voyage</option></select></label>
+            <label><span>Date</span><input name="date" type="date" required /></label>
+            <label class="wide"><span>Titre</span><input name="title" required placeholder="Titre du texte" /></label>
+            <label class="wide"><span>Chapeau, optionnel</span><input name="deck" placeholder="Une courte phrase d’introduction" /></label>
+            <label class="wide"><span>Texte</span><textarea name="body" rows="16" required placeholder="Pour un poème, conservez simplement vos retours à la ligne. Pour un récit ou une nouvelle, séparez les paragraphes par une ligne vide."></textarea></label>
+            <label><span>Image</span><input name="image" type="file" accept="image/*" /></label>
+            <label><span>Crédit image</span><input name="credit" placeholder="© Die 2 Lap" /></label>
+            <label class="wide"><span>Lien de publication d’origine, optionnel</span><input name="sourceUrl" type="url" placeholder="https://..." /></label>
+            <label><span>Aussi publié sur, optionnel</span><input name="alsoName" placeholder="Nom du média" /></label>
+            <label><span>Lien du média, optionnel</span><input name="alsoUrl" type="url" placeholder="https://..." /></label>
+          </div>
+          <div class="studio-actions"><button class="button button-primary" type="submit">Ajouter à l’atelier</button><span class="studio-note">Les tirets longs sont automatiquement remplacés par des tirets courts.</span></div>
+        </form>
+        <div class="studio-preview" id="post-preview" hidden></div>
+      </section>
+
+      <section class="studio-panel" data-panel="book" hidden>
+        <form id="book-form" class="studio-form">
+          <div class="field-grid">
+            <label class="wide"><span>Titre</span><input name="title" required /></label>
+            <label><span>Genre</span><input name="genre" required placeholder="Drame psychologique contemporain" /></label>
+            <label><span>Nombre de mots, optionnel</span><input name="words" inputmode="numeric" placeholder="82000" /></label>
+            <label><span>Statut</span><select name="status"><option value="">Achevé</option><option>En soumission</option></select></label>
+            <label class="check-label"><input name="seriesES" type="checkbox" /><span>Volume de la série E.S.</span></label>
+            <label class="wide"><span>Synopsis</span><textarea name="synopsis" rows="12" required placeholder="Séparez les paragraphes par une ligne vide."></textarea></label>
+          </div>
+          <button class="button button-primary" type="submit">Ajouter le roman</button>
+        </form>
+      </section>
+
+      <section class="studio-panel" data-panel="manage" hidden>
+        <div class="studio-manage-head"><div><p class="section-kicker">Ajouts locaux</p><h2>Prêts à publier</h2></div><button id="export-content" class="button button-primary" type="button">Exporter custom-content.js</button></div>
+        <div id="custom-list" class="custom-list"></div>
+        <p class="studio-help">Important : l’atelier n’écrit pas directement dans les fichiers de votre ordinateur. Après export, remplacez l’ancien <code>custom-content.js</code> par le nouveau. C’est ce fichier qui rend les ajouts visibles à tous les visiteurs après publication du site.</p>
+      </section>
+    </main>
+  </div>
+    <footer class="site-footer studio-footer">
+      <div class="shell footer-stack">
+        <div class="footer-inner">
+          <div class="footer-brand-block"><strong>Chroniques d’ailleurs</strong><span>Die 2 Lap</span></div>
+          <nav class="footer-nav" aria-label="Liens de pied de page">
+            <a href="index.html#textes">Textes</a>
+            <a href="index.html#romans">Romans</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="impressum.html">Impressum</a>
+            <a class="studio-link" href="atelier.html">Atelier auteur</a>
+          </nav>
+          <p>© <span id="current-year"></span> Die 2 Lap. Tous droits réservés.</p>
+        </div>
+        <p class="footer-note">Espace atelier protégé. Les ajouts réalisés ici restent locaux tant que vous ne publiez pas les fichiers mis à jour.</p>
+      </div>
+    </footer>
+</body>
+</html>

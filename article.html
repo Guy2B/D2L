@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Texte de Die 2 Lap sur Chroniques d’ailleurs." />
+  <meta name="theme-color" content="#f4efe6" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Chroniques d’ailleurs | Lecture</title>
+  <link rel="icon" href="assets/die2lap-avatar.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="posts.js" defer></script>
+  <script src="custom-content.js" defer></script>
+  <script src="article.js" defer></script>
+</head>
+<body class="reading-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header article-site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Accueil de Chroniques d’ailleurs">
+        <span class="brand-avatar"><img src="assets/die2lap-avatar.jpg" alt="" /></span>
+        <span class="brand-copy"><strong>Chroniques d’ailleurs</strong><small>Die 2 Lap · Ô Kamer</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="index.html#textes">Textes</a>
+        <a href="index.html#romans">Romans</a>
+        <a href="index.html#a-propos">Auteur</a>
+        <a href="index.html#archives">Archives</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button theme-toggle" type="button" aria-label="Activer le mode sombre" title="Changer de thème"><span aria-hidden="true">◐</span></button>
+        <button class="icon-button menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav"><span aria-hidden="true">☰</span></button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" hidden aria-label="Navigation mobile">
+      <a href="index.html#textes">Textes</a><a href="index.html#romans">Romans</a><a href="index.html#a-propos">Auteur</a><a href="index.html#archives">Archives</a>
+    </nav>
+  </header>
+
+  <main id="main" class="article-page">
+    <article class="article-shell" id="article">
+      <div class="article-topbar">
+        <a class="back-link" href="index.html#textes">← Tous les textes</a>
+        <div class="reading-tools" aria-label="Options de lecture">
+          <button type="button" data-font="minus" aria-label="Réduire la taille du texte">A−</button>
+          <button type="button" data-font="plus" aria-label="Agrandir la taille du texte">A+</button>
+          <button type="button" class="focus-mode-toggle" aria-pressed="false">Mode lecture</button>
+        </div>
+      </div>
+
+      <header class="article-header">
+        <div class="post-meta">
+          <span id="article-category" class="post-category"></span>
+          <span id="article-date-wrap" hidden><span aria-hidden="true">·</span><time id="article-date"></time></span>
+          <span aria-hidden="true">·</span><span id="article-reading-time"></span>
+        </div>
+        <h1 id="article-title"></h1>
+        <p id="article-deck" class="article-deck" hidden></p>
+      </header>
+
+      <figure id="article-figure" class="article-figure" hidden>
+        <img id="article-image" alt="" />
+        <figcaption id="article-image-credit" class="article-image-credit" hidden></figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <aside class="article-rail" aria-label="Repères de lecture">
+          <div class="rail-card">
+            <span>Publié</span><strong id="rail-date">-</strong>
+          </div>
+          <div class="rail-card">
+            <span>Catégorie</span><strong id="rail-category">-</strong>
+          </div>
+          <div class="rail-card">
+            <span>Lecture</span><strong id="rail-reading">-</strong>
+          </div>
+        </aside>
+
+        <div class="article-main">
+          <p id="article-media-note" class="article-media-note" hidden></p>
+          <div id="article-body" class="article-body prose"></div>
+
+          <div class="article-signature">
+            <span>© Die 2 Lap</span>
+          </div>
+
+          <div id="article-publication-notes" class="article-publication-notes" hidden>
+            <h2>Historique de publication</h2>
+          </div>
+
+          <footer class="post-actions article-actions">
+            <button class="like-button" type="button" aria-pressed="false"><span class="heart" aria-hidden="true">♡</span><span>J’aime</span><span class="like-count">0</span></button>
+            <div class="share">
+              <button class="share-toggle" type="button" aria-expanded="false"><span aria-hidden="true">↗</span> Partager</button>
+              <div class="share-menu" hidden>
+                <a class="share-x" href="#" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                <a class="share-facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a class="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <button class="share-copy" type="button">Copier le lien</button>
+              </div>
+            </div>
+          </footer>
+
+          <section class="comments" aria-label="Commentaires">
+            <button class="comments-toggle" type="button" aria-expanded="false">Commentaires <span class="comments-count">0</span></button>
+            <div class="comments-panel" hidden>
+              <div class="comments-list"></div>
+              <form class="comment-form">
+                <div class="form-row">
+                  <label><span>Nom</span><input name="name" type="text" maxlength="40" placeholder="Votre nom" required /></label>
+                  <label class="comment-field"><span>Commentaire</span><textarea name="message" rows="4" maxlength="600" placeholder="Écrire quelques mots…" required></textarea></label>
+                </div>
+                <button class="button button-small" type="submit">Publier localement</button>
+                <p class="form-help">Ces commentaires sont une démonstration locale et restent dans ce navigateur.</p>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section class="related-section" aria-labelledby="related-title">
+        <div class="related-heading">
+          <p class="section-kicker">Continuer</p>
+          <h2 id="related-title">À lire également</h2>
+        </div>
+        <div id="related-posts" class="related-grid"></div>
+      </section>
+
+      <nav class="article-pagination" aria-label="Navigation entre les textes">
+        <a id="prev-post" href="#" hidden></a>
+        <a id="next-post" href="#" hidden></a>
+      </nav>
+    </article>
+
+    <section id="article-not-found" class="shell not-found" hidden>
+      <p class="section-kicker">Lecture</p>
+      <h1>Texte introuvable</h1>
+      <p>Cette publication n’existe pas ou son identifiant est incorrect.</p>
+      <a class="button button-primary" href="index.html#textes">Retour aux textes</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-stack">
+      <div class="footer-inner">
+        <div class="footer-brand-block"><strong>Chroniques d’ailleurs</strong><span>Die 2 Lap</span></div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
+          <a href="index.html#textes">Textes</a>
+          <a href="index.html#romans">Romans</a>
+          <a href="disclaimer.html">Disclaimer</a>
+          <a href="impressum.html">Impressum</a>
+          <a class="studio-link" href="atelier.html">Atelier auteur</a>
+        </nav>
+        <p>© <span id="current-year"></span> Die 2 Lap. Tous droits réservés.</p>
+      </div>
+      <p class="footer-note">Site littéraire personnel. Les textes demeurent la propriété de leur auteur. Les liens externes sont proposés à titre documentaire.</p>
+    </div>
+  </footer>
+</body>
+</html>

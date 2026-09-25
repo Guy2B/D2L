@@ -245,9 +245,24 @@
 
       if (note.date) row.append(` · ${formatDate(note.date)}`);
       if (note.archiveTitle && note.archiveTitle !== post.title) row.append(` · titre d’archive : « ${note.archiveTitle} »`);
-      if (note.comments) row.append(` · ${note.comments} commentaire${note.comments > 1 ? "s" : ""} dans l’archive`);
       publicationNotes.appendChild(row);
     });
+  }
+
+  const archiveDiscussion = document.querySelector("#archive-discussion");
+  const archiveDiscussionCount = document.querySelector("#archive-discussion-count");
+  const archiveDiscussionLink = document.querySelector("#archive-discussion-link");
+  const archivedComments = Number(post.archiveComments || 0);
+
+  if (archiveDiscussion && archivedComments > 0) {
+    archiveDiscussion.hidden = false;
+    archiveDiscussionCount.textContent = `${archivedComments} commentaire${archivedComments > 1 ? "s" : ""} d’archive`;
+    if (post.sourceUrl) {
+      archiveDiscussionLink.href = post.sourceUrl;
+      archiveDiscussionLink.hidden = false;
+    } else {
+      archiveDiscussionLink.hidden = true;
+    }
   }
 
   const likeButton = document.querySelector(".like-button");

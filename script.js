@@ -175,6 +175,14 @@
     card.querySelector(".read-link").href = href;
     card.querySelector(".reading-time").textContent = `${readMinutes(post)} min`;
 
+    const archiveCommentsBadge = card.querySelector(".archive-comments-badge");
+    const archivedComments = Number(post.archiveComments || 0);
+    if (archiveCommentsBadge && archivedComments > 0) {
+      archiveCommentsBadge.hidden = false;
+      archiveCommentsBadge.textContent = `${archivedComments} com. archive`;
+      archiveCommentsBadge.title = `${archivedComments} commentaire${archivedComments > 1 ? "s" : ""} sur le blog d’origine`;
+    }
+
     const provenance = card.querySelector(".index-provenance");
     if (post.sourceUrl || (post.alsoPublished || []).length) {
       provenance.hidden = false;

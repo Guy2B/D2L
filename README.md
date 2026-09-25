@@ -153,3 +153,12 @@ Le partage social de la V29 est conservé.
 ## V31 - Likes globaux activés
 
 Le point d’accès Google Apps Script fourni par le propriétaire du site est maintenant intégré dans `likes-config.js`. Les pages d’article tentent donc automatiquement de lire et mettre à jour le compteur partagé. En cas d’indisponibilité du service Google, le site conserve le fonctionnement local comme solution de repli.
+
+## V32 - Commentaires d'archive
+
+Les nombres de commentaires historiques déjà recensés dans les données des deux anciens blogs sont désormais affichés séparément des nouveaux commentaires du site.
+
+- Les cartes de la bibliothèque affichent un badge discret uniquement lorsqu'un nombre historique est connu et supérieur à zéro.
+- Les pages d'article affichent un encart "commentaires d'archive" avec un lien vers la publication d'origine.
+- Les commentaires d'archive ne sont jamais additionnés aux nouveaux commentaires du site.
+- Aucun nombre n'a été inventé : les valeurs proviennent du champ `archiveComments` déjà présent dans les données migrées.

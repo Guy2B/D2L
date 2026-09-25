@@ -2382,3 +2382,112 @@ body.studio-locked { overflow: hidden; }
   cursor: wait;
   opacity: .72;
 }
+
+
+/* =========================================================
+   V32 - Mémoire des commentaires des anciens blogs
+   ========================================================= */
+
+.index-footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.archive-comments-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-soft) 42%, transparent);
+  color: var(--text-soft);
+  font: 700 .64rem/1 var(--sans);
+  white-space: nowrap;
+}
+
+.archive-comments-badge[hidden] {
+  display: none;
+}
+
+.archive-discussion {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 4px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+
+.archive-discussion[hidden] {
+  display: none;
+}
+
+.archive-discussion-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.archive-discussion-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.archive-discussion-copy strong {
+  font: 600 .86rem/1.25 var(--serif);
+}
+
+.archive-discussion-copy span {
+  color: var(--text-faint);
+  font-size: .68rem;
+}
+
+.archive-discussion a {
+  color: var(--accent);
+  font-size: .68rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.archive-discussion a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .index-footer {
+    align-items: flex-end;
+  }
+
+  .index-footer-meta {
+    gap: 5px;
+  }
+
+  .archive-comments-badge {
+    min-height: 22px;
+    padding-inline: 7px;
+    font-size: .61rem;
+  }
+
+  .archive-discussion {
+    grid-template-columns: auto 1fr;
+  }
+
+  .archive-discussion a {
+    grid-column: 1 / -1;
+    padding-left: 44px;
+  }
+}

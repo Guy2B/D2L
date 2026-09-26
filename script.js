@@ -5,6 +5,15 @@
   const customPosts = Array.isArray(window.CUSTOM_POSTS) ? window.CUSTOM_POSTS : [];
   const posts = [...basePosts, ...customPosts];
   const track = (eventName, params = {}) => window.d2lTrack?.(eventName, params);
+  const i18n = window.D2LI18N || {
+    t: key => key,
+    category: value => value,
+    formatDate: iso => iso || "",
+    localizeBook: (_key, book) => ({ ...book }),
+    seriesIntro: value => value,
+    language: "fr"
+  };
+  const t = (key, vars = {}) => i18n.t(key, vars);
   const feed = document.querySelector("#posts-feed");
   const template = document.querySelector("#post-index-template");
   const filters = [...document.querySelectorAll(".filter-chip")];
@@ -102,10 +111,7 @@
   const customBooks = window.CUSTOM_BOOKS && typeof window.CUSTOM_BOOKS === "object" ? window.CUSTOM_BOOKS : {};
   const MANUSCRIPTS = { ...BASE_MANUSCRIPTS, ...customBooks };
 
-  const formatDate = (isoDate) => isoDate
-    ? new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" })
-        .format(new Date(`${isoDate}T12:00:00`))
-    : "";
+  const formatDate = isoDate => i18n.formatDate(isoDate);
 
   const articleHref = post => `article.html?id=${encodeURIComponent(post.id)}`;
 
@@ -159,7 +165,7 @@
     image.alt = post.imageAlt || "";
     image.addEventListener("error", () => figureLink.remove(), { once: true });
 
-    card.querySelector(".post-category").textContent = post.category;
+    card.querySelector(".post-category").textContent = i18n.category(post.category);
     const time = card.querySelector(".post-date");
     if (post.date) {
       time.dateTime = post.date;
@@ -174,25 +180,28 @@
 
     card.querySelector(".index-excerpt").textContent = excerpt(post);
     card.querySelector(".read-link").href = href;
-    card.querySelector(".reading-time").textContent = `${readMinutes(post)} min`;
+    card.querySelector(".reading-time").textContent = t("dynamic.minutes", { count: readMinutes(post) });
+    const readLabel = card.querySelector(".read-link [data-i18n], .read-link span:first-child");
+    if (readLabel) readLabel.textContent = t("dynamic.read");
 
     const archiveCommentsBadge = card.querySelector(".archive-comments-badge");
     const archivedComments = Number(post.archiveComments || 0);
     if (archiveCommentsBadge && archivedComments > 0) {
       archiveCommentsBadge.hidden = false;
-      archiveCommentsBadge.textContent = `${archivedComments} com. archive`;
-      archiveCommentsBadge.title = `${archivedComments} commentaire${archivedComments > 1 ? "s" : ""} sur le blog d’origine`;
+      const plural = archivedComments > 1 ? (i18n.language === "de" ? "e" : "s") : "";
+      archiveCommentsBadge.textContent = t("dynamic.archiveComments", { count: archivedComments });
+      archiveCommentsBadge.title = t("dynamic.archiveCommentsLong", { count: archivedComments, plural });
     }
 
     const provenance = card.querySelector(".index-provenance");
     if (post.sourceUrl || (post.alsoPublished || []).length) {
       provenance.hidden = false;
       if (post.sourceUrl) {
-        appendLinkedPublication(provenance, "Publié sur ", post.sourceLabel || "le blog d’origine", post.sourceUrl);
+        appendLinkedPublication(provenance, t("dynamic.publishedOn"), post.sourceLabel || t("dynamic.originBlog"), post.sourceUrl);
       }
       for (const publication of (post.alsoPublished || [])) {
         if (provenance.childNodes.length) provenance.append(" · ");
-        appendLinkedPublication(provenance, "Aussi sur ", publication.name || "un autre média", publication.url);
+        appendLinkedPublication(provenance, t("dynamic.alsoOn"), publication.name || t("dynamic.otherMedia"), publication.url);
       }
     }
 
@@ -280,12 +289,12 @@
     copy.className = "featured-card-copy";
     const type = document.createElement("span");
     type.className = "door-type";
-    type.textContent = "Roman";
+    type.textContent = t("dynamic.novel");
     const title = document.createElement("h3");
     title.textContent = book.title;
     const action = document.createElement("span");
     action.className = "door-action";
-    action.textContent = "Lire le synopsis →";
+    action.textContent = t("dynamic.readSynopsis");
     copy.append(type, title, action);
     button.append(art, copy);
     card.appendChild(button);
@@ -298,8 +307,8 @@
     const poeme = newestByCategory("Poèmes");
     const bookKey = MANUSCRIPTS.demeure ? "demeure" : Object.keys(MANUSCRIPTS)[0];
     const doors = [
-      createDoorForPost(nouvelle, "Lire la nouvelle →", "Nouvelle"),
-      createDoorForPost(poeme, "Lire le poème →", "Poème"),
+      createDoorForPost(nouvelle, t("dynamic.readStory"), t("dynamic.story")),
+      createDoorForPost(poeme, t("dynamic.readPoem"), t("dynamic.poem")),
       bookKey ? createDoorForBook(bookKey, MANUSCRIPTS[bookKey]) : null
     ].filter(Boolean);
     doors.forEach(card => featuredPosts.appendChild(card));
@@ -313,7 +322,7 @@
     const all = document.createElement("button");
     all.type = "button";
     all.className = `year-chip ${activeYear === "all" ? "is-active" : ""}`;
-    all.textContent = "Toutes";
+    all.textContent = t("dynamic.allYears");
     all.addEventListener("click", () => {
       activeYear = "all";
       track("library_year", { year: "all" });
@@ -342,18 +351,20 @@
     grid.replaceChildren();
     const entries = Object.entries(MANUSCRIPTS).sort(([,a],[,b]) => Number(a.order || 99) - Number(b.order || 99));
     let seriesBannerAdded = false;
-    entries.forEach(([key, book]) => {
-      if (book.seriesES && !seriesBannerAdded) {
+    entries.forEach(([key, baseBook]) => {
+      const book = i18n.localizeBook(key, baseBook);
+      if (baseBook.seriesES && !seriesBannerAdded) {
         const banner = document.createElement("div");
         banner.className = "series-banner reveal-on-scroll";
         const esCount = entries.filter(([, candidate]) => candidate.seriesES).length;
-        banner.innerHTML = `<div><p class="series-label">Série Edmond Silla · E.S.</p><h3>Science, risque, énergie, mémoire.</h3></div><p>${esCount === 3 ? "Trois" : esCount} thrillers autonomes reliés par un même personnage et une même question : jusqu’où peut-on faire confiance à ce que l’on mesure lorsque les conséquences restent profondément humaines ?</p>`;
+        const countLabel = i18n.language === "fr" && esCount === 3 ? "Trois" : esCount;
+        banner.innerHTML = `<div><p class="series-label">${t("dynamic.seriesTitle")}</p><h3>${t("dynamic.seriesHeading")}</h3></div><p>${t("dynamic.seriesBanner", { count: countLabel })}</p>`;
         grid.appendChild(banner);
         seriesBannerAdded = true;
       }
       const btn = document.createElement("button");
-      const layoutClass = book.seriesES ? "work-card-es" : "work-card-primary";
-      btn.className = `work-card work-card-button ${layoutClass} reveal-on-scroll ${book.status ? "work-card-submission" : ""}`;
+      const layoutClass = baseBook.seriesES ? "work-card-es" : "work-card-primary";
+      btn.className = `work-card work-card-button ${layoutClass} reveal-on-scroll ${baseBook.status ? "work-card-submission" : ""}`;
       btn.type = "button";
       btn.dataset.book = key;
       btn.setAttribute("aria-haspopup", "dialog");
@@ -361,27 +372,27 @@
       top.className = "work-topline";
       const label = document.createElement("p");
       label.className = "work-kicker";
-      label.textContent = book.cardLabel || (book.seriesES ? "E.S. · achevé" : "Roman inédit · achevé");
+      label.textContent = book.cardLabel || (baseBook.seriesES ? t("dynamic.esCompleted") : t("dynamic.completedNovel"));
       top.appendChild(label);
-      if (book.status) {
+      if (baseBook.status) {
         const status = document.createElement("span");
         status.className = "work-status";
-        status.textContent = book.status;
+        status.textContent = book.status || t("dynamic.underSubmission");
         top.appendChild(status);
       }
       const h = document.createElement("h3");
       h.textContent = book.title;
       const p = document.createElement("p");
-      p.textContent = book.cardText || book.meta || "Roman achevé";
+      p.textContent = book.cardText || book.meta || t("dynamic.completedFallback");
       const read = document.createElement("span");
       read.className = "work-read";
-      read.textContent = book.seriesES ? "Série + synopsis ↗" : "Lire le synopsis ↗";
+      read.textContent = baseBook.seriesES ? t("dynamic.seriesSynopsis") : t("dynamic.readSynopsis");
       btn.append(top, h, p, read);
       grid.appendChild(btn);
     });
     const progress = document.createElement("article");
     progress.className = "work-card work-card-progress work-card-progress-wide reveal-on-scroll";
-    progress.innerHTML = `<div class="work-progress-copy"><p class="work-kicker">En cours d’écriture</p><h3>Autres manuscrits</h3></div><div class="work-progress-meta"><p>D’autres manuscrits sont actuellement en cours d’écriture.</p><span class="work-read work-read-muted">Travaux en cours</span></div>`;
+    progress.innerHTML = `<div class="work-progress-copy"><p class="work-kicker">${t("dynamic.inProgress")}</p><h3>${t("dynamic.otherManuscripts")}</h3></div><div class="work-progress-meta"><p>${t("dynamic.otherManuscriptsCopy")}</p><span class="work-read work-read-muted">${t("dynamic.workInProgress")}</span></div>`;
     grid.appendChild(progress);
   }
 
@@ -447,7 +458,8 @@
   function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#161412" : "#f4efe6");
-    themeToggle.setAttribute("aria-label", theme === "dark" ? "Activer le mode clair" : "Activer le mode sombre");
+    themeToggle.setAttribute("aria-label", theme === "dark" ? t("common.themeLight") : t("common.themeDark"));
+    themeToggle.title = t("common.themeTitle");
   }
 
   applyTheme(preferredTheme());
@@ -460,6 +472,7 @@
   menuToggle?.addEventListener("click", () => {
     const open = menuToggle.getAttribute("aria-expanded") === "true";
     menuToggle.setAttribute("aria-expanded", String(!open));
+    menuToggle.setAttribute("aria-label", open ? t("common.menu_open") : t("common.menu_close"));
     mobileNav.hidden = open;
     menuToggle.querySelector("span").textContent = open ? "☰" : "×";
   });
@@ -467,6 +480,7 @@
     link.addEventListener("click", () => {
       mobileNav.hidden = true;
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", t("common.menu_open"));
       menuToggle.querySelector("span").textContent = "☰";
     });
   });
@@ -497,9 +511,13 @@
     });
   };
 
-  function openSynopsis(key, trigger) {
-    const book = MANUSCRIPTS[key];
-    if (!book) return;
+  let activeSynopsisKey = null;
+
+  function openSynopsis(key, trigger, trackOpen = true) {
+    const baseBook = MANUSCRIPTS[key];
+    if (!baseBook) return;
+    const book = i18n.localizeBook(key, baseBook);
+    activeSynopsisKey = key;
 
     returnFocus = trigger;
     synopsisKicker.textContent = book.kicker;
@@ -507,20 +525,24 @@
     synopsisMeta.textContent = book.meta;
     synopsisCopy.replaceChildren();
 
-    if (book.seriesES) {
-      appendHeading("La série E.S.");
-      appendParagraphs(ES_SERIES_INTRO);
+    if (baseBook.seriesES) {
+      appendHeading(t("dynamic.seriesSection"));
+      appendParagraphs(i18n.seriesIntro(ES_SERIES_INTRO));
       const separator = document.createElement("div");
       separator.className = "synopsis-separator";
       separator.setAttribute("aria-hidden", "true");
       synopsisCopy.appendChild(separator);
-      appendHeading(`Ce volume : ${book.title}`);
+      appendHeading(t("dynamic.thisVolume", { title: book.title }));
     }
 
     appendParagraphs(book.paragraphs);
-    track("synopsis_open", { book_id: key, book_title: book.title, series_es: book.seriesES ? 1 : 0 });
-    dialog.showModal();
-    dialog.querySelector(".synopsis-close").focus();
+    if (trackOpen) {
+      track("synopsis_open", { book_id: key, book_title: book.title, series_es: baseBook.seriesES ? 1 : 0 });
+    }
+    if (!dialog.open) {
+      dialog.showModal();
+      dialog.querySelector(".synopsis-close").focus();
+    }
   }
 
   document.addEventListener("click", event => {
@@ -532,7 +554,10 @@
   dialog.addEventListener("click", event => {
     if (event.target === dialog) dialog.close();
   });
-  dialog.addEventListener("close", () => returnFocus?.focus());
+  dialog.addEventListener("close", () => {
+    activeSynopsisKey = null;
+    returnFocus?.focus();
+  });
 
   function renderResume() {
     const saved = (() => { try { return JSON.parse(localStorage.getItem("die2lap:last-read:v12")); } catch { return null; } })();
@@ -550,11 +575,14 @@
   }
 
   function activateReveal() {
-    const items = document.querySelectorAll(".reveal-on-scroll, .index-card, .cv-card, .archive-card");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const items = document.querySelectorAll(".reveal-on-scroll, .index-card");
+    if (!items.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      document.documentElement.classList.remove("reveal-ready");
       items.forEach(item => item.classList.add("is-visible"));
       return;
     }
+    document.documentElement.classList.add("reveal-ready");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -562,7 +590,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: .08, rootMargin: "0px 0px -30px" });
+    }, { threshold: .04, rootMargin: "80px 0px 80px" });
     items.forEach(item => observer.observe(item));
   }
 
@@ -579,9 +607,27 @@
   document.querySelector("#stat-posts").textContent = String(posts.length);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
-  if (libraryLede) libraryLede.textContent = `${posts.length} publications replacées dans leur chronologie et reliées à leurs sources d’origine.`;
-  const worksAside = document.querySelector("#works-aside");
-  if (worksAside) worksAside.textContent = `${bookCount} romans terminés. ${submissionCount} ${submissionCount > 1 ? "sont" : "est"} actuellement en soumission. Cliquez sur un titre pour lire son synopsis.`;
+  function updateDynamicHeadings() {
+    if (libraryLede) libraryLede.textContent = t("dynamic.libraryLede", { count: posts.length });
+    if (worksAside) {
+      worksAside.textContent = t("dynamic.worksAside", {
+        books: bookCount,
+        submissions: submissionCount,
+        verb: submissionCount > 1 ? t("dynamic.worksVerbMany") : t("dynamic.worksVerbOne")
+      });
+    }
+  }
+  updateDynamicHeadings();
+
+  window.addEventListener("d2l:languagechange", () => {
+    applyTheme(document.documentElement.dataset.theme || preferredTheme());
+    renderFeatured();
+    renderWorks();
+    renderYears();
+    renderPosts();
+    updateDynamicHeadings();
+    if (dialog.open && activeSynopsisKey) openSynopsis(activeSynopsisKey, returnFocus, false);
+  });
 
   renderFeatured();
   renderWorks();

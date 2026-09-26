@@ -5,6 +5,14 @@
   const customPosts = Array.isArray(window.CUSTOM_POSTS) ? window.CUSTOM_POSTS : [];
   const posts = [...basePosts, ...customPosts];
   const track = (eventName, params = {}) => window.d2lTrack?.(eventName, params);
+  const i18n = window.D2LI18N || {
+    t: key => key,
+    category: value => value,
+    formatDate: iso => iso || "",
+    locale: "fr-FR",
+    language: "fr"
+  };
+  const t = (key, vars = {}) => i18n.t(key, vars);
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const post = posts.find(item => item.id === id);
@@ -32,10 +40,7 @@
   const menuToggle = document.querySelector(".menu-toggle");
   const mobileNav = document.querySelector("#mobile-nav");
 
-  const formatDate = isoDate => isoDate
-    ? new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" })
-        .format(new Date(`${isoDate}T12:00:00`))
-    : "";
+  const formatDate = isoDate => i18n.formatDate(isoDate);
 
   function plainText(item) {
     return (item.content || [])
@@ -64,7 +69,8 @@
   function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#161412" : "#f4efe6");
-    themeToggle.setAttribute("aria-label", theme === "dark" ? "Activer le mode clair" : "Activer le mode sombre");
+    themeToggle.setAttribute("aria-label", theme === "dark" ? t("common.themeLight") : t("common.themeDark"));
+    themeToggle.title = t("common.themeTitle");
   }
 
   applyTheme(preferredTheme());
@@ -77,6 +83,7 @@
   menuToggle?.addEventListener("click", () => {
     const open = menuToggle.getAttribute("aria-expanded") === "true";
     menuToggle.setAttribute("aria-expanded", String(!open));
+    menuToggle.setAttribute("aria-label", open ? t("common.menuOpen") : t("common.menuClose"));
     mobileNav.hidden = open;
     menuToggle.querySelector("span").textContent = open ? "☰" : "×";
   });
@@ -96,24 +103,27 @@
     localStorage.setItem("die2lap:last-read:v12", JSON.stringify({ id: post.id, at: Date.now() }));
   } catch {}
 
-  document.title = `${post.title} | Chroniques d’ailleurs`;
-  document.querySelector('meta[name="description"]')?.setAttribute(
-    "content",
-    `${post.title}, ${post.category}. Un texte de Die 2 Lap sur Chroniques d’ailleurs.`
-  );
-
   const absoluteArticleUrl = new URL(`article.html?id=${encodeURIComponent(post.id)}`, window.location.href).href;
   const absoluteImageUrl = post.image ? new URL(post.image, window.location.href).href : new URL("assets/die2lap-portrait.jpg", window.location.href).href;
-  const socialDescription = `${post.title}, ${post.category}. Un texte de Die 2 Lap sur Chroniques d’ailleurs.`;
   const setMeta = (selector, value) => document.querySelector(selector)?.setAttribute("content", value);
-  setMeta('meta[property="og:title"]', post.title);
-  setMeta('meta[property="og:description"]', socialDescription);
-  setMeta('meta[property="og:url"]', absoluteArticleUrl);
-  setMeta('meta[property="og:image"]', absoluteImageUrl);
-  setMeta('meta[name="twitter:title"]', post.title);
-  setMeta('meta[name="twitter:description"]', socialDescription);
-  setMeta('meta[name="twitter:image"]', absoluteImageUrl);
-  document.querySelector('link[rel="canonical"]')?.setAttribute("href", absoluteArticleUrl);
+
+  function updateMetadata() {
+    document.title = `${post.title} | Chroniques d’ailleurs`;
+    const socialDescription = t("dynamic.metaDescription", {
+      title: post.title,
+      category: i18n.category(post.category)
+    });
+    document.querySelector('meta[name="description"]')?.setAttribute("content", socialDescription);
+    setMeta('meta[property="og:title"]', post.title);
+    setMeta('meta[property="og:description"]', socialDescription);
+    setMeta('meta[property="og:url"]', absoluteArticleUrl);
+    setMeta('meta[property="og:image"]', absoluteImageUrl);
+    setMeta('meta[name="twitter:title"]', post.title);
+    setMeta('meta[name="twitter:description"]', socialDescription);
+    setMeta('meta[name="twitter:image"]', absoluteImageUrl);
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", absoluteArticleUrl);
+  }
+  updateMetadata();
 
   track("article_view", {
     article_id: post.id,
@@ -123,11 +133,22 @@
   });
 
   const minutes = readMinutes(post);
-  document.querySelector("#article-category").textContent = post.category;
   document.querySelector("#article-title").textContent = post.title;
-  document.querySelector("#article-reading-time").textContent = `${minutes} min de lecture`;
-  document.querySelector("#rail-category").textContent = post.category;
-  document.querySelector("#rail-reading").textContent = `${minutes} min`;
+
+  function updateArticleChrome() {
+    document.querySelector("#article-category").textContent = i18n.category(post.category);
+    document.querySelector("#article-reading-time").textContent = t("dynamic.readingMinutes", { count: minutes });
+    document.querySelector("#rail-category").textContent = i18n.category(post.category);
+    document.querySelector("#rail-reading").textContent = t("dynamic.minutes", { count: minutes });
+    const railDate = document.querySelector("#rail-date");
+    if (post.date) {
+      document.querySelector("#article-date").textContent = formatDate(post.date);
+      railDate.textContent = formatDate(post.date);
+    } else {
+      railDate.textContent = t("dynamic.archive");
+    }
+  }
+  updateArticleChrome();
 
   if (post.deck) {
     const deck = document.querySelector("#article-deck");
@@ -141,9 +162,6 @@
     const time = document.querySelector("#article-date");
     time.dateTime = post.date;
     time.textContent = formatDate(post.date);
-    document.querySelector("#rail-date").textContent = formatDate(post.date);
-  } else {
-    document.querySelector("#rail-date").textContent = "Archive";
   }
 
   if (post.image) {
@@ -158,7 +176,8 @@
 
     if (post.imageCredit) {
       credit.hidden = false;
-      credit.textContent = `Crédit image : ${post.imageCredit}`;
+      credit.dataset.credit = post.imageCredit;
+      credit.textContent = t("dynamic.imageCredit", { credit: post.imageCredit });
     }
   }
 
@@ -195,7 +214,7 @@
       figure.appendChild(image);
       if (block.caption || block.credit) {
         const caption = document.createElement("figcaption");
-        const parts = [block.caption, block.credit ? `Crédit image : ${block.credit}` : ""].filter(Boolean);
+        const parts = [block.caption, block.credit ? t("dynamic.imageCredit", { credit: block.credit }) : ""].filter(Boolean);
         caption.textContent = parts.join(" · ");
         figure.appendChild(caption);
       }
@@ -208,33 +227,43 @@
     body.appendChild(paragraph);
   }
 
-  (post.content || []).forEach(appendContentBlock);
+  function renderArticleBody() {
+    body.replaceChildren();
+    (post.content || []).forEach(appendContentBlock);
+  }
+  renderArticleBody();
 
   const publicationNotes = document.querySelector("#article-publication-notes");
-  const notes = [];
+  const archiveDiscussion = document.querySelector("#archive-discussion");
+  const archiveDiscussionCount = document.querySelector("#archive-discussion-count");
+  const archiveDiscussionLink = document.querySelector("#archive-discussion-link");
+  const archivedComments = Number(post.archiveComments || 0);
 
-  if (post.sourceUrl) {
-    notes.push({
-      prefix: "Publié initialement sur ",
-      label: post.sourceLabel || "le blog de Die 2 Lap",
-      url: post.sourceUrl,
-      date: post.date || null,
-      comments: Number(post.archiveComments || 0),
-      archiveTitle: post.archiveTitle || null
-    });
-  }
+  function renderPublicationHistory() {
+    const heading = publicationNotes.querySelector("h2");
+    [...publicationNotes.querySelectorAll(".publication-note")].forEach(node => node.remove());
+    const notes = [];
 
-  for (const publication of (post.alsoPublished || [])) {
-    notes.push({
-      prefix: "Aussi publié sur ",
-      label: publication.name || "un autre média",
-      url: publication.url,
-      date: publication.date || null
-    });
-  }
+    if (post.sourceUrl) {
+      notes.push({
+        prefix: t("dynamic.publishedInitially"),
+        label: post.sourceLabel || t("dynamic.dieBlog"),
+        url: post.sourceUrl,
+        date: post.date || null,
+        archiveTitle: post.archiveTitle || null
+      });
+    }
 
-  if (notes.length) {
-    publicationNotes.hidden = false;
+    for (const publication of (post.alsoPublished || [])) {
+      notes.push({
+        prefix: t("dynamic.alsoPublished"),
+        label: publication.name || t("dynamic.otherMedia"),
+        url: publication.url,
+        date: publication.date || null
+      });
+    }
+
+    publicationNotes.hidden = notes.length === 0;
     notes.forEach(note => {
       const row = document.createElement("p");
       row.className = "publication-note";
@@ -252,30 +281,32 @@
       }
 
       if (note.date) row.append(` · ${formatDate(note.date)}`);
-      if (note.archiveTitle && note.archiveTitle !== post.title) row.append(` · titre d’archive : « ${note.archiveTitle} »`);
+      if (note.archiveTitle && note.archiveTitle !== post.title) {
+        row.append(` · ${t("dynamic.archiveTitle")} : « ${note.archiveTitle} »`);
+      }
       publicationNotes.appendChild(row);
     });
-  }
 
-  const archiveDiscussion = document.querySelector("#archive-discussion");
-  const archiveDiscussionCount = document.querySelector("#archive-discussion-count");
-  const archiveDiscussionLink = document.querySelector("#archive-discussion-link");
-  const archivedComments = Number(post.archiveComments || 0);
-
-  if (archiveDiscussion && archivedComments > 0) {
-    archiveDiscussion.hidden = false;
-    archiveDiscussionCount.textContent = `${archivedComments} commentaire${archivedComments > 1 ? "s" : ""} d’archive`;
-    if (post.sourceUrl) {
-      archiveDiscussionLink.href = post.sourceUrl;
-      archiveDiscussionLink.hidden = false;
-      archiveDiscussionLink.addEventListener("click", () => track("archive_open", {
-        article_id: post.id,
-        article_title: post.title
-      }));
-    } else {
-      archiveDiscussionLink.hidden = true;
+    if (archiveDiscussion && archivedComments > 0) {
+      archiveDiscussion.hidden = false;
+      const plural = archivedComments > 1 ? (i18n.language === "de" ? "e" : "s") : "";
+      archiveDiscussionCount.textContent = t("dynamic.archiveCommentsBox", { count: archivedComments, plural });
+      if (post.sourceUrl) {
+        archiveDiscussionLink.href = post.sourceUrl;
+        archiveDiscussionLink.hidden = false;
+      } else {
+        archiveDiscussionLink.hidden = true;
+      }
     }
   }
+
+  if (post.sourceUrl) {
+    archiveDiscussionLink?.addEventListener("click", () => track("archive_open", {
+      article_id: post.id,
+      article_title: post.title
+    }));
+  }
+  renderPublicationHistory();
 
   const likeButton = document.querySelector(".like-button");
   const likeCluster = document.querySelector(".like-cluster");
@@ -290,8 +321,10 @@
   let globalLikesReady = false;
   let likeSyncing = false;
 
-  const setLikeScope = text => {
-    if (likeScope) likeScope.textContent = text;
+  let likeScopeKey = "article.savedDevice";
+  const setLikeScope = key => {
+    likeScopeKey = key;
+    if (likeScope) likeScope.textContent = t(key);
   };
 
   const updateLike = () => {
@@ -300,7 +333,7 @@
     likeCluster?.classList.toggle("is-liked", liked);
     likeButton.setAttribute("aria-pressed", String(liked));
     heart.textContent = liked ? "♥" : "♡";
-    if (likeLabel) likeLabel.textContent = liked ? "Aimé" : "J’aime";
+    if (likeLabel) likeLabel.textContent = liked ? t("article.liked") : t("article.like");
 
     const localFallback = Number(post.baseLikes || 0) + (liked ? 1 : 0);
     const displayedCount = Number.isFinite(globalLikeCount) ? globalLikeCount : localFallback;
@@ -314,17 +347,18 @@
   const pageUrl = new URL(window.location.href);
   pageUrl.hash = "";
   const canonicalUrl = pageUrl.href;
-  const shareText = `${post.title} - Chroniques d’ailleurs`;
-
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(canonicalUrl)}`;
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${canonicalUrl}`)}`;
-
-  document.querySelector(".share-x").href = xUrl;
-  document.querySelector(".share-facebook").href = facebookUrl;
-  document.querySelector(".share-whatsapp").href = whatsappUrl;
-  document.querySelector(".after-like-x").href = xUrl;
-  document.querySelector(".after-like-whatsapp").href = whatsappUrl;
+  function updateShareUrls() {
+    const shareText = `${post.title} - Chroniques d’ailleurs`;
+    const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(canonicalUrl)}`;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${t("dynamic.shareText", { title: post.title })} ${canonicalUrl}`)}`;
+    document.querySelector(".share-x").href = xUrl;
+    document.querySelector(".share-facebook").href = facebookUrl;
+    document.querySelector(".share-whatsapp").href = whatsappUrl;
+    document.querySelector(".after-like-x").href = xUrl;
+    document.querySelector(".after-like-whatsapp").href = whatsappUrl;
+  }
+  updateShareUrls();
 
   const trackShareLink = method => () => track("article_share", { article_id: post.id, article_title: post.title, method });
   document.querySelector(".share-x")?.addEventListener("click", trackShareLink("x"));
@@ -338,7 +372,7 @@
     try {
       await navigator.share({
         title: post.title,
-        text: `« ${post.title} » sur Chroniques d’ailleurs`,
+        text: t("dynamic.shareText", { title: post.title }),
         url: canonicalUrl
       });
       track("article_share", { article_id: post.id, article_title: post.title, method: "native" });
@@ -365,10 +399,10 @@
       await navigator.clipboard.writeText(canonicalUrl);
       track("article_share", { article_id: post.id, article_title: post.title, method: "copy" });
       const old = button.textContent;
-      button.textContent = "Copié ✓";
+      button.textContent = t("article.copied");
       setTimeout(() => button.textContent = old, 1400);
     } catch {
-      window.prompt("Copiez ce lien :", canonicalUrl);
+      window.prompt(t("dynamic.copyPrompt"), canonicalUrl);
     }
   }
 
@@ -388,7 +422,7 @@
 
   async function loadGlobalLikes() {
     if (!likesApi.isConfigured) {
-      setLikeScope("enregistré sur cet appareil");
+      setLikeScope("article.savedDevice");
       updateLike();
       return;
     }
@@ -396,7 +430,7 @@
     likeSyncing = true;
     likeButton.disabled = true;
     try {
-      setLikeScope("synchronisation...");
+      setLikeScope("article.syncing");
       const result = await likesApi.getCount(post.id, post.title);
       if (!result?.ok) throw new Error("Service de Likes indisponible");
       globalLikesReady = true;
@@ -419,11 +453,11 @@
         saveObject(STORAGE.likes, likesState);
       }
 
-      setLikeScope(savedLike.liked ? "partagé avec les lecteurs" : "compteur partagé");
+      setLikeScope(savedLike.liked ? "article.sharedReaders" : "article.sharedCounter");
       updateLike();
     } catch {
       globalLikesReady = false;
-      setLikeScope("enregistré sur cet appareil");
+      setLikeScope("article.savedDevice");
       updateLike();
     } finally {
       likeSyncing = false;
@@ -467,19 +501,19 @@
     }
 
     if (!shouldSendVote) {
-      setLikeScope(globalLikesReady ? "partagé avec les lecteurs" : "enregistré sur cet appareil");
+      setLikeScope(globalLikesReady ? "article.sharedReaders" : "article.savedDevice");
       return;
     }
 
     likeSyncing = true;
     likeButton.disabled = true;
-    setLikeScope("synchronisation...");
+    setLikeScope("article.syncing");
 
     try {
       await synchronizeDesiredLikeState();
-      setLikeScope(becomingLiked ? "partagé avec les lecteurs" : "compteur partagé");
+      setLikeScope(becomingLiked ? "article.sharedReaders" : "article.sharedCounter");
     } catch {
-      setLikeScope("enregistré sur cet appareil");
+      setLikeScope("article.savedDevice");
     } finally {
       likeSyncing = false;
       likeButton.disabled = false;
@@ -525,7 +559,7 @@
     if (!comments.length) {
       const empty = document.createElement("p");
       empty.className = "empty-comments";
-      empty.textContent = "Aucun commentaire local pour le moment.";
+      empty.textContent = t("dynamic.noLocalComments");
       commentsList.appendChild(empty);
       return;
     }
@@ -539,7 +573,7 @@
       msg.textContent = comment.message;
       const time = document.createElement("time");
       time.dateTime = comment.createdAt;
-      time.textContent = new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" })
+      time.textContent = new Intl.DateTimeFormat(i18n.locale, { dateStyle: "medium", timeStyle: "short" })
         .format(new Date(comment.createdAt));
       item.append(author, msg, time);
       commentsList.appendChild(item);
@@ -585,17 +619,19 @@
   const prevLink = document.querySelector("#prev-post");
   const nextLink = document.querySelector("#next-post");
 
-  if (prev) {
-    prevLink.hidden = false;
-    prevLink.href = `article.html?id=${encodeURIComponent(prev.id)}`;
-    prevLink.innerHTML = `<span>← Précédent</span><strong></strong>`;
-    prevLink.querySelector("strong").textContent = prev.title;
-  }
-  if (next) {
-    nextLink.hidden = false;
-    nextLink.href = `article.html?id=${encodeURIComponent(next.id)}`;
-    nextLink.innerHTML = `<span>Suivant →</span><strong></strong>`;
-    nextLink.querySelector("strong").textContent = next.title;
+  function renderPagination() {
+    if (prev) {
+      prevLink.hidden = false;
+      prevLink.href = `article.html?id=${encodeURIComponent(prev.id)}`;
+      prevLink.innerHTML = `<span>${t("dynamic.prev")}</span><strong></strong>`;
+      prevLink.querySelector("strong").textContent = prev.title;
+    }
+    if (next) {
+      nextLink.hidden = false;
+      nextLink.href = `article.html?id=${encodeURIComponent(next.id)}`;
+      nextLink.innerHTML = `<span>${t("dynamic.next")}</span><strong></strong>`;
+      nextLink.querySelector("strong").textContent = next.title;
+    }
   }
 
   function relatedPosts() {
@@ -605,26 +641,32 @@
   }
 
   const related = document.querySelector("#related-posts");
-  relatedPosts().forEach(item => {
-    const card = document.createElement("article");
-    card.className = "related-card";
-    const link = document.createElement("a");
-    link.href = `article.html?id=${encodeURIComponent(item.id)}`;
-    const image = document.createElement("img");
-    image.src = item.image || "";
-    image.alt = item.imageAlt || "";
-    image.loading = "lazy";
-    const copy = document.createElement("div");
-    copy.className = "related-card-copy";
-    const category = document.createElement("span");
-    category.textContent = item.category;
-    const title = document.createElement("h3");
-    title.textContent = item.title;
-    copy.append(category, title);
-    link.append(image, copy);
-    card.appendChild(link);
-    related.appendChild(card);
-  });
+  function renderRelated() {
+    related.replaceChildren();
+    relatedPosts().forEach(item => {
+      const card = document.createElement("article");
+      card.className = "related-card";
+      const link = document.createElement("a");
+      link.href = `article.html?id=${encodeURIComponent(item.id)}`;
+      const image = document.createElement("img");
+      image.src = item.image || "";
+      image.alt = item.imageAlt || "";
+      image.loading = "lazy";
+      const copy = document.createElement("div");
+      copy.className = "related-card-copy";
+      const category = document.createElement("span");
+      category.textContent = i18n.category(item.category);
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      copy.append(category, title);
+      link.append(image, copy);
+      card.appendChild(link);
+      related.appendChild(card);
+    });
+  }
+
+  renderPagination();
+  renderRelated();
 
   const progress = document.querySelector(".reading-progress span");
   const readingMilestones = new Set();
@@ -678,6 +720,25 @@
   focusToggle.addEventListener("click", () => {
     const on = document.body.classList.toggle("focus-reading");
     focusToggle.setAttribute("aria-pressed", String(on));
-    focusToggle.textContent = on ? "Quitter le mode lecture" : "Mode lecture";
+    focusToggle.textContent = on ? t("article.focusExit") : t("article.focus");
+  });
+
+  window.addEventListener("d2l:languagechange", () => {
+    applyTheme(document.documentElement.dataset.theme || preferredTheme());
+    updateMetadata();
+    updateArticleChrome();
+    const mainCredit = document.querySelector("#article-image-credit");
+    if (mainCredit?.dataset.credit) {
+      mainCredit.textContent = t("dynamic.imageCredit", { credit: mainCredit.dataset.credit });
+    }
+    renderArticleBody();
+    renderPublicationHistory();
+    updateLike();
+    setLikeScope(likeScopeKey);
+    updateShareUrls();
+    renderComments();
+    renderPagination();
+    renderRelated();
+    focusToggle.textContent = document.body.classList.contains("focus-reading") ? t("article.focusExit") : t("article.focus");
   });
 })();

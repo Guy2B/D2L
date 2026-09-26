@@ -451,78 +451,90 @@ textarea:focus-visible {
 
 .hero-quote {
   position: absolute;
-  top: 118px;
-  right: -118px;
-  bottom: auto;
-  width: 272px;
+  top: -6px;
+  right: -35px;
+  width: min(232px, 58%);
+  aspect-ratio: 330 / 190;
   margin: 0;
-  padding: 22px 24px;
-  border: 1.25px solid color-mix(in srgb, var(--text) 20%, var(--line));
-  border-radius: 32px;
-  background: color-mix(in srgb, var(--surface-solid) 99%, transparent);
-  box-shadow: 0 20px 48px rgba(36, 24, 12, .10);
-  backdrop-filter: blur(14px);
-  font: italic .98rem/1.62 var(--serif);
-  text-align: left;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
   z-index: 5;
-  transform: none;
+  filter: drop-shadow(0 18px 26px rgba(36, 24, 12, .09));
 }
-.hero-quote::before {
-  content: none;
-}
-.hero-quote::after {
-  content: "";
+.hero-quote-cloud {
   position: absolute;
-  inset: 8px;
-  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
-  border-radius: 24px;
-  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.hero-quote-cloud path {
+  fill: color-mix(in srgb, var(--surface-solid) 99%, transparent);
+  stroke: color-mix(in srgb, var(--text) 20%, var(--line));
+  stroke-width: 2.2;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .hero-quote span {
   position: relative;
   z-index: 1;
   display: block;
+  width: 74%;
+  margin-top: -1px;
+  color: var(--text);
+  font: italic .92rem/1.48 var(--serif);
+  text-align: center;
+  text-wrap: balance;
 }
 
 .hero-thought-trail {
   position: absolute;
-  top: 248px;
-  right: 86px;
-  width: 168px;
-  height: 116px;
+  top: 132px;
+  right: -2px;
+  width: 142px;
+  height: 118px;
   z-index: 6;
   pointer-events: none;
 }
 .thought-dot {
   position: absolute;
   display: block;
-  border: 1.25px solid color-mix(in srgb, var(--text) 22%, var(--line));
+  border: 1.8px solid color-mix(in srgb, var(--text) 19%, var(--line));
   border-radius: 50%;
   background: color-mix(in srgb, var(--surface-solid) 99%, transparent);
-  box-shadow: 0 9px 20px rgba(36, 24, 12, .08);
+  box-shadow: 0 7px 14px rgba(36, 24, 12, .06);
 }
 .thought-dot-1 {
-  left: 8px;
-  bottom: 6px;
-  width: 11px;
-  height: 11px;
+  left: 0;
+  bottom: 0;
+  width: 9px;
+  height: 9px;
 }
 .thought-dot-2 {
-  left: 44px;
-  bottom: 28px;
-  width: 18px;
-  height: 18px;
+  left: 31px;
+  bottom: 25px;
+  width: 16px;
+  height: 16px;
 }
 .thought-dot-3 {
-  left: 92px;
-  bottom: 62px;
-  width: 28px;
-  height: 28px;
+  left: 72px;
+  bottom: 58px;
+  width: 25px;
+  height: 25px;
 }
 
 @media (min-width: 821px) {
+  .hero-art {
+    min-height: 560px;
+  }
   .hero-portrait {
-    transform: translate(-46px, 38px) rotate(-1.5deg);
+    width: min(350px, 76%);
+    transform: translate(-92px, 84px) rotate(-1.5deg);
   }
 }
 
@@ -1510,14 +1522,21 @@ body.focus-reading .article-shell { padding-top: 24px; }
     padding-block: 76px 72px;
   }
   .hero h1 { font-size: clamp(4.5rem, 16vw, 7.3rem); }
-  .hero-art { min-height: 460px; }
-  .hero-portrait { width: min(360px, 76vw); }
+  .hero-art { min-height: 520px; }
+  .hero-portrait {
+    width: min(340px, 72vw);
+    transform: translate(-44px, 72px) rotate(-1.5deg);
+  }
   .hero-quote {
-    top: 70px;
-    right: 0;
-    bottom: auto;
-    width: min(252px, 56vw);
-    padding: 20px 22px;
+    top: 2px;
+    right: max(2px, 2vw);
+    width: min(236px, 52vw);
+  }
+  .hero-thought-trail {
+    top: 142px;
+    right: max(22px, 6vw);
+    width: 128px;
+    height: 110px;
   }
   .library-controls {
     position: static;
@@ -1680,8 +1699,24 @@ body.focus-reading .article-shell { padding-top: 24px; }
 .year-chip { flex:0 0 auto; min-height:32px; padding:0 11px; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--text-soft); font-size:.68rem; cursor:pointer; }
 .year-chip:hover, .year-chip.is-active { background:var(--accent-soft); border-color:color-mix(in srgb,var(--accent) 26%,var(--line)); color:var(--text); }
 
-.reveal-on-scroll, .index-card, .cv-card, .archive-card { opacity:0; transform:translateY(14px); transition:opacity 520ms ease, transform 520ms cubic-bezier(.2,.8,.2,1); }
-.reveal-on-scroll.is-visible, .index-card.is-visible, .cv-card.is-visible, .archive-card.is-visible { opacity:1; transform:none; }
+/* Reveal is progressive enhancement: content remains visible if JavaScript is unavailable or interrupted. */
+.reveal-on-scroll, .index-card, .cv-card, .archive-card {
+  opacity: 1;
+  transform: none;
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(.2,.8,.2,1);
+}
+html.reveal-ready .reveal-on-scroll:not(.is-visible),
+html.reveal-ready .index-card:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+html.reveal-ready .reveal-on-scroll.is-visible,
+html.reveal-ready .index-card.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* CV and archive cards are intentionally always visible. They are key content, not decorative animation. */
+.cv-card, .archive-card { opacity: 1 !important; transform: none !important; }
 
 .studio-link { margin-left:8px; color:var(--text-faint); text-underline-offset:3px; }
 .studio-link:hover { color:var(--text); }
@@ -2077,29 +2112,32 @@ body.studio-locked { overflow: hidden; }
 
 @media (max-width: 560px) {
   .hero-art {
-    min-height: 575px;
-    padding-top: 138px;
+    min-height: 560px;
+    padding-top: 132px;
   }
   .hero-portrait {
-    width: min(330px, 78vw);
-    transform: translateX(-30px) rotate(-1.5deg);
+    width: min(318px, 76vw);
+    transform: translate(-34px, 58px) rotate(-1.5deg);
   }
   .hero-quote {
-    top: 46px;
-    right: -2px;
-    width: min(216px, 62vw);
-    padding: 16px 18px 14px;
-    font-size: .84rem;
+    top: 0;
+    right: 0;
+    width: min(218px, 61vw);
+  }
+  .hero-quote span {
+    width: 72%;
+    font-size: .82rem;
+    line-height: 1.42;
   }
   .hero-thought-trail {
-    top: 214px;
-    right: 70px;
-    width: 118px;
-    height: 92px;
+    top: 128px;
+    right: 20px;
+    width: 104px;
+    height: 94px;
   }
-  .thought-dot-1 { left: 6px; bottom: 2px; width: 8px; height: 8px; }
-  .thought-dot-2 { left: 34px; bottom: 18px; width: 12px; height: 12px; }
-  .thought-dot-3 { left: 66px; bottom: 42px; width: 18px; height: 18px; }
+  .thought-dot-1 { left: 0; bottom: 0; width: 7px; height: 7px; }
+  .thought-dot-2 { left: 25px; bottom: 20px; width: 12px; height: 12px; }
+  .thought-dot-3 { left: 55px; bottom: 44px; width: 18px; height: 18px; }
 }
 
 
@@ -2490,4 +2528,239 @@ body.studio-locked { overflow: hidden; }
     grid-column: 1 / -1;
     padding-left: 44px;
   }
+}
+
+/* =========================================================
+   V34 - Interface multilingue FR / EN / DE
+   ========================================================= */
+.language-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.language-picker::after {
+  content: "⌄";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-57%);
+  color: var(--text-faint);
+  font-size: .68rem;
+  pointer-events: none;
+}
+
+.language-select {
+  min-width: 58px;
+  height: 42px;
+  padding: 0 22px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--text);
+  font: 800 .68rem/1 var(--sans);
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.language-select:hover,
+.language-select:focus-visible {
+  border-color: var(--line-strong);
+  background: var(--surface-solid);
+}
+
+.standalone-language {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 600px) {
+  .header-actions { gap: 6px; }
+  .language-select {
+    min-width: 52px;
+    height: 38px;
+    padding-left: 8px;
+    padding-right: 19px;
+    font-size: .64rem;
+  }
+  .language-picker::after { right: 6px; }
+}
+
+@media (max-width: 430px) {
+  .brand-copy strong { font-size: .94rem; }
+  .header-inner { gap: 10px; }
+  .brand { gap: 8px; }
+  .header-actions { gap: 5px; }
+  .icon-button { width: 38px; height: 38px; }
+}
+
+@media (max-width: 370px) {
+  .brand-copy { display: none; }
+}
+
+.original-language-note,
+.library-language-note {
+  margin-top: 14px;
+  color: var(--text-soft);
+  font: 600 .72rem/1.5 var(--sans);
+  letter-spacing: .02em;
+}
+
+.original-language-note {
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  text-align: center;
+}
+
+.library-language-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-soft) 48%, transparent);
+}
+
+.original-language-note[hidden],
+.library-language-note[hidden] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .original-language-note {
+    margin-inline: 0;
+    border-radius: 14px;
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   V37 - Thought bubble composition: portrait always unobstructed
+   ========================================================= */
+.hero-art {
+  min-height: 560px;
+  overflow: visible;
+}
+
+@media (min-width: 821px) {
+  .hero-portrait {
+    position: absolute;
+    left: -10%;
+    top: 24%;
+    width: 72%;
+    margin: 0;
+    transform: rotate(-1.5deg);
+  }
+
+  .hero-quote {
+    top: 0;
+    right: -4%;
+    width: 44%;
+    max-width: 232px;
+  }
+
+  .hero-thought-trail {
+    top: 18%;
+    left: 61%;
+    right: auto;
+    width: 34%;
+    height: 28%;
+  }
+
+  .thought-dot-1 {
+    left: 0;
+    bottom: 0;
+  }
+
+  .thought-dot-2 {
+    left: 27%;
+    bottom: 27%;
+  }
+
+  .thought-dot-3 {
+    left: 57%;
+    bottom: 57%;
+  }
+}
+
+@media (max-width: 820px) {
+  .hero-art {
+    min-height: 580px;
+    padding-top: 0;
+  }
+
+  .hero-portrait {
+    position: absolute;
+    left: 12%;
+    top: 26%;
+    width: 44%;
+    margin: 0;
+    transform: rotate(-1.5deg);
+  }
+
+  .hero-quote {
+    top: 1%;
+    right: 7%;
+    width: 34%;
+    max-width: 244px;
+  }
+
+  .hero-thought-trail {
+    top: 20%;
+    left: 56%;
+    right: auto;
+    width: 28%;
+    height: 26%;
+  }
+
+  .thought-dot-1 { left: 0; bottom: 0; }
+  .thought-dot-2 { left: 28%; bottom: 28%; }
+  .thought-dot-3 { left: 58%; bottom: 58%; }
+}
+
+@media (max-width: 560px) {
+  .hero-art {
+    min-height: 560px;
+    padding-top: 0;
+  }
+
+  .hero-portrait {
+    left: 2%;
+    top: 28%;
+    width: 70%;
+    transform: rotate(-1.5deg);
+  }
+
+  .hero-quote {
+    top: 2%;
+    right: -1%;
+    width: 50%;
+    max-width: 210px;
+  }
+
+  .hero-quote span {
+    width: 73%;
+    font-size: .79rem;
+    line-height: 1.4;
+  }
+
+  .hero-thought-trail {
+    top: 18%;
+    left: 61%;
+    width: 34%;
+    height: 29%;
+  }
+
+  .thought-dot-1 { width: 7px; height: 7px; }
+  .thought-dot-2 { width: 12px; height: 12px; }
+  .thought-dot-3 { width: 18px; height: 18px; }
 }

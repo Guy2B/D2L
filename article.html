@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3SVPB7Y3P"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T3SVPB7Y3P"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -14,7 +14,6 @@
     try { gtag('event', eventName, params || {}); } catch (error) {}
   };
 </script>
-
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="description"/>
 <meta content="#f4efe6" name="theme-color"/>
@@ -26,42 +25,42 @@
 <script defer="" src="custom-content.js"></script>
 <script defer="" src="likes-config.js"></script>
 <script defer="" src="likes-api.js"></script>
-<script defer="" src="article.js"></script>
-<link href="https://guy2b.github.io/D2L/article.html" rel="canonical"/><meta content="article" property="og:type"/><meta content="Chroniques d’ailleurs" property="og:site_name"/><meta content="Chroniques d’ailleurs | Lecture" property="og:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." property="og:description"/><meta content="https://guy2b.github.io/D2L/article.html" property="og:url"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Chroniques d’ailleurs | Lecture" name="twitter:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="twitter:description"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" name="twitter:image"/><script defer src="analytics-page.js"></script>
+<script defer="" src="i18n.js"></script><script defer="" src="article.js"></script>
+<link href="https://guy2b.github.io/D2L/article.html" rel="canonical"/><meta content="article" property="og:type"/><meta content="Chroniques d’ailleurs" property="og:site_name"/><meta content="Chroniques d’ailleurs | Lecture" property="og:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." property="og:description"/><meta content="https://guy2b.github.io/D2L/article.html" property="og:url"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Chroniques d’ailleurs | Lecture" name="twitter:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="twitter:description"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" name="twitter:image"/><script defer="" src="analytics-page.js"></script>
 </head>
-<body class="reading-page">
+<body class="reading-page" data-i18n-page="article">
 <div aria-hidden="true" class="page-noise"></div>
 <div aria-hidden="true" class="reading-progress"><span></span></div>
-<a class="skip-link" href="#main">Aller au contenu</a>
+<a class="skip-link" data-i18n="common.skip" href="#main">Aller au contenu</a>
 <header class="site-header article-site-header">
 <div class="shell header-inner">
-<a aria-label="Accueil de Chroniques d’ailleurs" class="brand" href="index.html">
+<a aria-label="Accueil de Chroniques d’ailleurs" class="brand" data-i18n-aria="common.home" href="index.html">
 <span class="brand-avatar"><img alt="" src="assets/die2lap-avatar.jpg"/></span>
 <span class="brand-copy"><strong>Chroniques d’ailleurs</strong><small>Die 2 Lap · Ô Kamer</small></span>
 </a>
-<nav aria-label="Navigation principale" class="main-nav">
-<a href="index.html#textes">Textes</a>
-<a href="index.html#romans">Romans</a>
-<a href="index.html#a-propos">Auteur</a>
-<a href="index.html#archives">Archives</a>
+<nav aria-label="Navigation principale" class="main-nav" data-i18n-aria="common.nav">
+<a data-i18n="nav.texts" href="index.html#textes">Textes</a>
+<a data-i18n="nav.novels" href="index.html#romans">Romans</a>
+<a data-i18n="nav.author" href="index.html#a-propos">Auteur</a>
+<a data-i18n="nav.archives" href="index.html#archives">Archives</a>
 </nav>
-<div class="header-actions">
-<button aria-label="Activer le mode sombre" class="icon-button theme-toggle" title="Changer de thème" type="button"><span aria-hidden="true">◐</span></button>
-<button aria-controls="mobile-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="icon-button menu-toggle" type="button"><span aria-hidden="true">☰</span></button>
+<div class="header-actions"><label class="language-picker"><span class="sr-only">Langue du site</span><select class="language-select"><option value="fr">FR</option><option value="en">EN</option><option value="de">DE</option></select></label>
+<button aria-label="Activer le mode sombre" class="icon-button theme-toggle" data-i18n-aria="common.theme_dark" data-i18n-title="common.theme_title" title="Changer de thème" type="button"><span aria-hidden="true">◐</span></button>
+<button aria-controls="mobile-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="icon-button menu-toggle" data-i18n-aria="common.menu_open" type="button"><span aria-hidden="true">☰</span></button>
 </div>
 </div>
-<nav aria-label="Navigation mobile" class="mobile-nav" hidden="" id="mobile-nav">
-<a href="index.html#textes">Textes</a><a href="index.html#romans">Romans</a><a href="index.html#a-propos">Auteur</a><a href="index.html#archives">Archives</a>
+<nav aria-label="Navigation mobile" class="mobile-nav" data-i18n-aria="common.mobile_nav" hidden="" id="mobile-nav">
+<a data-i18n="nav.texts" href="index.html#textes">Textes</a><a data-i18n="nav.novels" href="index.html#romans">Romans</a><a data-i18n="nav.author" href="index.html#a-propos">Auteur</a><a data-i18n="nav.archives" href="index.html#archives">Archives</a>
 </nav>
 </header>
 <main class="article-page" id="main">
 <article class="article-shell" id="article">
 <div class="article-topbar">
-<a class="back-link" href="index.html#textes">← Tous les textes</a>
-<div aria-label="Options de lecture" class="reading-tools">
-<button aria-label="Réduire la taille du texte" data-font="minus" type="button">A−</button>
-<button aria-label="Agrandir la taille du texte" data-font="plus" type="button">A+</button>
-<button aria-pressed="false" class="focus-mode-toggle" type="button">Mode lecture</button>
+<a class="back-link" data-i18n="article.back" href="index.html#textes">← Tous les textes</a>
+<div aria-label="Options de lecture" class="reading-tools" data-i18n-aria="article.tools_aria">
+<button aria-label="Réduire la taille du texte" data-font="minus" data-i18n-aria="article.font_minus" type="button">A−</button>
+<button aria-label="Agrandir la taille du texte" data-font="plus" data-i18n-aria="article.font_plus" type="button">A+</button>
+<button aria-pressed="false" class="focus-mode-toggle" data-i18n="article.focus" type="button">Mode lecture</button>
 </div>
 </div>
 <header class="article-header">
@@ -72,21 +71,22 @@
 </div>
 <h1 id="article-title"></h1>
 <p class="article-deck" hidden="" id="article-deck"></p>
+<p class="original-language-note" data-i18n="article.originalNote" hidden="" id="original-language-note">Le texte littéraire ci-dessous reste dans sa langue originale, le français.</p>
 </header>
 <figure class="article-figure" hidden="" id="article-figure">
 <img alt="" id="article-image"/>
 <figcaption class="article-image-credit" hidden="" id="article-image-credit"></figcaption>
 </figure>
 <div class="article-layout">
-<aside aria-label="Repères de lecture" class="article-rail">
+<aside aria-label="Repères de lecture" class="article-rail" data-i18n-aria="article.rail_aria">
 <div class="rail-card">
-<span>Publié</span><strong id="rail-date">-</strong>
+<span data-i18n="article.published">Publié</span><strong id="rail-date">-</strong>
 </div>
 <div class="rail-card">
-<span>Catégorie</span><strong id="rail-category">-</strong>
+<span data-i18n="article.category">Catégorie</span><strong id="rail-category">-</strong>
 </div>
 <div class="rail-card">
-<span>Lecture</span><strong id="rail-reading">-</strong>
+<span data-i18n="article.reading">Lecture</span><strong id="rail-reading">-</strong>
 </div>
 </aside>
 <div class="article-main">
@@ -96,53 +96,53 @@
 <span>© Die 2 Lap</span>
 </div>
 <div class="article-publication-notes" hidden="" id="article-publication-notes">
-<h2>Historique de publication</h2>
+<h2 data-i18n="article.history">Historique de publication</h2>
 </div>
-<div class="archive-discussion" id="archive-discussion" hidden="">
-<span class="archive-discussion-icon" aria-hidden="true">◌</span>
+<div class="archive-discussion" hidden="" id="archive-discussion">
+<span aria-hidden="true" class="archive-discussion-icon">◌</span>
 <div class="archive-discussion-copy">
 <strong id="archive-discussion-count"></strong>
-<span>sur le blog d’origine</span>
+<span data-i18n="article.archive_origin">sur le blog d’origine</span>
 </div>
-<a id="archive-discussion-link" href="#" target="_blank" rel="noopener noreferrer">Voir l’archive ↗</a>
+<a data-i18n="article.archive_view" href="#" id="archive-discussion-link" rel="noopener noreferrer" target="_blank">Voir l’archive ↗</a>
 </div>
 <footer class="post-actions article-actions">
 <div class="like-cluster">
-<button aria-pressed="false" class="like-button" type="button"><span aria-hidden="true" class="heart">♡</span><span class="like-label">J’aime</span><span class="like-count">0</span></button>
-<span class="like-scope">enregistré sur cet appareil</span>
+<button aria-pressed="false" class="like-button" type="button"><span aria-hidden="true" class="heart">♡</span><span class="like-label" data-i18n="article.like">J’aime</span><span class="like-count">0</span></button>
+<span class="like-scope" data-i18n="article.like_local">enregistré sur cet appareil</span>
 </div>
 <div class="share">
-<button aria-expanded="false" class="share-toggle" type="button"><span aria-hidden="true">↗</span> Partager</button>
+<button aria-expanded="false" class="share-toggle" type="button"><span aria-hidden="true">↗</span> <span data-i18n="article.share">Partager</span></button>
 <div class="share-menu" hidden="">
-<button class="share-native" type="button" hidden="">Partager avec mon téléphone</button>
+<button class="share-native" data-i18n="article.share_phone" hidden="" type="button">Partager avec mon téléphone</button>
 <a class="share-x" href="#" rel="noopener noreferrer" target="_blank">X / Twitter</a>
 <a class="share-facebook" href="#" rel="noopener noreferrer" target="_blank">Facebook</a>
 <a class="share-whatsapp" href="#" rel="noopener noreferrer" target="_blank">WhatsApp</a>
-<button class="share-copy" type="button">Copier le lien</button>
+<button class="share-copy" data-i18n="article.copy_link" type="button">Copier le lien</button>
 </div>
 </div>
 </footer>
-<div class="after-like-share" hidden="" role="status" aria-live="polite">
-<span class="after-like-icon" aria-hidden="true">♥</span>
-<div class="after-like-copy"><strong>Ce texte reste avec vous.</strong><span>Vous souhaitez le partager ?</span></div>
+<div aria-live="polite" class="after-like-share" hidden="" role="status">
+<span aria-hidden="true" class="after-like-icon">♥</span>
+<div class="after-like-copy"><strong data-i18n="article.after_like_title">Ce texte reste avec vous.</strong><span data-i18n="article.after_like_copy">Vous souhaitez le partager ?</span></div>
 <div class="after-like-actions">
-<button class="after-like-native" type="button" hidden="">Partager</button>
-<a class="after-like-whatsapp" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-<a class="after-like-x" href="#" target="_blank" rel="noopener noreferrer">X</a>
-<button class="after-like-copy-link" type="button">Copier</button>
+<button class="after-like-native" data-i18n="article.share" hidden="" type="button">Partager</button>
+<a class="after-like-whatsapp" href="#" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+<a class="after-like-x" href="#" rel="noopener noreferrer" target="_blank">X</a>
+<button class="after-like-copy-link" data-i18n="article.copy_link" type="button">Copier</button>
 </div>
 </div>
-<section aria-label="Commentaires sur ce site" class="comments">
-<button aria-expanded="false" class="comments-toggle" type="button">Commentaires sur ce site <span class="comments-count">0</span></button>
+<section aria-label="Commentaires sur ce site" class="comments" data-i18n-aria="article.comments_aria">
+<button aria-expanded="false" class="comments-toggle" type="button"><span data-i18n="article.comments">Commentaires sur ce site</span> <span class="comments-count">0</span></button>
 <div class="comments-panel" hidden="">
 <div class="comments-list"></div>
 <form class="comment-form">
 <div class="form-row">
-<label><span>Nom</span><input maxlength="40" name="name" placeholder="Votre nom" required="" type="text"/></label>
-<label class="comment-field"><span>Commentaire</span><textarea maxlength="600" name="message" placeholder="Écrire quelques mots…" required="" rows="4"></textarea></label>
+<label><span data-i18n="article.name">Nom</span><input data-i18n-placeholder="article.name_placeholder" maxlength="40" name="name" placeholder="Votre nom" required="" type="text"/></label>
+<label class="comment-field"><span data-i18n="article.comment">Commentaire</span><textarea data-i18n-placeholder="article.comment_placeholder" maxlength="600" name="message" placeholder="Écrire quelques mots…" required="" rows="4"></textarea></label>
 </div>
-<button class="button button-small" type="submit">Publier localement</button>
-<p class="form-help">Ces commentaires restent uniquement dans ce navigateur et sont distincts des commentaires historiques du blog d’origine.</p>
+<button class="button button-small" data-i18n="article.publish_local" type="submit">Publier localement</button>
+<p class="form-help" data-i18n="article.comments_help">Ces commentaires restent uniquement dans ce navigateur et sont distincts des commentaires historiques du blog d’origine.</p>
 </form>
 </div>
 </section>
@@ -150,37 +150,37 @@
 </div>
 <section aria-labelledby="related-title" class="related-section">
 <div class="related-heading">
-<p class="section-kicker">Continuer</p>
-<h2 id="related-title">À lire également</h2>
+<p class="section-kicker" data-i18n="article.continue">Continuer</p>
+<h2 data-i18n="article.related" id="related-title">À lire également</h2>
 </div>
 <div class="related-grid" id="related-posts"></div>
 </section>
-<nav aria-label="Navigation entre les textes" class="article-pagination">
+<nav aria-label="Navigation entre les textes" class="article-pagination" data-i18n-aria="article.pagination_aria">
 <a hidden="" href="#" id="prev-post"></a>
 <a hidden="" href="#" id="next-post"></a>
 </nav>
 </article>
 <section class="shell not-found" hidden="" id="article-not-found">
-<p class="section-kicker">Lecture</p>
-<h1>Texte introuvable</h1>
-<p>Cette publication n’existe pas ou son identifiant est incorrect.</p>
-<a class="button button-primary" href="index.html#textes">Retour aux textes</a>
+<p class="section-kicker" data-i18n="article.notfound_kicker">Lecture</p>
+<h1 data-i18n="article.notfound_title">Texte introuvable</h1>
+<p data-i18n="article.notfound_copy">Cette publication n’existe pas ou son identifiant est incorrect.</p>
+<a class="button button-primary" data-i18n="article.notfound_back" href="index.html#textes">Retour aux textes</a>
 </section>
 </main>
 <footer class="site-footer">
 <div class="shell footer-stack">
 <div class="footer-inner">
 <div class="footer-brand-block"><strong>Chroniques d’ailleurs</strong><span>Die 2 Lap</span></div>
-<nav aria-label="Liens de pied de page" class="footer-nav">
-<a href="index.html#textes">Textes</a>
-<a href="index.html#romans">Romans</a>
-<a href="disclaimer.html">Disclaimer</a>
-<a href="impressum.html">Impressum</a>
-<a class="studio-link" href="atelier.html">Atelier auteur</a>
+<nav aria-label="Liens de pied de page" class="footer-nav" data-i18n-aria="common.footer_nav">
+<a data-i18n="nav.texts" href="index.html#textes">Textes</a>
+<a data-i18n="nav.novels" href="index.html#romans">Romans</a>
+<a data-i18n="nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="nav.impressum" href="impressum.html">Impressum</a>
+<a class="studio-link" data-i18n="nav.studio" href="atelier.html">Atelier auteur</a>
 </nav>
-<p>© <span id="current-year"></span> Die 2 Lap. Tous droits réservés.</p>
+<p>© <span id="current-year"></span> Die 2 Lap. <span data-i18n="footer.rights">Tous droits réservés.</span></p>
 </div>
-<p class="footer-note">Site littéraire personnel. Les textes demeurent la propriété de leur auteur. Les liens externes sont proposés à titre documentaire.</p>
+<p class="footer-note" data-i18n="footer.note">Site littéraire personnel. Les textes demeurent la propriété de leur auteur. Les liens externes sont proposés à titre documentaire.</p>
 </div>
 </footer>
 </body>

@@ -170,3 +170,36 @@ Les nombres de commentaires historiques déjà recensés dans les données des d
 - Le `page_view` automatique est désactivé puis envoyé manuellement après l’initialisation de la page, afin que les articles remontent avec leur vrai titre dynamique.
 - Événements ajoutés : ouverture d’article, progression 25/50/75/100 %, J’aime, partage, ouverture d’archive, commentaire local, filtres, année, recherche, synopsis, lecture surprise et reprise de lecture.
 - Le Disclaimer mentionne désormais la mesure d’audience.
+
+## V34 - Présentation trilingue FR / EN / DE
+
+- Français par défaut à la première visite.
+- Sélecteur de langue FR / EN / DE sur les pages publiques.
+- Le choix de langue est mémorisé dans le navigateur.
+- Navigation, accueil, bibliothèque, présentation de l'auteur, parcours, romans, synopsis, lecteur, likes, partage, commentaires, archives, Disclaimer, Impressum et page 404 sont traduits.
+- Les traductions anglaises et allemandes ont été rédigées dans un registre littéraire naturel, et non comme une traduction mot à mot.
+- Les titres des œuvres et des manuscrits restent dans leur forme originale.
+- Les 44 textes publiés, leurs extraits et leur contenu littéraire restent intégralement en français.
+- En anglais et en allemand, une note discrète précise que les œuvres publiées restent dans leur langue originale.
+- `posts.js` et `custom-content.js` n'ont pas été modifiés dans cette passe multilingue.
+
+
+## V35 - Correctif affichage Parcours et Archives
+
+- Correction du bug V34 pouvant rendre invisibles les cartes de la section Parcours et les liens des blogs d'origine.
+- Les contenus importants restent désormais visibles même si JavaScript ou l'animation d'apparition est interrompu.
+- Les animations de révélation sont maintenant un enrichissement progressif, jamais une condition d'affichage du contenu.
+- Les trois langues FR, EN et DE de la V34 sont conservées, avec le français par défaut.
+- Les textes littéraires publiés restent en français et ne sont pas traduits.
+
+## V36 - Bulle de pensée éditoriale
+
+- Grande bulle redessinée en forme de nuage organique via SVG.
+- Trois bulles de liaison de taille croissante entre le portrait et la citation.
+- Positionnement entièrement contenu dans la zone héro pour éviter le débordement horizontal.
+- Adaptation spécifique tablette et mobile.
+- Conservation des traductions FR / EN / DE de l'interface.
+
+## V37 - Bulle de pensée
+
+La composition du hero a été recalibrée afin que la bulle de pensée ne recouvre jamais le visage. Sur ordinateur, tablette et mobile, le portrait et la grande bulle occupent des zones distinctes. Trois petites bulles croissantes assurent la liaison visuelle entre le portrait et la pensée.

@@ -4,6 +4,7 @@
   const basePosts = Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [];
   const customPosts = Array.isArray(window.CUSTOM_POSTS) ? window.CUSTOM_POSTS : [];
   const posts = [...basePosts, ...customPosts];
+  const track = (eventName, params = {}) => window.d2lTrack?.(eventName, params);
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const post = posts.find(item => item.id === id);
@@ -113,6 +114,13 @@
   setMeta('meta[name="twitter:description"]', socialDescription);
   setMeta('meta[name="twitter:image"]', absoluteImageUrl);
   document.querySelector('link[rel="canonical"]')?.setAttribute("href", absoluteArticleUrl);
+
+  track("article_view", {
+    article_id: post.id,
+    article_title: post.title,
+    category: post.category,
+    reading_minutes: readMinutes(post)
+  });
 
   const minutes = readMinutes(post);
   document.querySelector("#article-category").textContent = post.category;
@@ -260,6 +268,10 @@
     if (post.sourceUrl) {
       archiveDiscussionLink.href = post.sourceUrl;
       archiveDiscussionLink.hidden = false;
+      archiveDiscussionLink.addEventListener("click", () => track("archive_open", {
+        article_id: post.id,
+        article_title: post.title
+      }));
     } else {
       archiveDiscussionLink.hidden = true;
     }
@@ -314,6 +326,13 @@
   document.querySelector(".after-like-x").href = xUrl;
   document.querySelector(".after-like-whatsapp").href = whatsappUrl;
 
+  const trackShareLink = method => () => track("article_share", { article_id: post.id, article_title: post.title, method });
+  document.querySelector(".share-x")?.addEventListener("click", trackShareLink("x"));
+  document.querySelector(".share-facebook")?.addEventListener("click", trackShareLink("facebook"));
+  document.querySelector(".share-whatsapp")?.addEventListener("click", trackShareLink("whatsapp"));
+  document.querySelector(".after-like-x")?.addEventListener("click", trackShareLink("x_after_like"));
+  document.querySelector(".after-like-whatsapp")?.addEventListener("click", trackShareLink("whatsapp_after_like"));
+
   async function nativeShare() {
     if (!navigator.share) return false;
     try {
@@ -322,6 +341,7 @@
         text: `« ${post.title} » sur Chroniques d’ailleurs`,
         url: canonicalUrl
       });
+      track("article_share", { article_id: post.id, article_title: post.title, method: "native" });
       return true;
     } catch (error) {
       if (error?.name !== "AbortError") console.warn("Partage interrompu", error);
@@ -343,6 +363,7 @@
   async function copyShareLink(button) {
     try {
       await navigator.clipboard.writeText(canonicalUrl);
+      track("article_share", { article_id: post.id, article_title: post.title, method: "copy" });
       const old = button.textContent;
       button.textContent = "Copié ✓";
       setTimeout(() => button.textContent = old, 1400);
@@ -418,6 +439,13 @@
     savedLike.liked = becomingLiked;
     likesState[post.id] = savedLike;
     saveObject(STORAGE.likes, likesState);
+    track("article_like", {
+      article_id: post.id,
+      article_title: post.title,
+      category: post.category,
+      liked: becomingLiked ? 1 : 0,
+      global_counter: likesApi.isConfigured ? 1 : 0
+    });
 
     const shouldSendVote = likesApi.isConfigured && globalLikesReady && becomingLiked !== remoteLiked;
     if (shouldSendVote && Number.isFinite(globalLikeCount)) {
@@ -539,6 +567,7 @@
     });
     commentsState[post.id] = comments;
     saveObject(STORAGE.comments, commentsState);
+    track("local_comment", { article_id: post.id, article_title: post.title });
     form.reset();
     renderComments();
   });
@@ -598,11 +627,25 @@
   });
 
   const progress = document.querySelector(".reading-progress span");
+  const readingMilestones = new Set();
   function updateProgress() {
     const start = article.offsetTop;
     const height = article.scrollHeight - window.innerHeight;
     const value = height > 0 ? Math.min(1, Math.max(0, (window.scrollY - start) / height)) : 0;
-    progress.style.width = `${value * 100}%`;
+    const percent = Math.round(value * 100);
+    progress.style.width = `${percent}%`;
+
+    [25, 50, 75, 100].forEach(milestone => {
+      if (percent >= milestone && !readingMilestones.has(milestone)) {
+        readingMilestones.add(milestone);
+        track("reading_progress", {
+          article_id: post.id,
+          article_title: post.title,
+          category: post.category,
+          percent: milestone
+        });
+      }
+    });
   }
   window.addEventListener("scroll", updateProgress, { passive: true });
   window.addEventListener("resize", updateProgress);

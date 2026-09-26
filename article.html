@@ -3,6 +3,18 @@
 <html data-theme="light" lang="fr">
 <head>
 <meta charset="utf-8"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3SVPB7Y3P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T3SVPB7Y3P', { send_page_view: false });
+  window.d2lTrack = function(eventName, params) {
+    try { gtag('event', eventName, params || {}); } catch (error) {}
+  };
+</script>
+
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="description"/>
 <meta content="#f4efe6" name="theme-color"/>
@@ -15,7 +27,8 @@
 <script defer="" src="likes-config.js"></script>
 <script defer="" src="likes-api.js"></script>
 <script defer="" src="article.js"></script>
-<link href="https://guy2b.github.io/D2L/article.html" rel="canonical"/><meta content="article" property="og:type"/><meta content="Chroniques d’ailleurs" property="og:site_name"/><meta content="Chroniques d’ailleurs | Lecture" property="og:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." property="og:description"/><meta content="https://guy2b.github.io/D2L/article.html" property="og:url"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Chroniques d’ailleurs | Lecture" name="twitter:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="twitter:description"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" name="twitter:image"/></head>
+<link href="https://guy2b.github.io/D2L/article.html" rel="canonical"/><meta content="article" property="og:type"/><meta content="Chroniques d’ailleurs" property="og:site_name"/><meta content="Chroniques d’ailleurs | Lecture" property="og:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." property="og:description"/><meta content="https://guy2b.github.io/D2L/article.html" property="og:url"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Chroniques d’ailleurs | Lecture" name="twitter:title"/><meta content="Texte de Die 2 Lap sur Chroniques d’ailleurs." name="twitter:description"/><meta content="https://guy2b.github.io/D2L/assets/die2lap-portrait.jpg" name="twitter:image"/><script defer src="analytics-page.js"></script>
+</head>
 <body class="reading-page">
 <div aria-hidden="true" class="page-noise"></div>
 <div aria-hidden="true" class="reading-progress"><span></span></div>

@@ -162,3 +162,11 @@ Les nombres de commentaires historiques déjà recensés dans les données des d
 - Les pages d'article affichent un encart "commentaires d'archive" avec un lien vers la publication d'origine.
 - Les commentaires d'archive ne sont jamais additionnés aux nouveaux commentaires du site.
 - Aucun nombre n'a été inventé : les valeurs proviennent du champ `archiveComments` déjà présent dans les données migrées.
+
+## V33 - Google Analytics 4
+
+- Google Analytics 4 activé avec l’identifiant `G-T3SVPB7Y3P` sur les pages publiques.
+- Les pages Atelier auteur et Studio ne chargent pas Google Analytics afin de ne pas mélanger l’usage éditorial avec l’audience publique.
+- Le `page_view` automatique est désactivé puis envoyé manuellement après l’initialisation de la page, afin que les articles remontent avec leur vrai titre dynamique.
+- Événements ajoutés : ouverture d’article, progression 25/50/75/100 %, J’aime, partage, ouverture d’archive, commentaire local, filtres, année, recherche, synopsis, lecture surprise et reprise de lecture.
+- Le Disclaimer mentionne désormais la mesure d’audience.

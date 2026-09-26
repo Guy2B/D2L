@@ -2,6 +2,18 @@
 <html lang="fr" data-theme="light">
 <head>
   <meta charset="utf-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3SVPB7Y3P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T3SVPB7Y3P', { send_page_view: false });
+  window.d2lTrack = function(eventName, params) {
+    try { gtag('event', eventName, params || {}); } catch (error) {}
+  };
+</script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Disclaimer du site Chroniques d’ailleurs." />
   <meta name="theme-color" content="#f4efe6" />
@@ -10,6 +22,7 @@
   <link rel="icon" href="assets/die2lap-avatar.jpg" />
   <link rel="stylesheet" href="styles.css" />
   <script src="legal.js" defer></script>
+<script defer src="analytics-page.js"></script>
 </head>
 <body class="legal-page">
   <div class="page-noise" aria-hidden="true"></div>
@@ -62,6 +75,9 @@
         <h2>Commentaires, appréciations et usages locaux</h2>
         <p>Les commentaires locaux, l’état du bouton « J’aime » et l’atelier auteur utilisent le stockage du navigateur pour certaines préférences et données locales.</p>
         <p>Lorsque le compteur global de « J’aime » est activé, une requête technique est envoyée à Google Apps Script pour lire ou mettre à jour le compteur. La feuille Google Sheets associée au site conserve l’identifiant du texte, son titre, le nombre de « J’aime » et la date de dernière mise à jour.</p>
+
+        <h2>Mesure d’audience</h2>
+        <p>Le site utilise Google Analytics 4 pour mesurer l’audience et mieux comprendre la consultation des pages. Des événements techniques peuvent notamment mesurer l’ouverture d’un article, la progression de lecture, l’utilisation des filtres et de la recherche, l’ouverture d’un synopsis, ainsi que les actions « J’aime » et « Partager ». L’identifiant de mesure utilisé par le site est <code>G-T3SVPB7Y3P</code>.</p>
 
         <h2>Portée du présent texte</h2>
         <p>Ce disclaimer a une valeur informative et ne remplace pas un avis juridique adapté à votre situation ou aux obligations précises de votre pays d’hébergement.</p>

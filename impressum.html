@@ -2,6 +2,18 @@
 <html lang="fr" data-theme="light">
 <head>
   <meta charset="utf-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3SVPB7Y3P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T3SVPB7Y3P', { send_page_view: false });
+  window.d2lTrack = function(eventName, params) {
+    try { gtag('event', eventName, params || {}); } catch (error) {}
+  };
+</script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Impressum du site Chroniques d’ailleurs." />
   <meta name="theme-color" content="#f4efe6" />
@@ -10,6 +22,7 @@
   <link rel="icon" href="assets/die2lap-avatar.jpg" />
   <link rel="stylesheet" href="styles.css" />
   <script src="legal.js" defer></script>
+<script defer src="analytics-page.js"></script>
 </head>
 <body class="legal-page">
   <div class="page-noise" aria-hidden="true"></div>

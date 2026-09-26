@@ -4,6 +4,7 @@
   const basePosts = Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [];
   const customPosts = Array.isArray(window.CUSTOM_POSTS) ? window.CUSTOM_POSTS : [];
   const posts = [...basePosts, ...customPosts];
+  const track = (eventName, params = {}) => window.d2lTrack?.(eventName, params);
   const feed = document.querySelector("#posts-feed");
   const template = document.querySelector("#post-index-template");
   const filters = [...document.querySelectorAll(".filter-chip")];
@@ -313,14 +314,24 @@
     all.type = "button";
     all.className = `year-chip ${activeYear === "all" ? "is-active" : ""}`;
     all.textContent = "Toutes";
-    all.addEventListener("click", () => { activeYear = "all"; renderYears(); renderPosts(); });
+    all.addEventListener("click", () => {
+      activeYear = "all";
+      track("library_year", { year: "all" });
+      renderYears();
+      renderPosts();
+    });
     strip.appendChild(all);
     years.forEach(year => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = `year-chip ${activeYear === year ? "is-active" : ""}`;
       b.textContent = year;
-      b.addEventListener("click", () => { activeYear = year; renderYears(); renderPosts(); });
+      b.addEventListener("click", () => {
+        activeYear = year;
+        track("library_year", { year });
+        renderYears();
+        renderPosts();
+      });
       strip.appendChild(b);
     });
   }
@@ -377,6 +388,7 @@
   filters.forEach(button => {
     button.addEventListener("click", () => {
       activeFilter = button.dataset.filter;
+      track("library_filter", { filter: activeFilter });
       filters.forEach(item => {
         const active = item === button;
         item.classList.toggle("is-active", active);
@@ -386,12 +398,23 @@
     });
   });
 
+  let searchAnalyticsTimer = null;
   searchInput.addEventListener("input", () => {
     searchQuery = searchInput.value.trim().toLocaleLowerCase("fr");
     renderPosts();
+    clearTimeout(searchAnalyticsTimer);
+    if (searchQuery.length >= 2) {
+      searchAnalyticsTimer = setTimeout(() => {
+        track("library_search", {
+          search_term: searchQuery.slice(0, 80),
+          results: Number(visibleCount.textContent || 0)
+        });
+      }, 650);
+    }
   });
 
   clearSearch.addEventListener("click", () => {
+    track("library_reset");
     searchInput.value = "";
     searchQuery = "";
     activeFilter = "all";
@@ -409,7 +432,10 @@
   document.querySelector(".surprise-button")?.addEventListener("click", () => {
     const pool = posts.filter(post => post.id);
     const post = pool[Math.floor(Math.random() * pool.length)];
-    if (post) window.location.href = articleHref(post);
+    if (post) {
+      track("surprise_open", { article_id: post.id, article_title: post.title, category: post.category });
+      window.location.href = articleHref(post);
+    }
   });
 
   function preferredTheme() {
@@ -492,6 +518,7 @@
     }
 
     appendParagraphs(book.paragraphs);
+    track("synopsis_open", { book_id: key, book_title: book.title, series_es: book.seriesES ? 1 : 0 });
     dialog.showModal();
     dialog.querySelector(".synopsis-close").focus();
   }
@@ -518,6 +545,7 @@
     if (!section || !link || !title) return;
     link.href = articleHref(found);
     title.textContent = found.title;
+    link.addEventListener("click", () => track("resume_reading", { article_id: found.id, article_title: found.title }));
     section.hidden = false;
   }
 

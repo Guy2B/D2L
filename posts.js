@@ -1,4 +1,4 @@
-/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V51 : 13 carnets en composition éditoriale immersive; contenus littéraires et lignes poétiques FR/EN/DE inchangés). */
+/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V52 : composition V51 conservée, livraison d’images responsive AVIF/WebP; contenus littéraires et lignes poétiques FR/EN/DE inchangés). */
 window.BLOG_POSTS = [
   {
     "id": "vague-a-l-ame",

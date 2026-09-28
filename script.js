@@ -14,6 +14,8 @@
     language: "fr"
   };
   const t = (key, vars = {}) => i18n.t(key, vars);
+  const imageTools = window.D2LImageTools || null;
+  const rootHref = value => value;
   const feed = document.querySelector("#posts-feed");
   const template = document.querySelector("#post-index-template");
   const filters = [...document.querySelectorAll(".filter-chip")];
@@ -173,12 +175,17 @@
     const image = card.querySelector(".index-image");
     figureLink.href = href;
     figureLink.classList.toggle("is-contained", post.imageMode === "contain");
-    image.src = post.image || "";
     image.alt = post.imageAlt || "";
     image.loading = "lazy";
     image.decoding = "async";
     if (post.imageWidth) image.width = Number(post.imageWidth);
     if (post.imageHeight) image.height = Number(post.imageHeight);
+    const imageParent = image.parentElement;
+    const cardMedia = imageTools
+      ? imageTools.createPicture(image, post.image || "", { resolver: rootHref, sizes: "(max-width: 760px) 94vw, (max-width: 1180px) 44vw, 380px", loading: "lazy" })
+      : image;
+    if (!imageTools) image.src = post.image || "";
+    if (cardMedia !== image && imageParent) imageParent.replaceChildren(cardMedia);
     image.addEventListener("error", () => figureLink.remove(), { once: true });
 
     card.querySelector(".post-category").textContent = i18n.category(post.category);
@@ -271,12 +278,15 @@
     const link = document.createElement("a");
     link.href = articleHref(post);
     const img = document.createElement("img");
-    img.src = post.image || "";
     img.alt = post.imageAlt || "";
     img.loading = "lazy";
     img.decoding = "async";
     if (post.imageWidth) img.width = Number(post.imageWidth);
     if (post.imageHeight) img.height = Number(post.imageHeight);
+    const doorMedia = imageTools
+      ? imageTools.createPicture(img, post.image || "", { resolver: rootHref, sizes: "(max-width: 760px) 94vw, 46vw", loading: "lazy" })
+      : img;
+    if (!imageTools) img.src = post.image || "";
     const copy = document.createElement("div");
     copy.className = "featured-card-copy";
     const type = document.createElement("span");
@@ -288,7 +298,7 @@
     action.className = "door-action";
     action.textContent = label;
     copy.append(type, title, action);
-    link.append(img, copy);
+    link.append(doorMedia, copy);
     card.appendChild(link);
     return card;
   }

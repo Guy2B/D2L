@@ -25,6 +25,19 @@
     if (!value || /^(?:[a-z]+:|#|\/\/)/i.test(value)) return value;
     return `${SITE_PREFIX}${value}`;
   };
+  const imageTools = window.D2LImageTools || null;
+  const photoSizes = layout => {
+    if (["cinema", "hero", "wide", "finale", "panorama"].includes(layout)) {
+      return "(max-width: 760px) 100vw, 96vw";
+    }
+    if (["portrait-left", "portrait-right", "portrait-center"].includes(layout)) {
+      return "(max-width: 760px) 92vw, 52vw";
+    }
+    if (["editorial-left", "editorial-right", "quiet", "archive"].includes(layout)) {
+      return "(max-width: 760px) 94vw, 70vw";
+    }
+    return "(max-width: 760px) 94vw, 78vw";
+  };
   const staticPostIds = new Set(basePosts.map(item => item.id));
   const localFileMode = window.location.protocol === "file:";
   const articleHref = postId => staticPostIds.has(postId)
@@ -529,7 +542,6 @@
       }
 
       const image = document.createElement("img");
-      image.src = siteHref(block.image || "");
       image.alt = block.alt || "";
       image.loading = isPremiumPhotoEssay && photoIndex === 0 ? "eager" : "lazy";
       image.decoding = "async";
@@ -545,16 +557,28 @@
         figure.classList.toggle("is-landscape", ratio >= .82 && ratio <= 1.85);
       }
 
+      const responsiveNode = isPremiumPhotoEssay && imageTools
+        ? imageTools.createPicture(image, block.image || "", {
+            resolver: siteHref,
+            sizes: photoSizes(resolvedLayout),
+            loading: photoIndex === 0 ? "eager" : "lazy",
+            fetchPriority: photoIndex === 0 ? "high" : "auto"
+          })
+        : image;
+      if (!(isPremiumPhotoEssay && imageTools)) image.src = siteHref(block.image || "");
+
       if (isPremiumPhotoEssay && photoIndex >= 0) {
         const opener = document.createElement("button");
         opener.className = "photo-open";
         opener.type = "button";
         opener.dataset.photoIndex = String(photoIndex);
         opener.setAttribute("aria-label", t("photoEssay.enlarge", { caption: block.caption || post.title }));
-        opener.appendChild(image);
+        const asset = imageTools?.get(block.image || "");
+        if (asset?.color) opener.style.setProperty("--photo-placeholder", asset.color);
+        opener.appendChild(responsiveNode);
         figure.appendChild(opener);
       } else {
-        figure.appendChild(image);
+        figure.appendChild(responsiveNode);
       }
 
       if (block.caption || block.credit || block.poeticLine) {
@@ -644,10 +668,20 @@
 
     const stage = document.createElement("div");
     stage.className = "photo-lightbox-stage";
+    const picture = document.createElement("picture");
+    picture.className = "photo-lightbox-picture";
+    const sourceAvif = document.createElement("source");
+    sourceAvif.type = "image/avif";
+    sourceAvif.className = "photo-lightbox-source-avif";
+    const sourceWebp = document.createElement("source");
+    sourceWebp.type = "image/webp";
+    sourceWebp.className = "photo-lightbox-source-webp";
     const image = document.createElement("img");
     image.className = "photo-lightbox-image";
     image.alt = "";
-    stage.appendChild(image);
+    image.decoding = "async";
+    picture.append(sourceAvif, sourceWebp, image);
+    stage.appendChild(picture);
 
     const close = document.createElement("button");
     close.className = "photo-lightbox-close";
@@ -719,7 +753,23 @@
     const block = photoEssayBlocks[photoLightboxIndex];
     const dialog = ensurePhotoLightbox();
     const image = dialog.querySelector(".photo-lightbox-image");
-    image.src = siteHref(block.image);
+    const sourceAvif = dialog.querySelector(".photo-lightbox-source-avif");
+    const sourceWebp = dialog.querySelector(".photo-lightbox-source-webp");
+    const asset = imageTools?.get(block.image || "");
+    if (asset && imageTools) {
+      sourceAvif.srcset = imageTools.resolveSrcset(asset.avif, siteHref);
+      sourceAvif.sizes = "100vw";
+      sourceWebp.srcset = imageTools.resolveSrcset(asset.webp, siteHref);
+      sourceWebp.sizes = "100vw";
+      image.src = siteHref(asset.lightbox);
+      image.srcset = imageTools.resolveSrcset(asset.webp, siteHref);
+      image.sizes = "100vw";
+    } else {
+      sourceAvif.removeAttribute("srcset");
+      sourceWebp.removeAttribute("srcset");
+      image.removeAttribute("srcset");
+      image.src = siteHref(block.image);
+    }
     image.alt = block.alt || block.caption || post.title;
     dialog.querySelector(".photo-lightbox-count").textContent = photoCounter(photoLightboxIndex, total);
     dialog.querySelector(".photo-lightbox-meta").textContent = [
@@ -1167,10 +1217,14 @@
       link.classList.add("photo-story-pagination-card");
       if (!link.querySelector("img")) {
         const image = document.createElement("img");
-        image.src = siteHref(item.image || "");
         image.alt = "";
         image.loading = "lazy";
-        link.prepend(image);
+        image.decoding = "async";
+        const media = imageTools
+          ? imageTools.createPicture(image, item.image || "", { resolver: siteHref, sizes: "(max-width: 760px) 92vw, 44vw", loading: "lazy" })
+          : image;
+        if (!imageTools) image.src = siteHref(item.image || "");
+        link.prepend(media);
       }
     });
   }
@@ -1190,9 +1244,13 @@
       const link = document.createElement("a");
       link.href = articleHref(item.id);
       const image = document.createElement("img");
-      image.src = item.image || "";
       image.alt = item.imageAlt || "";
       image.loading = "lazy";
+      image.decoding = "async";
+      const relatedMedia = imageTools
+        ? imageTools.createPicture(image, item.image || "", { resolver: siteHref, sizes: "(max-width: 760px) 92vw, 30vw", loading: "lazy" })
+        : image;
+      if (!imageTools) image.src = siteHref(item.image || "");
       const copy = document.createElement("div");
       copy.className = "related-card-copy";
       const category = document.createElement("span");
@@ -1200,7 +1258,7 @@
       const title = document.createElement("h3");
       title.textContent = item.title;
       copy.append(category, title);
-      link.append(image, copy);
+      link.append(relatedMedia, copy);
       card.appendChild(link);
       related.appendChild(card);
     });

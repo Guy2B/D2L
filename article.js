@@ -135,6 +135,13 @@
   article.classList.toggle("is-photo-essay", isPhotoEssay);
   article.classList.toggle("photo-essay-premium", isPremiumPhotoEssay);
   article.classList.toggle("is-prose-article", isProse);
+  if (isPremiumPhotoEssay) {
+    document.body.dataset.photoStory = post.id;
+    article.dataset.photoStory = post.id;
+  } else {
+    delete document.body.dataset.photoStory;
+    delete article.dataset.photoStory;
+  }
 
   const originalLanguageNote = document.querySelector("#original-language-note");
   const enforceOriginalLanguageNote = () => {
@@ -206,24 +213,61 @@
     ? (post.content || []).filter(block => block?.type === "image")
     : [];
 
-  // Composition éditoriale pensée carnet par carnet. Les formats alternent
-  // grande ouverture, respiration large et portraits décalés afin d’éviter
-  // l’effet de galerie répétitive.
+  // V51 : chaque carnet partage une même grammaire, mais possède sa propre
+  // composition. Les formats ci-dessous ne recadrent jamais les images : ils
+  // règlent seulement leur place, leur échelle et la relation image / légende.
   const PHOTO_ESSAY_LAYOUTS = {
-    "shanghai-dec": ["hero", "wide", "wide", "portrait-left", "portrait-right", "portrait-center", "finale"],
-    "oxford-nov": ["hero", "wide", "wide", "portrait-right", "finale"],
-    "murgtal-oct": ["hero", "wide", "wide", "wide", "wide", "finale"],
-    "yaounde-sept": ["portrait-left", "wide", "wide", "wide", "wide", "finale"],
-    "jyvaskyla-sept": ["wide", "portrait-right", "wide", "wide", "wide", "finale"],
-    "ny-summer": ["hero", "portrait-left", "wide", "wide", "portrait-right", "finale"],
-    "helsinki-june": ["hero", "wide", "portrait-right", "wide", "wide", "finale"],
-    "berlin-july": ["hero", "wide", "wide", "wide", "finale"],
-    "porto-may": ["portrait-left", "portrait-right", "wide", "finale"],
-    "suzhou-feb": ["hero", "wide", "wide", "finale"],
-    "paris-may": ["wide", "portrait-center"],
-    "toulouse-june": ["portrait-left", "wide", "finale"],
-    "amsterdam-june": ["hero", "wide", "wide", "wide", "wide", "portrait-right", "finale"]
+    "shanghai-dec": ["cinema", "editorial-left", "quiet", "portrait-left", "portrait-right", "portrait-center", "finale"],
+    "oxford-nov": ["cinema", "bleed", "editorial-right", "portrait-right", "finale"],
+    "murgtal-oct": ["bleed", "panorama-left", "bleed", "editorial-right", "panorama-right", "finale"],
+    "yaounde-sept": ["portrait-stage", "editorial-left", "bleed", "editorial-right", "cinema", "finale"],
+    "jyvaskyla-sept": ["cinema", "portrait-right", "editorial-left", "bleed", "quiet", "finale"],
+    "ny-summer": ["cinema", "portrait-left", "editorial-right", "bleed", "portrait-right", "finale"],
+    "helsinki-june": ["cinema", "panorama-left", "portrait-right", "editorial-left", "bleed", "finale"],
+    "berlin-july": ["cinema", "editorial-right", "quiet", "bleed", "finale"],
+    "porto-may": ["portrait-left", "portrait-right", "editorial-left", "finale"],
+    "suzhou-feb": ["cinema", "editorial-left", "bleed", "finale"],
+    "paris-may": ["panorama-left", "portrait-stage"],
+    "toulouse-june": ["portrait-left", "editorial-right", "finale"],
+    "amsterdam-june": ["cinema", "editorial-left", "bleed", "editorial-right", "quiet", "portrait-right", "finale"]
   };
+
+  const PHOTO_ESSAY_TONES = {
+    "shanghai-dec": ["amber", "market", "night", "ink", "red", "amber", "mist"],
+    "oxford-nov": ["air", "air", "mist", "paper", "warm"],
+    "murgtal-oct": ["ember", "forest", "forest", "mist", "forest", "ember"],
+    "yaounde-sept": ["night", "air", "earth", "earth", "night", "air"],
+    "jyvaskyla-sept": ["air", "paper", "cool", "night", "warm", "air"],
+    "ny-summer": ["air", "paper", "paper", "night", "air", "night"],
+    "helsinki-june": ["air", "cool", "paper", "paper", "blue", "warm"],
+    "berlin-july": ["air", "paper", "warm", "earth", "air"],
+    "porto-may": ["air", "blue", "paper", "night"],
+    "suzhou-feb": ["air", "night", "red", "night"],
+    "paris-may": ["air", "blue"],
+    "toulouse-june": ["air", "warm", "berry"],
+    "amsterdam-june": ["air", "paper", "night", "night", "warm", "ink", "night"]
+  };
+
+  const PHOTO_ESSAY_PERSONAS = {
+    "shanghai-dec": "metropolis",
+    "oxford-nov": "scholar",
+    "murgtal-oct": "silence",
+    "yaounde-sept": "pulse",
+    "jyvaskyla-sept": "nordic",
+    "ny-summer": "vertical",
+    "helsinki-june": "harbour",
+    "berlin-july": "geometry",
+    "porto-may": "atlantic",
+    "suzhou-feb": "lantern",
+    "paris-may": "monument",
+    "toulouse-june": "table",
+    "amsterdam-june": "transit"
+  };
+
+  if (isPremiumPhotoEssay) {
+    document.body.dataset.photoPersona = PHOTO_ESSAY_PERSONAS[post.id] || "journal";
+    document.body.dataset.photoTone = PHOTO_ESSAY_TONES[post.id]?.[0] || "paper";
+  }
 
   function photoEssayLayout(block, index, total) {
     const curated = PHOTO_ESSAY_LAYOUTS[post.id]?.[index];
@@ -231,10 +275,15 @@
     const width = Number(block?.width || 0);
     const height = Number(block?.height || 0);
     const ratio = width && height ? width / height : 1.4;
-    if (index === 0) return ratio < .82 ? "portrait-center" : "hero";
-    if (index === total - 1) return ratio < .82 ? "portrait-center" : "finale";
+    if (index === 0) return ratio < .82 ? "portrait-stage" : "cinema";
+    if (index === total - 1) return ratio < .82 ? "portrait-stage" : "finale";
+    if (ratio > 2.2) return index % 2 ? "panorama-left" : "panorama-right";
     if (ratio < .82) return index % 2 ? "portrait-left" : "portrait-right";
-    return "wide";
+    return index % 2 ? "editorial-left" : "editorial-right";
+  }
+
+  function photoEssayTone(index) {
+    return PHOTO_ESSAY_TONES[post.id]?.[index] || PHOTO_ESSAY_TONES[post.id]?.[0] || "paper";
   }
 
   function localizedPoeticLine(block) {
@@ -246,6 +295,9 @@
   let photoStoryBar = null;
   let photoStoryCounter = null;
   let photoStoryCountLabel = null;
+  let photoStoryIndex = null;
+  let photoStoryProgress = null;
+  let photoStoryClosing = null;
   let photoObserver = null;
   let photoLightbox = null;
   let photoLightboxIndex = 0;
@@ -254,14 +306,68 @@
     return `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
   }
 
+  function buildPhotoStoryIndex() {
+    if (!isPremiumPhotoEssay) return;
+    const articleHeader = document.querySelector(".article-header");
+    photoStoryIndex = articleHeader.querySelector(".photo-story-index");
+    if (!photoStoryIndex) {
+      photoStoryIndex = document.createElement("nav");
+      photoStoryIndex.className = "photo-story-index";
+      photoStoryIndex.setAttribute("aria-label", t("photoEssay.sequence"));
+      articleHeader.appendChild(photoStoryIndex);
+    }
+    photoStoryIndex.replaceChildren();
+    photoEssayBlocks.forEach((block, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "photo-story-index-mark";
+      const width = Number(block.width || 1);
+      const height = Number(block.height || 1);
+      const ratio = Math.max(.42, Math.min(2.5, width / height));
+      button.style.setProperty("--photo-ratio", String(ratio));
+      button.style.setProperty("--mark-width", `${Math.round(18 + (ratio * 18))}px`);
+      button.dataset.photoIndex = String(index);
+      button.setAttribute("aria-label", t("photoEssay.jump", {
+        current: index + 1,
+        total: photoEssayBlocks.length,
+        caption: block.caption || post.title
+      }));
+      const number = document.createElement("span");
+      number.textContent = String(index + 1).padStart(2, "0");
+      button.appendChild(number);
+      button.addEventListener("click", () => {
+        document.querySelector(`.article-inline-figure[data-photo-index="${index}"]`)?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "center"
+        });
+      });
+      if (index === 0) {
+        button.classList.add("is-active");
+        button.setAttribute("aria-current", "true");
+      }
+      photoStoryIndex.appendChild(button);
+    });
+  }
+
   function setupPhotoEssayChrome() {
     if (!isPremiumPhotoEssay) return;
     const articleHeader = document.querySelector(".article-header");
+    articleHeader.classList.add("photo-story-cover");
     photoStoryCountLabel = articleHeader.querySelector(".photo-essay-count");
     if (!photoStoryCountLabel) {
       photoStoryCountLabel = document.createElement("p");
       photoStoryCountLabel.className = "photo-essay-count";
       articleHeader.appendChild(photoStoryCountLabel);
+    }
+    buildPhotoStoryIndex();
+
+    const entryCue = articleHeader.querySelector(".photo-story-entry");
+    if (!entryCue) {
+      const cue = document.createElement("span");
+      cue.className = "photo-story-entry";
+      cue.textContent = "↓";
+      cue.setAttribute("aria-hidden", "true");
+      articleHeader.appendChild(cue);
     }
 
     photoStoryBar = document.querySelector(".photo-story-bar");
@@ -279,9 +385,16 @@
       location.className = "photo-story-location";
       location.textContent = post.title;
 
+      const progress = document.createElement("span");
+      progress.className = "photo-story-progress";
+      const progressFill = document.createElement("i");
+      progress.appendChild(progressFill);
+      photoStoryProgress = progressFill;
+
       photoStoryCounter = document.createElement("span");
       photoStoryCounter.className = "photo-story-counter";
       photoStoryCounter.textContent = photoCounter(0, photoEssayBlocks.length);
+      if (photoStoryProgress) photoStoryProgress.style.width = `${100 / Math.max(1, photoEssayBlocks.length)}%`;
 
       const focus = document.createElement("button");
       focus.className = "photo-story-focus";
@@ -290,12 +403,14 @@
       focus.setAttribute("aria-label", t("article.focus"));
       focus.addEventListener("click", () => document.querySelector(".focus-mode-toggle")?.click());
 
-      photoStoryBar.append(back, location, photoStoryCounter, focus);
+      photoStoryBar.append(back, location, progress, photoStoryCounter, focus);
       document.body.appendChild(photoStoryBar);
 
       const updateVisibility = () => {
         const threshold = articleHeader.getBoundingClientRect().bottom + window.scrollY;
-        photoStoryBar.classList.toggle("is-visible", window.scrollY > threshold - 80);
+        const active = window.scrollY > threshold - 72;
+        photoStoryBar.classList.toggle("is-visible", active);
+        document.body.classList.toggle("photo-story-reading", active);
       };
       window.addEventListener("scroll", updateVisibility, { passive: true });
       updateVisibility();
@@ -312,6 +427,17 @@
     if (back) back.setAttribute("aria-label", t("article.back"));
     const focus = photoStoryBar?.querySelector(".photo-story-focus");
     if (focus) focus.setAttribute("aria-label", t("article.focus"));
+    if (photoStoryIndex) {
+      photoStoryIndex.setAttribute("aria-label", t("photoEssay.sequence"));
+      [...photoStoryIndex.querySelectorAll(".photo-story-index-mark")].forEach((button, index) => {
+        const block = photoEssayBlocks[index];
+        button.setAttribute("aria-label", t("photoEssay.jump", {
+          current: index + 1,
+          total: photoEssayBlocks.length,
+          caption: block?.caption || post.title
+        }));
+      });
+    }
   }
 
   setupPhotoEssayChrome();
@@ -399,6 +525,7 @@
       if (isPremiumPhotoEssay && photoIndex >= 0) {
         figure.dataset.photoIndex = String(photoIndex);
         figure.dataset.photoNumber = photoCounter(photoIndex, photoTotal);
+        figure.dataset.photoTone = photoEssayTone(photoIndex);
       }
 
       const image = document.createElement("img");
@@ -480,6 +607,32 @@
     if (isPremiumPhotoEssay) bindPhotoEssayExperience();
   }
   renderArticleBody();
+
+  function ensurePhotoStoryClosing() {
+    if (!isPremiumPhotoEssay) return;
+    const articleMain = document.querySelector(".article-main");
+    photoStoryClosing = articleMain.querySelector(".photo-story-closing");
+    if (!photoStoryClosing) {
+      photoStoryClosing = document.createElement("section");
+      photoStoryClosing.className = "photo-story-closing";
+      const mark = document.createElement("span");
+      mark.className = "photo-story-closing-mark";
+      mark.setAttribute("aria-hidden", "true");
+      mark.textContent = "·";
+      const label = document.createElement("span");
+      label.className = "photo-story-closing-label";
+      const title = document.createElement("strong");
+      title.textContent = post.title;
+      const date = document.createElement("time");
+      if (post.date) date.dateTime = post.date;
+      photoStoryClosing.append(mark, label, title, date);
+      document.querySelector(".article-signature")?.before(photoStoryClosing);
+    }
+    photoStoryClosing.querySelector(".photo-story-closing-label").textContent = t("photoEssay.end");
+    const date = photoStoryClosing.querySelector("time");
+    date.textContent = post.date ? formatDate(post.date) : "";
+  }
+  ensurePhotoStoryClosing();
 
   function ensurePhotoLightbox() {
     if (!isPremiumPhotoEssay) return null;
@@ -597,7 +750,14 @@
       if (!visible) return;
       const index = Number(visible.target.dataset.photoIndex || 0);
       if (photoStoryCounter) photoStoryCounter.textContent = photoCounter(index, figures.length);
-    }, { rootMargin: "-32% 0px -42%", threshold: [0, .15, .35, .6] });
+      if (photoStoryProgress) photoStoryProgress.style.width = `${((index + 1) / figures.length) * 100}%`;
+      document.body.dataset.photoTone = visible.target.dataset.photoTone || photoEssayTone(index);
+      [...(photoStoryIndex?.querySelectorAll(".photo-story-index-mark") || [])].forEach((mark, markIndex) => {
+        mark.classList.toggle("is-active", markIndex === index);
+        if (markIndex === index) mark.setAttribute("aria-current", "true");
+        else mark.removeAttribute("aria-current");
+      });
+    }, { rootMargin: "-34% 0px -40%", threshold: [0, .12, .28, .5, .72] });
     figures.forEach(figure => photoObserver.observe(figure));
   }
 
@@ -1123,6 +1283,7 @@
     decoratePhotoEssayPagination();
     renderRelated();
     updatePhotoEssayChrome();
+    ensurePhotoStoryClosing();
     updatePhotoLightboxLabels();
     enforceOriginalLanguageNote();
     focusToggle.textContent = document.body.classList.contains("focus-reading") ? t("article.focusExit") : t("article.focus");

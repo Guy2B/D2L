@@ -1,4 +1,4 @@
-/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V49 : expérience photo premium généralisée aux 13 carnets, lignes poétiques FR/EN/DE, original Garden restauré). */
+/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V51 : 13 carnets en composition éditoriale immersive; contenus littéraires et lignes poétiques FR/EN/DE inchangés). */
 window.BLOG_POSTS = [
   {
     "id": "vague-a-l-ame",

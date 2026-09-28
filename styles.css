@@ -4228,3 +4228,839 @@ body.focus-reading .photo-story-bar {
     transition: none !important;
   }
 }
+
+/* =========================================================
+   V51 - Carnets de voyage / monographie photographique web
+   Direction artistique : image d'abord, typographie en retrait,
+   rythme variable et navigation quasi invisible.
+   ========================================================= */
+
+body.photo-essay-premium {
+  --photo-gutter: clamp(18px, 3.4vw, 58px);
+  --photo-max: 1640px;
+  --photo-cover-bg: #f0ebe2;
+  --photo-cover-ink: #1c1916;
+  --photo-accent: #7e3026;
+  --photo-haze: rgba(96, 77, 57, .12);
+  --photo-night: #111315;
+  --photo-night-soft: #191b1e;
+  background: var(--bg);
+}
+
+body.photo-essay-premium[data-photo-persona="metropolis"] { --photo-cover-bg:#eee7dc; --photo-accent:#913628; --photo-haze:rgba(150,85,54,.13); }
+body.photo-essay-premium[data-photo-persona="scholar"]    { --photo-cover-bg:#edece7; --photo-accent:#334e61; --photo-haze:rgba(76,95,108,.10); }
+body.photo-essay-premium[data-photo-persona="silence"]    { --photo-cover-bg:#e9ede6; --photo-accent:#425b46; --photo-haze:rgba(64,91,70,.10); }
+body.photo-essay-premium[data-photo-persona="pulse"]      { --photo-cover-bg:#eee8df; --photo-accent:#9a4d2d; --photo-haze:rgba(151,83,46,.12); }
+body.photo-essay-premium[data-photo-persona="nordic"]     { --photo-cover-bg:#e9eef0; --photo-accent:#3b6172; --photo-haze:rgba(75,111,127,.10); }
+body.photo-essay-premium[data-photo-persona="vertical"]   { --photo-cover-bg:#efebe5; --photo-accent:#8f2d2d; --photo-haze:rgba(137,44,44,.10); }
+body.photo-essay-premium[data-photo-persona="harbour"]    { --photo-cover-bg:#e8edef; --photo-accent:#315e73; --photo-haze:rgba(54,101,121,.10); }
+body.photo-essay-premium[data-photo-persona="geometry"]   { --photo-cover-bg:#eceae5; --photo-accent:#5a5550; --photo-haze:rgba(64,60,56,.09); }
+body.photo-essay-premium[data-photo-persona="atlantic"]   { --photo-cover-bg:#e9edf0; --photo-accent:#315a75; --photo-haze:rgba(58,91,115,.10); }
+body.photo-essay-premium[data-photo-persona="lantern"]    { --photo-cover-bg:#efe7df; --photo-accent:#963d30; --photo-haze:rgba(152,63,48,.11); }
+body.photo-essay-premium[data-photo-persona="monument"]   { --photo-cover-bg:#ecebea; --photo-accent:#43566d; --photo-haze:rgba(68,87,109,.09); }
+body.photo-essay-premium[data-photo-persona="table"]      { --photo-cover-bg:#f0ebe4; --photo-accent:#8a5138; --photo-haze:rgba(139,81,56,.10); }
+body.photo-essay-premium[data-photo-persona="transit"]    { --photo-cover-bg:#e9eceb; --photo-accent:#3e5b5e; --photo-haze:rgba(61,89,92,.10); }
+
+/* Le site reste présent à l'entrée du carnet, puis se retire pendant la lecture. */
+body.photo-essay-premium .article-site-header {
+  transition: transform 420ms cubic-bezier(.22,.8,.2,1), opacity 280ms ease;
+  will-change: transform;
+}
+body.photo-essay-premium.photo-story-reading .article-site-header {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.photo-essay-premium .article-shell {
+  padding-top: 0;
+  overflow: clip;
+}
+
+body.photo-essay-premium .article-topbar {
+  display: none;
+}
+
+/* Couverture typographique. Aucune photo n'est répétée ici : l'entrée est celle d'un livre. */
+body.photo-essay-premium .article-header.photo-story-cover {
+  position: relative;
+  width: 100%;
+  min-height: min(82svh, 900px);
+  margin: 0;
+  padding: clamp(42px, 7vw, 92px) max(var(--photo-gutter), calc((100vw - 1500px) / 2));
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr);
+  grid-template-rows: auto 1fr auto;
+  column-gap: clamp(28px, 6vw, 110px);
+  align-items: end;
+  text-align: left;
+  background:
+    radial-gradient(circle at 78% 24%, var(--photo-haze), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--photo-cover-bg) 93%, white) 0%, var(--photo-cover-bg) 100%);
+  color: var(--photo-cover-ink);
+  isolation: isolate;
+}
+
+body.photo-essay-premium .article-header.photo-story-cover::before {
+  content: "";
+  position: absolute;
+  inset: clamp(28px, 4vw, 58px);
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--photo-cover-ink) 10%, transparent);
+  pointer-events: none;
+}
+
+body.photo-essay-premium .article-header.photo-story-cover::after {
+  content: "";
+  position: absolute;
+  top: clamp(28px, 4vw, 58px);
+  right: clamp(28px, 4vw, 58px);
+  width: clamp(34px, 4vw, 64px);
+  height: 2px;
+  background: var(--photo-accent);
+}
+
+body.photo-essay-premium .article-header.photo-story-cover .post-meta {
+  grid-column: 1 / -1;
+  align-self: start;
+  justify-content: flex-start;
+  margin: 0;
+  color: color-mix(in srgb, var(--photo-cover-ink) 55%, transparent);
+  font: 650 .63rem/1.4 var(--sans);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+body.photo-essay-premium .article-header.photo-story-cover .post-meta > :last-child,
+body.photo-essay-premium .article-header.photo-story-cover .post-meta > :nth-last-child(2) {
+  display: none;
+}
+
+body.photo-essay-premium .article-header.photo-story-cover h1 {
+  grid-column: 1;
+  align-self: end;
+  max-width: 11ch;
+  margin: clamp(70px, 12vh, 150px) 0 0;
+  color: var(--photo-cover-ink);
+  font-size: clamp(4.8rem, 10.7vw, 10.8rem);
+  font-weight: 480;
+  line-height: .82;
+  letter-spacing: -.075em;
+  text-wrap: balance;
+}
+
+body.photo-essay-premium .article-header.photo-story-cover .article-deck,
+body.photo-essay-premium .article-header.photo-story-cover .original-language-note {
+  display: none !important;
+}
+
+body.photo-essay-premium .photo-essay-count {
+  grid-column: 2;
+  align-self: end;
+  justify-self: start;
+  margin: 0 0 clamp(26px, 4vw, 52px);
+  color: color-mix(in srgb, var(--photo-cover-ink) 66%, transparent);
+  font: italic 400 clamp(1.15rem, 1.8vw, 1.45rem)/1.45 var(--serif);
+  letter-spacing: 0;
+}
+
+/* Index abstrait : chaque trait reprend le ratio de sa photographie. */
+body.photo-essay-premium .photo-story-index {
+  grid-column: 1 / -1;
+  align-self: end;
+  display: flex;
+  align-items: end;
+  gap: clamp(8px, 1vw, 14px);
+  min-height: 42px;
+  margin-top: clamp(52px, 9vw, 110px);
+  padding-right: 72px;
+}
+
+body.photo-essay-premium .photo-story-index-mark {
+  position: relative;
+  width: var(--mark-width, 34px);
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--photo-cover-ink) 42%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--photo-cover-ink) 55%, transparent);
+  cursor: pointer;
+  transition: width 240ms ease, border-color 240ms ease, transform 240ms ease;
+}
+
+body.photo-essay-premium .photo-story-index-mark::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--photo-accent);
+  transition: width 260ms ease;
+}
+
+body.photo-essay-premium .photo-story-index-mark span {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  opacity: 0;
+  font: 650 .52rem/1 var(--sans);
+  letter-spacing: .08em;
+  transition: opacity 180ms ease;
+}
+
+body.photo-essay-premium .photo-story-index-mark:hover,
+body.photo-essay-premium .photo-story-index-mark:focus-visible,
+body.photo-essay-premium .photo-story-index-mark.is-active {
+  border-color: var(--photo-accent);
+  transform: translateY(-3px);
+}
+body.photo-essay-premium .photo-story-index-mark:hover::after,
+body.photo-essay-premium .photo-story-index-mark:focus-visible::after,
+body.photo-essay-premium .photo-story-index-mark.is-active::after { width: 100%; }
+body.photo-essay-premium .photo-story-index-mark:hover span,
+body.photo-essay-premium .photo-story-index-mark:focus-visible span,
+body.photo-essay-premium .photo-story-index-mark.is-active span { opacity: 1; }
+
+body.photo-essay-premium .photo-story-entry {
+  position: absolute;
+  right: max(var(--photo-gutter), calc((100vw - 1500px) / 2));
+  bottom: clamp(38px, 5vw, 64px);
+  color: color-mix(in srgb, var(--photo-cover-ink) 44%, transparent);
+  font: 300 clamp(1.4rem, 2vw, 1.9rem)/1 var(--sans);
+  animation: photo-entry-float 2.6s ease-in-out infinite;
+}
+
+@keyframes photo-entry-float {
+  0%,100% { transform: translateY(0); opacity:.48; }
+  50% { transform: translateY(7px); opacity:.9; }
+}
+
+/* Quelques carnets déplacent leur couverture pour créer des personnalités distinctes. */
+body.photo-essay-premium[data-photo-persona="silence"] .photo-story-cover h1,
+body.photo-essay-premium[data-photo-persona="atlantic"] .photo-story-cover h1 {
+  grid-column: 1 / -1;
+  max-width: 9ch;
+  justify-self: end;
+  text-align: right;
+}
+body.photo-essay-premium[data-photo-persona="silence"] .photo-essay-count,
+body.photo-essay-premium[data-photo-persona="atlantic"] .photo-essay-count {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+}
+body.photo-essay-premium[data-photo-persona="geometry"] .photo-story-cover h1,
+body.photo-essay-premium[data-photo-persona="monument"] .photo-story-cover h1 {
+  max-width: 13ch;
+  font-weight: 430;
+  letter-spacing: -.06em;
+}
+body.photo-essay-premium[data-photo-persona="vertical"] .photo-story-cover h1 {
+  max-width: 7ch;
+  font-size: clamp(5.5rem, 13vw, 12rem);
+}
+body.photo-essay-premium[data-photo-persona="table"] .photo-story-cover h1 {
+  max-width: 9ch;
+  font-size: clamp(5rem, 11vw, 10rem);
+}
+
+/* Lecture : disparition de la grille générale du site. */
+body.photo-essay-premium .article-layout,
+body.photo-essay-premium .article-main,
+body.photo-essay-premium .article-body {
+  display: block;
+  width: 100%;
+  max-width: none;
+  overflow: visible;
+}
+body.photo-essay-premium .article-rail { display:none; }
+body.photo-essay-premium .article-media-note { width:min(760px, calc(100vw - (var(--photo-gutter) * 2))); margin-inline:auto; }
+
+body.photo-essay-premium .article-body {
+  padding-top: clamp(80px, 11vw, 150px);
+}
+
+body.photo-essay-premium .article-body .article-inline-figure,
+body.photo-essay-premium .article-body .article-inline-figure.is-portrait,
+body.photo-essay-premium .article-body .article-inline-figure.is-panorama,
+body.photo-essay-premium .article-body .article-inline-figure.is-landscape {
+  --photo-section-bg: transparent;
+  --photo-section-fg: var(--text);
+  position: relative;
+  z-index: 1;
+  width: min(80rem, calc(100vw - (var(--photo-gutter) * 2)));
+  margin: clamp(9rem, 18vw, 17rem) auto;
+  padding: 0;
+  display: grid;
+  align-items: end;
+  isolation: isolate;
+  transform: none;
+}
+
+body.photo-essay-premium .article-body .article-inline-figure::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: clamp(-5rem, -8vw, -3rem);
+  width: 100vw;
+  height: calc(100% + clamp(8rem, 14vw, 14rem));
+  transform: translateX(-50%);
+  background: var(--photo-section-bg);
+  pointer-events: none;
+}
+
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="night"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="ink"] {
+  --photo-section-bg: #111316;
+  --photo-section-fg: #f3f0ea;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="red"] {
+  --photo-section-bg: #1c1111;
+  --photo-section-fg: #f5efe8;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="market"] {
+  --photo-section-bg: #efe8de;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="forest"] {
+  --photo-section-bg: #e8ece6;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="mist"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="air"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="cool"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="blue"] {
+  --photo-section-bg: #e9edef;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="warm"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="amber"],
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="ember"] {
+  --photo-section-bg: #eee7dc;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="earth"] {
+  --photo-section-bg: #ece5dd;
+}
+body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone="berry"] {
+  --photo-section-bg: #eee4e4;
+}
+
+html[data-theme="dark"] body.photo-essay-premium .article-body .article-inline-figure[data-photo-tone]:not([data-photo-tone="night"]):not([data-photo-tone="ink"]):not([data-photo-tone="red"]) {
+  --photo-section-bg: #171819;
+  --photo-section-fg: #f1eee8;
+}
+html[data-theme="dark"] body.photo-essay-premium .article-header.photo-story-cover {
+  --photo-cover-bg:#171819;
+  --photo-cover-ink:#f2efe9;
+  background: radial-gradient(circle at 78% 24%, rgba(255,255,255,.045), transparent 34%), #171819;
+}
+
+body.photo-essay-premium .photo-open {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+body.photo-essay-premium .photo-open::after {
+  content: "↗";
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(12,12,12,.54);
+  color: rgba(255,255,255,.9);
+  font: 400 .75rem/1 var(--sans);
+  opacity: 0;
+  transform: translateY(4px);
+  backdrop-filter: blur(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+body.photo-essay-premium .photo-open:hover::after,
+body.photo-essay-premium .photo-open:focus-visible::after { opacity:1; transform:none; }
+
+body.photo-essay-premium .article-body .article-inline-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Compositions V51 */
+body.photo-essay-premium .article-body .photo-layout-cinema {
+  width: min(var(--photo-max), calc(100vw - (var(--photo-gutter) * 2)));
+  margin-top: clamp(3rem, 7vw, 7rem);
+}
+body.photo-essay-premium .photo-layout-cinema .photo-open {
+  background: #0e0f10;
+}
+body.photo-essay-premium .photo-layout-cinema img {
+  max-height: 88svh;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+body.photo-essay-premium .article-body .photo-layout-bleed {
+  width: min(100vw, 1900px);
+  max-width: none;
+}
+body.photo-essay-premium .photo-layout-bleed figcaption {
+  width: min(50rem, calc(100vw - (var(--photo-gutter) * 2)));
+}
+
+body.photo-essay-premium .article-body .photo-layout-editorial-left,
+body.photo-essay-premium .article-body .photo-layout-editorial-right {
+  width: min(1220px, calc(100vw - (var(--photo-gutter) * 2)));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(20px, 3.5vw, 56px);
+}
+body.photo-essay-premium .photo-layout-editorial-left .photo-open { grid-column: 1 / span 8; grid-row: 1; }
+body.photo-essay-premium .photo-layout-editorial-left figcaption { grid-column: 9 / -1; grid-row: 1; align-self: end; }
+body.photo-essay-premium .photo-layout-editorial-right .photo-open { grid-column: 5 / -1; grid-row: 1; }
+body.photo-essay-premium .photo-layout-editorial-right figcaption { grid-column: 1 / span 4; grid-row: 1; align-self: end; }
+
+body.photo-essay-premium .article-body .photo-layout-quiet {
+  width: min(720px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin-top: clamp(12rem, 23vw, 22rem);
+  margin-bottom: clamp(12rem, 23vw, 22rem);
+}
+
+body.photo-essay-premium .article-body .photo-layout-panorama-left,
+body.photo-essay-premium .article-body .photo-layout-panorama-right {
+  width: min(1320px, calc(100vw - var(--photo-gutter)));
+}
+body.photo-essay-premium .article-body .photo-layout-panorama-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+body.photo-essay-premium .article-body .photo-layout-panorama-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+body.photo-essay-premium .photo-layout-panorama-left figcaption,
+body.photo-essay-premium .photo-layout-panorama-right figcaption {
+  width: min(48rem, calc(100vw - (var(--photo-gutter) * 2)));
+}
+body.photo-essay-premium .photo-layout-panorama-left figcaption { margin-left: max(var(--photo-gutter), 5vw); margin-right:auto; }
+body.photo-essay-premium .photo-layout-panorama-right figcaption { margin-right: max(var(--photo-gutter), 5vw); margin-left:auto; }
+
+body.photo-essay-premium .article-body .photo-layout-portrait-left,
+body.photo-essay-premium .article-body .photo-layout-portrait-right,
+body.photo-essay-premium .article-body .photo-layout-portrait-center {
+  width: min(540px, calc(100vw - (var(--photo-gutter) * 2)));
+}
+body.photo-essay-premium .article-body .photo-layout-portrait-left {
+  margin-left: max(var(--photo-gutter), calc(50vw - 520px));
+  margin-right: auto;
+}
+body.photo-essay-premium .article-body .photo-layout-portrait-right {
+  margin-left: auto;
+  margin-right: max(var(--photo-gutter), calc(50vw - 520px));
+}
+body.photo-essay-premium .article-body .photo-layout-portrait-center {
+  width: min(500px, calc(100vw - (var(--photo-gutter) * 2)));
+}
+
+body.photo-essay-premium .article-body .photo-layout-portrait-stage {
+  width: min(1060px, calc(100vw - (var(--photo-gutter) * 2)));
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .58fr);
+  gap: clamp(28px, 6vw, 90px);
+  align-items: end;
+}
+body.photo-essay-premium .photo-layout-portrait-stage .photo-open {
+  width: min(560px, 100%);
+  justify-self: end;
+}
+body.photo-essay-premium .photo-layout-portrait-stage figcaption {
+  width: 100%;
+  margin: 0 0 clamp(10px, 3vw, 40px);
+}
+
+body.photo-essay-premium .article-body .photo-layout-finale {
+  width: min(1540px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin-top: clamp(14rem, 25vw, 24rem);
+  margin-bottom: clamp(13rem, 21vw, 20rem);
+}
+
+/* Légendes : la donnée documentaire reste discrète, la voix littéraire respire. */
+body.photo-essay-premium .article-body .article-inline-figure figcaption {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr);
+  column-gap: clamp(16px, 2.4vw, 34px);
+  row-gap: .8rem;
+  width: min(100%, 49rem);
+  margin: clamp(20px, 2.6vw, 32px) auto 0;
+  padding: 0;
+  color: var(--photo-section-fg);
+  text-align: left;
+}
+body.photo-essay-premium .photo-caption-sequence {
+  grid-column:1;
+  grid-row:1 / span 2;
+  padding-top:.1rem;
+  color: color-mix(in srgb, var(--photo-section-fg) 44%, transparent);
+  font: 650 .58rem/1.4 var(--sans);
+  letter-spacing:.16em;
+}
+body.photo-essay-premium .photo-caption-meta {
+  grid-column:2;
+  color: color-mix(in srgb, var(--photo-section-fg) 48%, transparent);
+  font: 650 .58rem/1.5 var(--sans);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+body.photo-essay-premium .photo-caption-poetic {
+  grid-column:2;
+  max-width: 34rem;
+  margin:0;
+  color: var(--photo-section-fg);
+  font: italic 400 clamp(1.18rem, 1.8vw, 1.55rem)/1.52 var(--serif);
+  letter-spacing:-.012em;
+  text-wrap:pretty;
+}
+
+body.photo-essay-premium .photo-layout-editorial-left figcaption,
+body.photo-essay-premium .photo-layout-editorial-right figcaption {
+  display:block;
+  margin:0 0 clamp(8px, 2vw, 26px);
+  width:100%;
+}
+body.photo-essay-premium .photo-layout-editorial-left .photo-caption-sequence,
+body.photo-essay-premium .photo-layout-editorial-right .photo-caption-sequence,
+body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-sequence {
+  display:block;
+  margin-bottom:20px;
+}
+body.photo-essay-premium .photo-layout-editorial-left .photo-caption-meta,
+body.photo-essay-premium .photo-layout-editorial-right .photo-caption-meta,
+body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-meta {
+  display:block;
+  margin-bottom:14px;
+}
+body.photo-essay-premium .photo-layout-editorial-left .photo-caption-poetic,
+body.photo-essay-premium .photo-layout-editorial-right .photo-caption-poetic,
+body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-poetic {
+  display:block;
+  font-size:clamp(1.28rem, 2vw, 1.7rem);
+  line-height:1.5;
+}
+
+/* Une vraie coda avant les fonctions sociales. */
+body.photo-essay-premium .photo-story-closing {
+  min-height: min(64svh, 680px);
+  width: min(900px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin: clamp(4rem, 9vw, 8rem) auto 0;
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  text-align:center;
+}
+body.photo-essay-premium .photo-story-closing-mark {
+  color:var(--photo-accent);
+  font:400 3.8rem/1 var(--serif);
+}
+body.photo-essay-premium .photo-story-closing-label {
+  margin-top:22px;
+  color:var(--text-faint);
+  font:650 .6rem/1.2 var(--sans);
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+body.photo-essay-premium .photo-story-closing strong {
+  margin-top:16px;
+  font:500 clamp(2.2rem, 5vw, 4.8rem)/.98 var(--serif);
+  letter-spacing:-.045em;
+}
+body.photo-essay-premium .photo-story-closing time {
+  margin-top:18px;
+  color:var(--text-soft);
+  font:italic 400 1rem/1.4 var(--serif);
+}
+
+body.photo-essay-premium .article-signature,
+body.photo-essay-premium .article-publication-notes,
+body.photo-essay-premium .archive-discussion,
+body.photo-essay-premium .article-actions,
+body.photo-essay-premium .after-like-share,
+body.photo-essay-premium .comments {
+  width:min(760px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin-inline:auto;
+}
+body.photo-essay-premium .article-signature { margin-top:0; }
+
+/* Barre de lecture : presque une ligne, pas un composant flottant. */
+.photo-story-bar {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:120;
+  width:100%;
+  min-height:48px;
+  padding:0 max(10px, 2vw);
+  display:grid;
+  grid-template-columns:38px minmax(100px, 220px) minmax(100px, 1fr) auto 38px;
+  align-items:center;
+  gap:clamp(9px, 1.7vw, 24px);
+  border:0;
+  border-bottom:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:0;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  box-shadow:none;
+  backdrop-filter:blur(18px) saturate(112%);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-100%);
+  transition:opacity 220ms ease, transform 360ms cubic-bezier(.22,.8,.2,1);
+}
+.photo-story-bar.is-visible { opacity:1; pointer-events:auto; transform:none; }
+.photo-story-back,
+.photo-story-focus {
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--text-soft);
+  text-decoration:none;
+  cursor:pointer;
+}
+.photo-story-location {
+  overflow:hidden;
+  color:var(--text);
+  font:650 .66rem/1.2 var(--sans);
+  letter-spacing:.035em;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.photo-story-progress {
+  position:relative;
+  height:1px;
+  overflow:hidden;
+  background:color-mix(in srgb, var(--text) 12%, transparent);
+}
+.photo-story-progress i {
+  position:absolute;
+  inset:0 auto 0 0;
+  width:0;
+  background:var(--photo-accent, var(--accent));
+  transition:width 520ms cubic-bezier(.22,.8,.2,1);
+}
+.photo-story-counter {
+  min-width:56px;
+  color:var(--text-faint);
+  font:700 .57rem/1 var(--sans);
+  letter-spacing:.14em;
+  text-align:right;
+}
+body.focus-reading .photo-story-bar { top:0; }
+
+/* Visionneuse : l'image flotte dans le noir, l'interface devient secondaire. */
+.photo-lightbox {
+  background:#070809;
+}
+.photo-lightbox-stage {
+  height:calc(100vh - 138px);
+  padding:26px 5vw 8px;
+}
+.photo-lightbox-image { box-shadow:0 20px 90px rgba(0,0,0,.34); }
+.photo-lightbox-close,
+.photo-lightbox-nav {
+  border:0;
+  background:rgba(14,14,14,.24);
+  opacity:.56;
+  transition:opacity 180ms ease, background 180ms ease;
+}
+.photo-lightbox-close:hover,
+.photo-lightbox-nav:hover { opacity:1; background:rgba(30,30,30,.66); }
+.photo-lightbox-info {
+  bottom:20px;
+  width:min(820px, calc(100vw - 120px));
+}
+.photo-lightbox-poetic { font-size:clamp(1rem, 1.7vw, 1.28rem); }
+
+/* Navigation vers le texte précédent/suivant : grandes portes photographiques. */
+body.photo-essay-premium .article-pagination {
+  width:min(1320px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin:clamp(7rem, 13vw, 12rem) auto 0;
+  gap:clamp(10px, 2vw, 24px);
+}
+body.photo-essay-premium .article-pagination .photo-story-pagination-card {
+  min-height:clamp(320px, 38vw, 520px);
+  border-radius:0;
+}
+body.photo-essay-premium .article-pagination .photo-story-pagination-card strong {
+  font-size:clamp(1.7rem, 3.5vw, 3.3rem);
+}
+
+/* Animation sobre : une respiration, jamais un effet spectaculaire. */
+@supports (animation-timeline: view()) {
+  body.photo-essay-premium .article-body .article-inline-figure {
+    animation: photo-v51-reveal linear both;
+    animation-timeline:view();
+    animation-range:entry 0% cover 24%;
+  }
+}
+@keyframes photo-v51-reveal {
+  from { opacity:.55; transform:translateY(34px); filter:saturate(.88); }
+  to { opacity:1; transform:none; filter:saturate(1); }
+}
+
+@media (max-width: 900px) {
+  body.photo-essay-premium { --photo-gutter:18px; }
+  body.photo-essay-premium .article-header.photo-story-cover {
+    min-height:72svh;
+    padding:34px 24px 30px;
+    grid-template-columns:1fr;
+    grid-template-rows:auto 1fr auto auto;
+  }
+  body.photo-essay-premium .article-header.photo-story-cover::before { inset:18px; }
+  body.photo-essay-premium .article-header.photo-story-cover::after { top:18px; right:18px; }
+  body.photo-essay-premium .article-header.photo-story-cover h1,
+  body.photo-essay-premium[data-photo-persona] .photo-story-cover h1 {
+    grid-column:1;
+    grid-row:2;
+    justify-self:start;
+    align-self:end;
+    max-width:9ch;
+    margin:48px 0 0;
+    text-align:left;
+    font-size:clamp(4rem, 17vw, 7.2rem);
+    line-height:.86;
+  }
+  body.photo-essay-premium .photo-essay-count,
+  body.photo-essay-premium[data-photo-persona] .photo-essay-count {
+    grid-column:1;
+    grid-row:3;
+    margin:24px 0 0;
+  }
+  body.photo-essay-premium .photo-story-index {
+    grid-column:1;
+    grid-row:4;
+    overflow-x:auto;
+    width:100%;
+    margin-top:38px;
+    padding:0 48px 12px 0;
+    scrollbar-width:none;
+  }
+  body.photo-essay-premium .photo-story-index::-webkit-scrollbar { display:none; }
+  body.photo-essay-premium .photo-story-entry { right:30px; bottom:31px; }
+
+  body.photo-essay-premium .article-body { padding-top:60px; }
+  body.photo-essay-premium .article-body .article-inline-figure,
+  body.photo-essay-premium .article-body .article-inline-figure.is-portrait,
+  body.photo-essay-premium .article-body .article-inline-figure.is-panorama,
+  body.photo-essay-premium .article-body .article-inline-figure.is-landscape,
+  body.photo-essay-premium .article-body .photo-layout-cinema,
+  body.photo-essay-premium .article-body .photo-layout-bleed,
+  body.photo-essay-premium .article-body .photo-layout-editorial-left,
+  body.photo-essay-premium .article-body .photo-layout-editorial-right,
+  body.photo-essay-premium .article-body .photo-layout-quiet,
+  body.photo-essay-premium .article-body .photo-layout-panorama-left,
+  body.photo-essay-premium .article-body .photo-layout-panorama-right,
+  body.photo-essay-premium .article-body .photo-layout-portrait-left,
+  body.photo-essay-premium .article-body .photo-layout-portrait-right,
+  body.photo-essay-premium .article-body .photo-layout-portrait-center,
+  body.photo-essay-premium .article-body .photo-layout-portrait-stage,
+  body.photo-essay-premium .article-body .photo-layout-finale {
+    width:calc(100vw - 36px);
+    margin:clamp(5.8rem, 22vw, 9rem) 18px;
+    display:block;
+  }
+  body.photo-essay-premium .article-body .article-inline-figure:first-child { margin-top:0; }
+  body.photo-essay-premium .article-body .photo-layout-bleed,
+  body.photo-essay-premium .article-body .photo-layout-cinema,
+  body.photo-essay-premium .article-body .photo-layout-finale {
+    width:100vw;
+    margin-left:0;
+    margin-right:0;
+  }
+  body.photo-essay-premium .photo-layout-cinema img { max-height:none; }
+  body.photo-essay-premium .article-body .photo-layout-portrait-left,
+  body.photo-essay-premium .article-body .photo-layout-portrait-right,
+  body.photo-essay-premium .article-body .photo-layout-portrait-center,
+  body.photo-essay-premium .article-body .photo-layout-portrait-stage {
+    width:calc(100vw - 52px);
+    margin-left:26px;
+    margin-right:26px;
+  }
+  body.photo-essay-premium .photo-layout-portrait-stage .photo-open { width:100%; }
+
+  body.photo-essay-premium .article-body .article-inline-figure figcaption,
+  body.photo-essay-premium .photo-layout-editorial-left figcaption,
+  body.photo-essay-premium .photo-layout-editorial-right figcaption,
+  body.photo-essay-premium .photo-layout-portrait-stage figcaption,
+  body.photo-essay-premium .photo-layout-panorama-left figcaption,
+  body.photo-essay-premium .photo-layout-panorama-right figcaption,
+  body.photo-essay-premium .photo-layout-bleed figcaption {
+    display:grid;
+    grid-template-columns:3.4rem minmax(0,1fr);
+    width:calc(100% - 36px);
+    margin:18px 18px 0;
+  }
+  body.photo-essay-premium .photo-layout-editorial-left .photo-caption-sequence,
+  body.photo-essay-premium .photo-layout-editorial-right .photo-caption-sequence,
+  body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-sequence {
+    display:block;
+    grid-column:1;
+    grid-row:1 / span 2;
+    margin:0;
+  }
+  body.photo-essay-premium .photo-layout-editorial-left .photo-caption-meta,
+  body.photo-essay-premium .photo-layout-editorial-right .photo-caption-meta,
+  body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-meta {
+    display:block;
+    grid-column:2;
+    margin:0;
+  }
+  body.photo-essay-premium .photo-layout-editorial-left .photo-caption-poetic,
+  body.photo-essay-premium .photo-layout-editorial-right .photo-caption-poetic,
+  body.photo-essay-premium .photo-layout-portrait-stage .photo-caption-poetic {
+    display:block;
+    grid-column:2;
+    margin:0;
+    font-size:clamp(1.12rem, 5vw, 1.34rem);
+  }
+  body.photo-essay-premium .photo-caption-poetic { font-size:clamp(1.12rem, 5vw, 1.34rem); }
+
+  .photo-story-bar {
+    grid-template-columns:34px minmax(84px, 1fr) minmax(70px, .8fr) auto;
+    min-height:44px;
+    gap:10px;
+    padding:0 8px;
+  }
+  .photo-story-focus { display:none; }
+  .photo-story-location { font-size:.61rem; }
+  .photo-story-counter { min-width:50px; font-size:.53rem; }
+
+  body.photo-essay-premium .photo-story-closing { min-height:54svh; }
+  body.photo-essay-premium .article-pagination { grid-template-columns:1fr; }
+  body.photo-essay-premium .article-pagination .photo-story-pagination-card { min-height:330px; }
+
+  .photo-lightbox-stage { height:calc(100vh - 170px); padding:58px 10px 8px; }
+  .photo-lightbox-info { width:calc(100vw - 88px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.photo-essay-premium .photo-story-entry,
+  body.photo-essay-premium .article-body .article-inline-figure,
+  body.photo-essay-premium .article-site-header,
+  .photo-story-progress i,
+  .photo-story-index-mark {
+    animation:none !important;
+    transition:none !important;
+  }
+}

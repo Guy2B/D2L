@@ -1,3 +1,7 @@
+# Chroniques d’ailleurs - Die 2 Lap - V49
+
+V49 généralise la mise en page éditoriale premium aux 13 récits photographiques, remplace la dernière image d’archive de Shanghai par l’original fourni par l’auteur et propose les 67 lignes poétiques en français, anglais et allemand selon la langue d’interface, sans traduire ni modifier les œuvres littéraires existantes.
+
 # Chroniques d'ailleurs - V14
 
 Correction du visuel original de Le seuil...
@@ -6,14 +10,14 @@ Correction du visuel original de Le seuil...
 
 Trois visuels historiques ont été corrigés après comparaison avec la page originale du blog.
 
-# Chroniques d’ailleurs - Die 2 Lap - V11
+# Chroniques d’ailleurs - Die 2 Lap - V43
 
 Cette version consolide la migration du blog et ajoute une refonte UX/UI complète.
 
 ## Contenu
 
-- 44 publications historiques disponibles dans le site.
-- 44 visuels locaux en meilleure définition dans `assets/articles/`.
+- 57 publications historiques disponibles dans le site.
+- Les visuels sont servis localement depuis `assets/articles/`, dont les 67 photographies originales des récits photographiques désormais intégrées en haute qualité.
 - Dates, catégories et liens vers les publications d’origine conservés.
 - Mentions `Aussi publié sur...` conservées lorsqu’elles sont documentées.
 - Cinq romans achevés avec synopsis interactifs.
@@ -123,7 +127,7 @@ This version updates the featured image for `Artifices de petit prince` using th
 
 ## V28 - Relecture complète des textes
 
-Les 44 publications ont fait l’objet d’une relecture linguistique complète. Orthographe, accords, conjugaison, ponctuation, typographie et erreurs syntaxiques évidentes ont été corrigés tout en conservant la voix, les figures littéraires et la structure des poèmes. Voir `CORRECTIONS_TEXTES_V28.md` pour le périmètre et les contrôles effectués.
+Les 44 publications littéraires déjà présentes avant V43 ont fait l’objet d’une relecture linguistique complète. Orthographe, accords, conjugaison, ponctuation, typographie et erreurs syntaxiques évidentes ont été corrigés tout en conservant la voix, les figures littéraires et la structure des poèmes. Voir `CORRECTIONS_TEXTES_V28.md` pour le périmètre et les contrôles effectués.
 
 ## V29 - Lecture et partage
 
@@ -179,7 +183,7 @@ Les nombres de commentaires historiques déjà recensés dans les données des d
 - Navigation, accueil, bibliothèque, présentation de l'auteur, parcours, romans, synopsis, lecteur, likes, partage, commentaires, archives, Disclaimer, Impressum et page 404 sont traduits.
 - Les traductions anglaises et allemandes ont été rédigées dans un registre littéraire naturel, et non comme une traduction mot à mot.
 - Les titres des œuvres et des manuscrits restent dans leur forme originale.
-- Les 44 textes publiés, leurs extraits et leur contenu littéraire restent intégralement en français.
+- Les textes littéraires publiés, leurs extraits et leur contenu restent dans leur langue originale. Les légendes historiques des récits photographiques sont conservées telles qu’elles apparaissent dans les sources.
 - En anglais et en allemand, une note discrète précise que les œuvres publiées restent dans leur langue originale.
 - `posts.js` et `custom-content.js` n'ont pas été modifiés dans cette passe multilingue.
 
@@ -244,6 +248,11 @@ Principales évolutions :
 - aucun contenu littéraire de `posts.js` n'a été modifié.
 
 
-## V43 - 13 carnets photographiques restaurés
+## V43 - récits photographiques de voyage
 
-Ajout de 13 publications « Greetings from… » de 2015 : Shanghai, Oxford, Murgtal, Yaoundé, Jyväskylä, New York, Helsinki, Berlin, Porto, Suzhou, Paris, Toulouse et Amsterdam. Elles apparaissent sous « Histoires de voyage » avec un gabarit galerie dédié. Le compteur principal reste à 44 textes, car ces 13 publications sont des carnets photographiques distincts.
+- Ajout de 13 publications historiques de la série photographique de 2015, pour un total de 57 publications.
+- `Shanghai (Dec)` reste distinct de `Carnet de voyages : Shanghai`.
+- 67 photographies ont été extraites fidèlement des captures d’archive fournies par l’auteur, dans l’ordre documenté et avec les légendes d’origine.
+- Les fichiers image originaux de l’ancien blog n’ayant pas pu être récupérés de façon fiable, aucune image de substitution n’a été inventée.
+- Galeries locales WebP, pages statiques, SEO, sitemap, recherche, filtres, navigation et compteurs mis à jour.
+- Aucun texte littéraire préexistant n’a été réécrit.

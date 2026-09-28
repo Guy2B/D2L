@@ -1,11 +1,11 @@
-# Rapport de migration - V11
+# Rapport de migration - V43
 
 ## État
 
-- Publications historiques identifiées : 44
-- Publications intégrées au site : 44
+- Publications historiques identifiées : 57
+- Publications intégrées au site : 57
 - Publications marquées comme simples extraits : 0
-- Visuels locaux associés aux publications : 44
+- Fichiers image locaux dans `assets/articles/` : 116
 - Dépendance aux miniatures Unblog pour l’affichage : 0
 
 ## Principes appliqués
@@ -18,3 +18,8 @@
 6. Les crédits des images sont conservés quand ils ont été fournis.
 7. Aucun tiret long n’est utilisé dans les textes affichés.
 8. Les images fournies par l’auteur ont priorité sur les anciennes miniatures compressées.
+
+
+## Mise à jour V43
+
+Treize récits photographiques de voyage de 2015 ont été intégrés à partir des captures d’archive fournies par l’auteur. La série ajoute 67 images locales et porte le catalogue à 57 publications. Les images originales du serveur Unblog n’ont pas pu être récupérées de manière suffisamment fiable. Les visuels V43 sont donc des extractions fidèles des captures fournies, sans génération d’image ni ajout narratif.

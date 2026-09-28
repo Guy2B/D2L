@@ -59,7 +59,7 @@
   function plainText(item) {
     return (item.content || [])
       .filter(block => block && typeof block === "object")
-      .map(block => block.text || block.caption || "")
+      .map(block => [block.text, block.caption, block.poeticLine, block.poeticLineEn, block.poeticLineDe].filter(Boolean).join(" "))
       .join(" ")
       .replace(/\s+/g, " ")
       .trim();
@@ -117,7 +117,8 @@
   const isFiction = post.category === "Nouvelles";
   const isChronicle = post.category === "Chroniques";
   const isTravel = post.category === "Histoires de voyage";
-  const isPhotoEssay = post.layout === "photo-essay";
+  const isPhotoEssay = post.format === "photo-essay";
+  const isPremiumPhotoEssay = isPhotoEssay;
   const isProse = !isPoem;
 
   document.body.classList.toggle("is-poem-article", isPoem);
@@ -125,16 +126,25 @@
   document.body.classList.toggle("is-chronicle-article", isChronicle);
   document.body.classList.toggle("is-travel-article", isTravel);
   document.body.classList.toggle("is-photo-essay", isPhotoEssay);
+  document.body.classList.toggle("photo-essay-premium", isPremiumPhotoEssay);
   document.body.classList.toggle("is-prose-article", isProse);
   article.classList.toggle("is-poem-article", isPoem);
   article.classList.toggle("is-fiction-article", isFiction);
   article.classList.toggle("is-chronicle-article", isChronicle);
   article.classList.toggle("is-travel-article", isTravel);
   article.classList.toggle("is-photo-essay", isPhotoEssay);
+  article.classList.toggle("photo-essay-premium", isPremiumPhotoEssay);
   article.classList.toggle("is-prose-article", isProse);
 
-  // Les œuvres restent en français même lorsque l'interface est en anglais ou en allemand.
-  document.querySelector("#article-body")?.setAttribute("lang", "fr");
+  const originalLanguageNote = document.querySelector("#original-language-note");
+  const enforceOriginalLanguageNote = () => {
+    if (isPhotoEssay && originalLanguageNote) originalLanguageNote.hidden = true;
+  };
+  enforceOriginalLanguageNote();
+
+  // Les œuvres littéraires restent en français. Les lignes poétiques des carnets photo
+  // suivent volontairement la langue d’interface (FR / EN / DE).
+  document.querySelector("#article-body")?.setAttribute("lang", isPhotoEssay ? i18n.language : "fr");
 
   try {
     localStorage.setItem("die2lap:last-read:v12", JSON.stringify({ id: post.id, at: Date.now() }));
@@ -179,11 +189,9 @@
 
   function updateArticleChrome() {
     document.querySelector("#article-category").textContent = i18n.category(post.category);
-    const readingLabel = isPhotoEssay ? t("dynamic.photoGallery") : t("dynamic.readingMinutes", { count: minutes });
-    const railReadingLabel = isPhotoEssay ? t("dynamic.photoGallery") : t("dynamic.minutes", { count: minutes });
-    document.querySelector("#article-reading-time").textContent = readingLabel;
+    document.querySelector("#article-reading-time").textContent = t("dynamic.readingMinutes", { count: minutes });
     document.querySelector("#rail-category").textContent = i18n.category(post.category);
-    document.querySelector("#rail-reading").textContent = railReadingLabel;
+    document.querySelector("#rail-reading").textContent = t("dynamic.minutes", { count: minutes });
     const railDate = document.querySelector("#rail-date");
     if (post.date) {
       document.querySelector("#article-date").textContent = formatDate(post.date);
@@ -193,6 +201,120 @@
     }
   }
   updateArticleChrome();
+
+  const photoEssayBlocks = isPremiumPhotoEssay
+    ? (post.content || []).filter(block => block?.type === "image")
+    : [];
+
+  // Composition éditoriale pensée carnet par carnet. Les formats alternent
+  // grande ouverture, respiration large et portraits décalés afin d’éviter
+  // l’effet de galerie répétitive.
+  const PHOTO_ESSAY_LAYOUTS = {
+    "shanghai-dec": ["hero", "wide", "wide", "portrait-left", "portrait-right", "portrait-center", "finale"],
+    "oxford-nov": ["hero", "wide", "wide", "portrait-right", "finale"],
+    "murgtal-oct": ["hero", "wide", "wide", "wide", "wide", "finale"],
+    "yaounde-sept": ["portrait-left", "wide", "wide", "wide", "wide", "finale"],
+    "jyvaskyla-sept": ["wide", "portrait-right", "wide", "wide", "wide", "finale"],
+    "ny-summer": ["hero", "portrait-left", "wide", "wide", "portrait-right", "finale"],
+    "helsinki-june": ["hero", "wide", "portrait-right", "wide", "wide", "finale"],
+    "berlin-july": ["hero", "wide", "wide", "wide", "finale"],
+    "porto-may": ["portrait-left", "portrait-right", "wide", "finale"],
+    "suzhou-feb": ["hero", "wide", "wide", "finale"],
+    "paris-may": ["wide", "portrait-center"],
+    "toulouse-june": ["portrait-left", "wide", "finale"],
+    "amsterdam-june": ["hero", "wide", "wide", "wide", "wide", "portrait-right", "finale"]
+  };
+
+  function photoEssayLayout(block, index, total) {
+    const curated = PHOTO_ESSAY_LAYOUTS[post.id]?.[index];
+    if (curated) return curated;
+    const width = Number(block?.width || 0);
+    const height = Number(block?.height || 0);
+    const ratio = width && height ? width / height : 1.4;
+    if (index === 0) return ratio < .82 ? "portrait-center" : "hero";
+    if (index === total - 1) return ratio < .82 ? "portrait-center" : "finale";
+    if (ratio < .82) return index % 2 ? "portrait-left" : "portrait-right";
+    return "wide";
+  }
+
+  function localizedPoeticLine(block) {
+    if (!block) return "";
+    if (i18n.language === "en") return block.poeticLineEn || block.poeticLine || "";
+    if (i18n.language === "de") return block.poeticLineDe || block.poeticLine || "";
+    return block.poeticLine || "";
+  }
+  let photoStoryBar = null;
+  let photoStoryCounter = null;
+  let photoStoryCountLabel = null;
+  let photoObserver = null;
+  let photoLightbox = null;
+  let photoLightboxIndex = 0;
+
+  function photoCounter(index, total) {
+    return `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+  }
+
+  function setupPhotoEssayChrome() {
+    if (!isPremiumPhotoEssay) return;
+    const articleHeader = document.querySelector(".article-header");
+    photoStoryCountLabel = articleHeader.querySelector(".photo-essay-count");
+    if (!photoStoryCountLabel) {
+      photoStoryCountLabel = document.createElement("p");
+      photoStoryCountLabel.className = "photo-essay-count";
+      articleHeader.appendChild(photoStoryCountLabel);
+    }
+
+    photoStoryBar = document.querySelector(".photo-story-bar");
+    if (!photoStoryBar) {
+      photoStoryBar = document.createElement("div");
+      photoStoryBar.className = "photo-story-bar";
+
+      const back = document.createElement("a");
+      back.className = "photo-story-back";
+      back.href = siteHref("index.html#textes");
+      back.textContent = "←";
+      back.setAttribute("aria-label", t("article.back"));
+
+      const location = document.createElement("strong");
+      location.className = "photo-story-location";
+      location.textContent = post.title;
+
+      photoStoryCounter = document.createElement("span");
+      photoStoryCounter.className = "photo-story-counter";
+      photoStoryCounter.textContent = photoCounter(0, photoEssayBlocks.length);
+
+      const focus = document.createElement("button");
+      focus.className = "photo-story-focus";
+      focus.type = "button";
+      focus.textContent = "◌";
+      focus.setAttribute("aria-label", t("article.focus"));
+      focus.addEventListener("click", () => document.querySelector(".focus-mode-toggle")?.click());
+
+      photoStoryBar.append(back, location, photoStoryCounter, focus);
+      document.body.appendChild(photoStoryBar);
+
+      const updateVisibility = () => {
+        const threshold = articleHeader.getBoundingClientRect().bottom + window.scrollY;
+        photoStoryBar.classList.toggle("is-visible", window.scrollY > threshold - 80);
+      };
+      window.addEventListener("scroll", updateVisibility, { passive: true });
+      updateVisibility();
+    }
+    updatePhotoEssayChrome();
+  }
+
+  function updatePhotoEssayChrome() {
+    if (!isPremiumPhotoEssay) return;
+    if (photoStoryCountLabel) {
+      photoStoryCountLabel.textContent = t("photoEssay.count", { count: photoEssayBlocks.length });
+    }
+    const back = photoStoryBar?.querySelector(".photo-story-back");
+    if (back) back.setAttribute("aria-label", t("article.back"));
+    const focus = photoStoryBar?.querySelector(".photo-story-focus");
+    if (focus) focus.setAttribute("aria-label", t("article.focus"));
+  }
+
+  setupPhotoEssayChrome();
 
   if (post.deck) {
     const deck = document.querySelector("#article-deck");
@@ -208,7 +330,7 @@
     time.textContent = formatDate(post.date);
   }
 
-  if (post.image) {
+  if (post.image && !post.hideLeadImage) {
     const figure = document.querySelector("#article-figure");
     const image = document.querySelector("#article-image");
     const credit = document.querySelector("#article-image-credit");
@@ -232,7 +354,7 @@
 
   const body = document.querySelector("#article-body");
 
-  function appendContentBlock(block) {
+  function appendContentBlock(block, photoIndex = -1, photoTotal = 0) {
     if (!block || typeof block !== "object") return;
 
     if (block.type === "poem") {
@@ -268,18 +390,69 @@
     if (block.type === "image") {
       const figure = document.createElement("figure");
       figure.className = "article-inline-figure";
+      const resolvedLayout = isPremiumPhotoEssay && photoIndex >= 0
+        ? photoEssayLayout(block, photoIndex, photoTotal)
+        : block.layout;
+      if (isPremiumPhotoEssay && resolvedLayout) {
+        figure.classList.add(`photo-layout-${resolvedLayout}`);
+      }
+      if (isPremiumPhotoEssay && photoIndex >= 0) {
+        figure.dataset.photoIndex = String(photoIndex);
+        figure.dataset.photoNumber = photoCounter(photoIndex, photoTotal);
+      }
+
       const image = document.createElement("img");
       image.src = siteHref(block.image || "");
       image.alt = block.alt || "";
-      image.loading = "lazy";
+      image.loading = isPremiumPhotoEssay && photoIndex === 0 ? "eager" : "lazy";
       image.decoding = "async";
+      if (isPremiumPhotoEssay && photoIndex === 0) image.fetchPriority = "high";
       if (block.width) image.width = Number(block.width);
       if (block.height) image.height = Number(block.height);
-      figure.appendChild(image);
-      if (block.caption || block.credit) {
+      const width = Number(block.width || 0);
+      const height = Number(block.height || 0);
+      if (width && height) {
+        const ratio = width / height;
+        figure.classList.toggle("is-portrait", ratio < .82);
+        figure.classList.toggle("is-panorama", ratio > 1.85);
+        figure.classList.toggle("is-landscape", ratio >= .82 && ratio <= 1.85);
+      }
+
+      if (isPremiumPhotoEssay && photoIndex >= 0) {
+        const opener = document.createElement("button");
+        opener.className = "photo-open";
+        opener.type = "button";
+        opener.dataset.photoIndex = String(photoIndex);
+        opener.setAttribute("aria-label", t("photoEssay.enlarge", { caption: block.caption || post.title }));
+        opener.appendChild(image);
+        figure.appendChild(opener);
+      } else {
+        figure.appendChild(image);
+      }
+
+      if (block.caption || block.credit || block.poeticLine) {
         const caption = document.createElement("figcaption");
+        if (isPremiumPhotoEssay && photoIndex >= 0) {
+          const sequence = document.createElement("span");
+          sequence.className = "photo-caption-sequence";
+          sequence.textContent = photoCounter(photoIndex, photoTotal);
+          caption.appendChild(sequence);
+        }
         const parts = [block.caption, block.credit ? t("dynamic.imageCredit", { credit: block.credit }) : ""].filter(Boolean);
-        caption.textContent = parts.join(" · ");
+        if (parts.length) {
+          const meta = document.createElement("span");
+          meta.className = "photo-caption-meta";
+          meta.textContent = parts.join(" · ");
+          caption.appendChild(meta);
+        }
+        const poeticCopy = localizedPoeticLine(block);
+        if (poeticCopy) {
+          const poeticLine = document.createElement("span");
+          poeticLine.className = "photo-caption-poetic";
+          poeticLine.lang = i18n.language;
+          poeticLine.textContent = poeticCopy;
+          caption.appendChild(poeticLine);
+        }
         figure.appendChild(caption);
       }
       body.appendChild(figure);
@@ -293,9 +466,140 @@
 
   function renderArticleBody() {
     body.replaceChildren();
-    (post.content || []).forEach(appendContentBlock);
+    body.setAttribute("lang", isPhotoEssay ? i18n.language : "fr");
+    const photoTotal = isPremiumPhotoEssay ? photoEssayBlocks.length : 0;
+    let photoIndex = 0;
+    (post.content || []).forEach(block => {
+      if (block?.type === "image") {
+        appendContentBlock(block, isPremiumPhotoEssay ? photoIndex : -1, photoTotal);
+        photoIndex += 1;
+      } else {
+        appendContentBlock(block);
+      }
+    });
+    if (isPremiumPhotoEssay) bindPhotoEssayExperience();
   }
   renderArticleBody();
+
+  function ensurePhotoLightbox() {
+    if (!isPremiumPhotoEssay) return null;
+    photoLightbox = document.querySelector(".photo-lightbox");
+    if (photoLightbox) return photoLightbox;
+
+    photoLightbox = document.createElement("dialog");
+    photoLightbox.className = "photo-lightbox";
+
+    const stage = document.createElement("div");
+    stage.className = "photo-lightbox-stage";
+    const image = document.createElement("img");
+    image.className = "photo-lightbox-image";
+    image.alt = "";
+    stage.appendChild(image);
+
+    const close = document.createElement("button");
+    close.className = "photo-lightbox-close";
+    close.type = "button";
+    close.textContent = "×";
+    close.setAttribute("aria-label", t("photoEssay.close"));
+
+    const previous = document.createElement("button");
+    previous.className = "photo-lightbox-nav photo-lightbox-prev";
+    previous.type = "button";
+    previous.textContent = "‹";
+    previous.setAttribute("aria-label", t("photoEssay.previous"));
+
+    const next = document.createElement("button");
+    next.className = "photo-lightbox-nav photo-lightbox-next";
+    next.type = "button";
+    next.textContent = "›";
+    next.setAttribute("aria-label", t("photoEssay.next"));
+
+    const info = document.createElement("div");
+    info.className = "photo-lightbox-info";
+    const count = document.createElement("span");
+    count.className = "photo-lightbox-count";
+    const meta = document.createElement("span");
+    meta.className = "photo-lightbox-meta";
+    const poetic = document.createElement("p");
+    poetic.className = "photo-lightbox-poetic";
+    info.append(count, meta, poetic);
+
+    photoLightbox.append(stage, close, previous, next, info);
+    document.body.appendChild(photoLightbox);
+
+    close.addEventListener("click", () => photoLightbox.close());
+    previous.addEventListener("click", () => showPhotoInLightbox(photoLightboxIndex - 1));
+    next.addEventListener("click", () => showPhotoInLightbox(photoLightboxIndex + 1));
+    photoLightbox.addEventListener("click", event => {
+      if (event.target === photoLightbox) photoLightbox.close();
+    });
+    photoLightbox.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") { event.preventDefault(); showPhotoInLightbox(photoLightboxIndex - 1); }
+      if (event.key === "ArrowRight") { event.preventDefault(); showPhotoInLightbox(photoLightboxIndex + 1); }
+    });
+    let touchStartX = null;
+    photoLightbox.addEventListener("touchstart", event => {
+      touchStartX = event.changedTouches?.[0]?.clientX ?? null;
+    }, { passive: true });
+    photoLightbox.addEventListener("touchend", event => {
+      if (touchStartX === null) return;
+      const touchEndX = event.changedTouches?.[0]?.clientX ?? touchStartX;
+      const delta = touchEndX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(delta) < 48) return;
+      showPhotoInLightbox(photoLightboxIndex + (delta < 0 ? 1 : -1));
+    }, { passive: true });
+    return photoLightbox;
+  }
+
+  function updatePhotoLightboxLabels() {
+    if (!photoLightbox) return;
+    photoLightbox.querySelector(".photo-lightbox-close")?.setAttribute("aria-label", t("photoEssay.close"));
+    photoLightbox.querySelector(".photo-lightbox-prev")?.setAttribute("aria-label", t("photoEssay.previous"));
+    photoLightbox.querySelector(".photo-lightbox-next")?.setAttribute("aria-label", t("photoEssay.next"));
+  }
+
+  function showPhotoInLightbox(index) {
+    if (!isPremiumPhotoEssay || !photoEssayBlocks.length) return;
+    const total = photoEssayBlocks.length;
+    photoLightboxIndex = (index + total) % total;
+    const block = photoEssayBlocks[photoLightboxIndex];
+    const dialog = ensurePhotoLightbox();
+    const image = dialog.querySelector(".photo-lightbox-image");
+    image.src = siteHref(block.image);
+    image.alt = block.alt || block.caption || post.title;
+    dialog.querySelector(".photo-lightbox-count").textContent = photoCounter(photoLightboxIndex, total);
+    dialog.querySelector(".photo-lightbox-meta").textContent = [
+      block.caption,
+      block.credit ? t("dynamic.imageCredit", { credit: block.credit }) : ""
+    ].filter(Boolean).join(" · ");
+    const lightboxPoetic = dialog.querySelector(".photo-lightbox-poetic");
+    lightboxPoetic.lang = i18n.language;
+    lightboxPoetic.textContent = localizedPoeticLine(block);
+    if (!dialog.open) dialog.showModal();
+  }
+
+  function bindPhotoEssayExperience() {
+    if (!isPremiumPhotoEssay) return;
+    const figures = [...body.querySelectorAll(".article-inline-figure")];
+    figures.forEach((figure, index) => {
+      figure.querySelector(".photo-open")?.addEventListener("click", () => showPhotoInLightbox(index));
+    });
+
+    ensurePhotoLightbox();
+    updatePhotoLightboxLabels();
+
+    photoObserver?.disconnect();
+    photoObserver = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const index = Number(visible.target.dataset.photoIndex || 0);
+      if (photoStoryCounter) photoStoryCounter.textContent = photoCounter(index, figures.length);
+    }, { rootMargin: "-32% 0px -42%", threshold: [0, .15, .35, .6] });
+    figures.forEach(figure => photoObserver.observe(figure));
+  }
 
   const publicationNotes = document.querySelector("#article-publication-notes");
   const archiveDiscussion = document.querySelector("#archive-discussion");
@@ -696,6 +1000,21 @@
     }
   }
 
+  function decoratePhotoEssayPagination() {
+    if (!isPremiumPhotoEssay) return;
+    [[prevLink, prev], [nextLink, next]].forEach(([link, item]) => {
+      if (!link || !item || link.hidden) return;
+      link.classList.add("photo-story-pagination-card");
+      if (!link.querySelector("img")) {
+        const image = document.createElement("img");
+        image.src = siteHref(item.image || "");
+        image.alt = "";
+        image.loading = "lazy";
+        link.prepend(image);
+      }
+    });
+  }
+
   function relatedPosts() {
     const sameCategory = ordered.filter(item => item.id !== post.id && item.category === post.category);
     const others = ordered.filter(item => item.id !== post.id && item.category !== post.category);
@@ -728,6 +1047,7 @@
   }
 
   renderPagination();
+  decoratePhotoEssayPagination();
   renderRelated();
 
   const progress = document.querySelector(".reading-progress span");
@@ -800,7 +1120,11 @@
     updateShareUrls();
     renderComments();
     renderPagination();
+    decoratePhotoEssayPagination();
     renderRelated();
+    updatePhotoEssayChrome();
+    updatePhotoLightboxLabels();
+    enforceOriginalLanguageNote();
     focusToggle.textContent = document.body.classList.contains("focus-reading") ? t("article.focusExit") : t("article.focus");
   });
 })();

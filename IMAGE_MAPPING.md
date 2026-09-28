@@ -65,3 +65,23 @@ Correspondances revérifiées avec la capture du blog d’origine :
 
 ## Update v15
 - `Artifices de petit prince` now uses the updated image supplied by the author (`E.M. 2` variant).
+
+## V43 - récits photographiques de voyage
+
+Les 67 images suivantes sont stockées sous `assets/articles/voyages/`. Elles proviennent exclusivement des captures d’archive fournies par l’auteur. Les fichiers originaux du serveur Unblog n’ont pas pu être récupérés de manière fiable. Aucun visuel de substitution n’a été créé.
+
+- **Shanghai (Dec)** : `shanghai-dec-01.webp` à `shanghai-dec-07.webp` · © Die 2 Lap 2015
+- **Oxford (Nov)** : `oxford-nov-01.webp` à `oxford-nov-05.webp` · © Die 2 Lap 2015
+- **Murgtal (Oct)** : `murgtal-oct-01.webp` à `murgtal-oct-06.webp` · © Die 2 Lap 2015
+- **Yaoundé (Sept)** : `yaounde-sept-01.webp` à `yaounde-sept-06.webp` · © Die 2 Lap 2015
+- **Jyväskylä (Sept)** : `jyvaskyla-sept-01.webp` à `jyvaskyla-sept-06.webp` · © Die 2 Lap 2015
+- **NY (Summer)** : `ny-summer-01.webp` à `ny-summer-06.webp` · © Die 2 Lap 2015
+- **Helsinki (June)** : `helsinki-june-01.webp` à `helsinki-june-06.webp` · © Die 2 Lap 2015
+- **Berlin (July)** : `berlin-july-01.webp` à `berlin-july-05.webp` · © Die 2 Lap 2014
+- **Porto (May)** : `porto-may-01.webp` à `porto-may-04.webp` · © Die 2 Lap 2015
+- **Suzhou (Feb)** : `suzhou-feb-01.webp` à `suzhou-feb-04.webp` · © Die 2 Lap 2015
+- **Paris (May)** : `paris-may-01.webp` à `paris-may-02.webp` · © Die 2 Lap 2015
+- **Toulouse (June)** : `toulouse-june-01.webp` à `toulouse-june-03.webp` · © Die 2 Lap 2015
+- **Amsterdam (June)** : `amsterdam-june-01.webp` à `amsterdam-june-07.webp` · © Die 2 Lap 2015
+
+Le fichier `assets/articles/voyages/SOURCE_MANIFEST.json` conserve, pour chaque image, la capture source et la zone d’extraction utilisée.

@@ -130,7 +130,7 @@
   function plainText(post) {
     return (post.content || [])
       .filter(block => block && typeof block === "object")
-      .map(block => block.text || block.caption || "")
+      .map(block => [block.text, block.caption, block.poeticLine, block.poeticLineEn, block.poeticLineDe].filter(Boolean).join(" "))
       .join(" ")
       .replace(/\s+/g, " ")
       .trim();
@@ -196,9 +196,7 @@
 
     card.querySelector(".index-excerpt").textContent = excerpt(post);
     card.querySelector(".read-link").href = href;
-    card.querySelector(".reading-time").textContent = post.layout === "photo-essay"
-      ? t("dynamic.photoGallery")
-      : t("dynamic.minutes", { count: readMinutes(post) });
+    card.querySelector(".reading-time").textContent = t("dynamic.minutes", { count: readMinutes(post) });
     const readLabel = card.querySelector(".read-link [data-i18n], .read-link span:first-child");
     if (readLabel) readLabel.textContent = t("dynamic.read");
 
@@ -625,8 +623,7 @@
   document.querySelector("#current-year").textContent = new Date().getFullYear();
   const bookCount = Object.keys(MANUSCRIPTS).length;
   const submissionCount = Object.values(MANUSCRIPTS).filter(book => book.status === "En soumission").length;
-  const literaryTextCount = posts.filter(post => post.layout !== "photo-essay").length;
-  document.querySelector("#stat-posts").textContent = String(literaryTextCount);
+  document.querySelector("#stat-posts").textContent = String(posts.length);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
   function updateDynamicHeadings() {

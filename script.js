@@ -113,7 +113,19 @@
 
   const formatDate = isoDate => i18n.formatDate(isoDate);
 
-  const articleHref = post => `article.html?id=${encodeURIComponent(post.id)}`;
+  const staticPostIds = new Set(basePosts.map(post => post.id));
+  const localFileMode = window.location.protocol === "file:";
+  const articleHref = post => staticPostIds.has(post.id)
+    ? `textes/${encodeURIComponent(post.id)}/${localFileMode ? "index.html" : ""}`
+    : `article.html?id=${encodeURIComponent(post.id)}`;
+
+  // En test local (double-clic sur index.html), un dossier ne sert pas automatiquement index.html.
+  // On adapte uniquement les liens locaux, sans changer les URL propres du site publié.
+  if (localFileMode) {
+    document.querySelectorAll('a[href^="textes/"][href$="/"]').forEach(link => {
+      link.setAttribute("href", `${link.getAttribute("href")}index.html`);
+    });
+  }
 
   function plainText(post) {
     return (post.content || [])
@@ -163,6 +175,10 @@
     figureLink.classList.toggle("is-contained", post.imageMode === "contain");
     image.src = post.image || "";
     image.alt = post.imageAlt || "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    if (post.imageWidth) image.width = Number(post.imageWidth);
+    if (post.imageHeight) image.height = Number(post.imageHeight);
     image.addEventListener("error", () => figureLink.remove(), { once: true });
 
     card.querySelector(".post-category").textContent = i18n.category(post.category);
@@ -180,7 +196,9 @@
 
     card.querySelector(".index-excerpt").textContent = excerpt(post);
     card.querySelector(".read-link").href = href;
-    card.querySelector(".reading-time").textContent = t("dynamic.minutes", { count: readMinutes(post) });
+    card.querySelector(".reading-time").textContent = post.layout === "photo-essay"
+      ? t("dynamic.photoGallery")
+      : t("dynamic.minutes", { count: readMinutes(post) });
     const readLabel = card.querySelector(".read-link [data-i18n], .read-link span:first-child");
     if (readLabel) readLabel.textContent = t("dynamic.read");
 
@@ -258,6 +276,9 @@
     img.src = post.image || "";
     img.alt = post.imageAlt || "";
     img.loading = "lazy";
+    img.decoding = "async";
+    if (post.imageWidth) img.width = Number(post.imageWidth);
+    if (post.imageHeight) img.height = Number(post.imageHeight);
     const copy = document.createElement("div");
     copy.className = "featured-card-copy";
     const type = document.createElement("span");
@@ -604,7 +625,8 @@
   document.querySelector("#current-year").textContent = new Date().getFullYear();
   const bookCount = Object.keys(MANUSCRIPTS).length;
   const submissionCount = Object.values(MANUSCRIPTS).filter(book => book.status === "En soumission").length;
-  document.querySelector("#stat-posts").textContent = String(posts.length);
+  const literaryTextCount = posts.filter(post => post.layout !== "photo-essay").length;
+  document.querySelector("#stat-posts").textContent = String(literaryTextCount);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
   function updateDynamicHeadings() {

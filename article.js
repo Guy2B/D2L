@@ -14,8 +14,22 @@
   };
   const t = (key, vars = {}) => i18n.t(key, vars);
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  const textIndex = pathParts.lastIndexOf("textes");
+  const pathId = textIndex >= 0 && pathParts[textIndex + 1] ? decodeURIComponent(pathParts[textIndex + 1]) : null;
+  const id = params.get("id") || pathId;
   const post = posts.find(item => item.id === id);
+  const isPrettyArticle = Boolean(pathId);
+  const SITE_PREFIX = isPrettyArticle ? "../../" : "";
+  const siteHref = value => {
+    if (!value || /^(?:[a-z]+:|#|\/\/)/i.test(value)) return value;
+    return `${SITE_PREFIX}${value}`;
+  };
+  const staticPostIds = new Set(basePosts.map(item => item.id));
+  const localFileMode = window.location.protocol === "file:";
+  const articleHref = postId => staticPostIds.has(postId)
+    ? siteHref(`textes/${encodeURIComponent(postId)}/${localFileMode ? "index.html" : ""}`)
+    : siteHref(`article.html?id=${encodeURIComponent(postId)}`);
 
   const STORAGE = {
     likes: "die2lap:likes:v11",
@@ -103,17 +117,20 @@
   const isFiction = post.category === "Nouvelles";
   const isChronicle = post.category === "Chroniques";
   const isTravel = post.category === "Histoires de voyage";
+  const isPhotoEssay = post.layout === "photo-essay";
   const isProse = !isPoem;
 
   document.body.classList.toggle("is-poem-article", isPoem);
   document.body.classList.toggle("is-fiction-article", isFiction);
   document.body.classList.toggle("is-chronicle-article", isChronicle);
   document.body.classList.toggle("is-travel-article", isTravel);
+  document.body.classList.toggle("is-photo-essay", isPhotoEssay);
   document.body.classList.toggle("is-prose-article", isProse);
   article.classList.toggle("is-poem-article", isPoem);
   article.classList.toggle("is-fiction-article", isFiction);
   article.classList.toggle("is-chronicle-article", isChronicle);
   article.classList.toggle("is-travel-article", isTravel);
+  article.classList.toggle("is-photo-essay", isPhotoEssay);
   article.classList.toggle("is-prose-article", isProse);
 
   // Les œuvres restent en français même lorsque l'interface est en anglais ou en allemand.
@@ -123,8 +140,13 @@
     localStorage.setItem("die2lap:last-read:v12", JSON.stringify({ id: post.id, at: Date.now() }));
   } catch {}
 
-  const absoluteArticleUrl = new URL(`article.html?id=${encodeURIComponent(post.id)}`, window.location.href).href;
-  const absoluteImageUrl = post.image ? new URL(post.image, window.location.href).href : new URL("assets/die2lap-portrait.jpg", window.location.href).href;
+  const canonicalNode = document.querySelector('link[rel="canonical"]');
+  const absoluteArticleUrl = isPrettyArticle && canonicalNode?.href
+    ? canonicalNode.href
+    : new URL(articleHref(post.id), window.location.href).href;
+  const absoluteImageUrl = post.image
+    ? new URL(siteHref(post.image), window.location.href).href
+    : new URL(siteHref("assets/die2lap-portrait.jpg"), window.location.href).href;
   const setMeta = (selector, value) => document.querySelector(selector)?.setAttribute("content", value);
 
   function updateMetadata() {
@@ -157,9 +179,11 @@
 
   function updateArticleChrome() {
     document.querySelector("#article-category").textContent = i18n.category(post.category);
-    document.querySelector("#article-reading-time").textContent = t("dynamic.readingMinutes", { count: minutes });
+    const readingLabel = isPhotoEssay ? t("dynamic.photoGallery") : t("dynamic.readingMinutes", { count: minutes });
+    const railReadingLabel = isPhotoEssay ? t("dynamic.photoGallery") : t("dynamic.minutes", { count: minutes });
+    document.querySelector("#article-reading-time").textContent = readingLabel;
     document.querySelector("#rail-category").textContent = i18n.category(post.category);
-    document.querySelector("#rail-reading").textContent = t("dynamic.minutes", { count: minutes });
+    document.querySelector("#rail-reading").textContent = railReadingLabel;
     const railDate = document.querySelector("#rail-date");
     if (post.date) {
       document.querySelector("#article-date").textContent = formatDate(post.date);
@@ -190,8 +214,13 @@
     const credit = document.querySelector("#article-image-credit");
     figure.hidden = false;
     figure.classList.toggle("is-contained", post.imageMode === "contain");
-    image.src = post.image;
+    image.src = siteHref(post.image);
     image.alt = post.imageAlt || "";
+    image.loading = "eager";
+    image.decoding = "async";
+    image.fetchPriority = "high";
+    if (post.imageWidth) image.width = Number(post.imageWidth);
+    if (post.imageHeight) image.height = Number(post.imageHeight);
     image.addEventListener("error", () => figure.hidden = true, { once: true });
 
     if (post.imageCredit) {
@@ -240,9 +269,12 @@
       const figure = document.createElement("figure");
       figure.className = "article-inline-figure";
       const image = document.createElement("img");
-      image.src = block.image || "";
+      image.src = siteHref(block.image || "");
       image.alt = block.alt || "";
       image.loading = "lazy";
+      image.decoding = "async";
+      if (block.width) image.width = Number(block.width);
+      if (block.height) image.height = Number(block.height);
       figure.appendChild(image);
       if (block.caption || block.credit) {
         const caption = document.createElement("figcaption");
@@ -376,9 +408,7 @@
   const shareMenu = document.querySelector(".share-menu");
   const shareNative = document.querySelector(".share-native");
   const afterLikeNative = document.querySelector(".after-like-native");
-  const pageUrl = new URL(window.location.href);
-  pageUrl.hash = "";
-  const canonicalUrl = pageUrl.href;
+  const canonicalUrl = document.querySelector('link[rel="canonical"]')?.href || absoluteArticleUrl;
   function updateShareUrls() {
     const shareText = `${post.title} - Chroniques d’ailleurs`;
     const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(canonicalUrl)}`;
@@ -654,13 +684,13 @@
   function renderPagination() {
     if (prev) {
       prevLink.hidden = false;
-      prevLink.href = `article.html?id=${encodeURIComponent(prev.id)}`;
+      prevLink.href = articleHref(prev.id);
       prevLink.innerHTML = `<span>${t("dynamic.prev")}</span><strong></strong>`;
       prevLink.querySelector("strong").textContent = prev.title;
     }
     if (next) {
       nextLink.hidden = false;
-      nextLink.href = `article.html?id=${encodeURIComponent(next.id)}`;
+      nextLink.href = articleHref(next.id);
       nextLink.innerHTML = `<span>${t("dynamic.next")}</span><strong></strong>`;
       nextLink.querySelector("strong").textContent = next.title;
     }
@@ -679,7 +709,7 @@
       const card = document.createElement("article");
       card.className = "related-card";
       const link = document.createElement("a");
-      link.href = `article.html?id=${encodeURIComponent(item.id)}`;
+      link.href = articleHref(item.id);
       const image = document.createElement("img");
       image.src = item.image || "";
       image.alt = item.imageAlt || "";

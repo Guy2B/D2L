@@ -221,3 +221,29 @@ Les articles de catégorie `Poèmes` utilisent désormais un gabarit de lecture 
 - Mode lecture : recentrage complet, disparition des éléments secondaires et outils de lecture conservés dans une barre flottante discrète.
 - Le corps des œuvres reste explicitement en français pour que la césure typographique soit correcte même lorsque l'interface est en anglais ou en allemand.
 - Aucun contenu littéraire n'a été modifié dans cette version.
+
+## V41 - correctif du mode lecture
+
+Correction d'un conflit CSS introduit par la V40 : le rail de métadonnées (Publié, Catégorie, Lecture) pouvait redevenir visible en mode lecture et se superposer au texte. Il est désormais retiré du flux avec `display: none !important` lorsque le mode lecture est actif. Aucun texte littéraire n'a été modifié.
+
+## V42 - SEO, mobile, performance et accessibilité
+
+Cette version transforme les 44 publications historiques en pages statiques individuelles sous `textes/<slug>/` tout en conservant `article.html?id=...` comme solution de compatibilité pour les contenus ajoutés ultérieurement via l'atelier.
+
+Principales évolutions :
+- 44 URL propres et stables, par exemple `textes/le-souffle-d-or/`.
+- métadonnées SEO et sociales propres à chaque texte : titre, description, image, URL canonique, date, catégorie et données structurées BlogPosting.
+- contenu littéraire pré-rendu dans chaque page HTML pour rester lisible et indexable même sans JavaScript.
+- sitemap et robots.txt alignés sur `https://chroniques.guybeaho.com/`.
+- fichier CNAME inclus pour le domaine personnalisé GitHub Pages.
+- liens internes, précédent/suivant et recommandations basculés vers les nouvelles URL.
+- dimensions d'images ajoutées pour limiter les décalages de mise en page.
+- chargement prioritaire de l'image principale et chargement différé des images secondaires.
+- cibles tactiles renforcées, navigation mobile et contrôles de lecture affinés.
+- styles de contraste forcé et robustesse clavier améliorés.
+- aucun contenu littéraire de `posts.js` n'a été modifié.
+
+
+## V43 - 13 carnets photographiques restaurés
+
+Ajout de 13 publications « Greetings from… » de 2015 : Shanghai, Oxford, Murgtal, Yaoundé, Jyväskylä, New York, Helsinki, Berlin, Porto, Suzhou, Paris, Toulouse et Amsterdam. Elles apparaissent sous « Histoires de voyage » avec un gabarit galerie dédié. Le compteur principal reste à 44 textes, car ces 13 publications sont des carnets photographiques distincts.

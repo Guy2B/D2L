@@ -3318,3 +3318,397 @@ body.focus-reading .article-shell {
     justify-content: center;
   }
 }
+
+/* =========================================================
+   V41 - Correctif mode lecture immersif
+   Le rail de métadonnées doit disparaître totalement.
+   ========================================================= */
+body.focus-reading .article-rail {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: static !important;
+}
+
+body.focus-reading .article-layout {
+  display: block !important;
+  width: min(100%, 72ch);
+  margin-inline: auto;
+}
+
+body.focus-reading .article-main {
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   V42 - Finitions premium : mobile, accessibilité, stabilité
+   ========================================================= */
+
+body {
+  overflow-x: clip;
+}
+
+/* Cibles tactiles cohérentes et confortables. */
+.icon-button,
+.language-select,
+.reading-tools button,
+.like-button,
+.share-toggle,
+.button {
+  min-height: 44px;
+}
+
+.mobile-nav a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+/* Évite les décalages visuels pendant le chargement des images. */
+img[width][height] {
+  height: auto;
+}
+
+/* Lisibilité des liens dans les blocs de lecture au clavier. */
+.article-body a:focus-visible,
+.article-publication-notes a:focus-visible,
+.archive-discussion a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --shell: min(100% - 28px, 1180px);
+  }
+
+  .header-inner {
+    min-height: 68px;
+  }
+
+  .icon-button,
+  .language-select {
+    min-width: 44px;
+    height: 44px;
+  }
+
+  .language-select {
+    padding-left: 10px;
+    padding-right: 22px;
+  }
+
+  .mobile-nav {
+    padding-bottom: 10px;
+  }
+
+  .mobile-nav a {
+    padding-block: 12px;
+  }
+
+  .hero-actions .button {
+    min-height: 46px;
+  }
+
+  .article-topbar {
+    gap: 12px;
+  }
+
+  .reading-tools {
+    gap: 6px;
+  }
+
+  .reading-tools button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .article-header h1 {
+    text-wrap: balance;
+  }
+
+  .article-body,
+  .article-body p,
+  .poem-stanza {
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --shell: min(100% - 24px, 1180px);
+  }
+
+  .site-header .header-inner {
+    min-height: 64px;
+  }
+
+  .brand-avatar {
+    flex: 0 0 auto;
+  }
+
+  .brand-copy strong {
+    line-height: 1.1;
+  }
+
+  .language-select,
+  .icon-button {
+    min-width: 44px;
+    height: 44px;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    justify-content: center;
+  }
+
+  .article-shell {
+    width: min(100% - 24px, 1100px);
+  }
+
+  .article-topbar {
+    align-items: stretch;
+  }
+
+  .article-topbar .back-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .reading-tools {
+    flex-wrap: wrap;
+  }
+
+  .focus-mode-toggle {
+    max-width: none;
+  }
+
+  .article-header h1 {
+    max-width: 100%;
+  }
+
+  .post-actions {
+    align-items: stretch;
+  }
+
+  .share,
+  .share-toggle,
+  .like-cluster,
+  .like-button {
+    width: 100%;
+  }
+
+  .like-button,
+  .share-toggle {
+    justify-content: center;
+  }
+}
+
+@media (forced-colors: active) {
+  .button,
+  .filter-chip,
+  .icon-button,
+  .language-select,
+  .reading-tools button,
+  .like-button,
+  .share-toggle {
+    border: 1px solid ButtonText;
+  }
+}
+
+
+/* =========================================================
+   V43 - Carnets photographiques "Greetings from..."
+   ========================================================= */
+
+body.is-photo-essay .article-shell {
+  --photo-essay-width: 820px;
+}
+
+body.is-photo-essay .article-header {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+body.is-photo-essay .article-header .post-meta {
+  justify-content: center;
+}
+
+body.is-photo-essay .article-deck {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  margin: 14px auto 0;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-soft);
+  font-family: var(--sans);
+  font-size: .7rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+body.is-photo-essay .article-figure {
+  width: min(100%, 760px);
+  margin: 34px auto 56px;
+  padding: clamp(14px, 2vw, 22px);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--surface-solid) 98%, transparent), color-mix(in srgb, var(--bg) 88%, transparent));
+  box-shadow: 0 22px 60px rgba(32, 25, 18, .08);
+}
+
+body.is-photo-essay .article-figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 540px;
+  margin-inline: auto;
+  border-radius: 14px;
+  object-fit: contain;
+}
+
+body.is-photo-essay .article-image-credit {
+  margin-top: 12px;
+  text-align: center;
+}
+
+body.is-photo-essay .article-layout {
+  grid-template-columns: 112px minmax(0, var(--photo-essay-width));
+  gap: 44px;
+  justify-content: center;
+}
+
+body.is-photo-essay .article-main {
+  max-width: var(--photo-essay-width);
+}
+
+body.is-photo-essay .article-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 26px 22px;
+  max-width: none;
+  counter-reset: archive-photo 1;
+}
+
+body.is-photo-essay .article-inline-figure {
+  counter-increment: archive-photo;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 14px 34px rgba(32, 25, 18, .055);
+  break-inside: avoid;
+}
+
+body.is-photo-essay .article-inline-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  margin: 0 auto;
+  border-radius: 12px;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--bg) 78%, white);
+}
+
+body.is-photo-essay .article-inline-figure figcaption {
+  position: relative;
+  min-height: 34px;
+  margin-top: 11px;
+  padding: 0 4px 0 32px;
+  color: var(--text-soft);
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+body.is-photo-essay .article-inline-figure figcaption::before {
+  content: counter(archive-photo, decimal-leading-zero);
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  color: var(--accent);
+  font: 800 .62rem/1.5 var(--sans);
+  letter-spacing: .06em;
+}
+
+body.is-photo-essay .article-signature {
+  margin-top: 42px;
+}
+
+body.is-photo-essay .article-rail {
+  opacity: .8;
+}
+
+.index-card[data-layout="photo-essay"] .index-figure {
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+}
+
+.index-card[data-layout="photo-essay"] .index-image {
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  body.is-photo-essay .article-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  body.is-photo-essay .article-rail {
+    display: none;
+  }
+
+  body.is-photo-essay .article-main {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  body.is-photo-essay .article-header {
+    text-align: left;
+  }
+
+  body.is-photo-essay .article-header .post-meta {
+    justify-content: flex-start;
+  }
+
+  body.is-photo-essay .article-deck {
+    margin-left: 0;
+  }
+
+  body.is-photo-essay .article-figure {
+    margin-top: 24px;
+    margin-bottom: 34px;
+    border-radius: 20px;
+  }
+
+  body.is-photo-essay .article-body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  body.is-photo-essay .article-inline-figure {
+    padding: 10px;
+    border-radius: 17px;
+  }
+
+  body.is-photo-essay .article-inline-figure img {
+    max-height: none;
+  }
+}

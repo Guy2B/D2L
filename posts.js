@@ -1,4 +1,4 @@
-/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V28). */
+/* Chroniques d'ailleurs - données éditoriales restaurées et corrigées (V43). */
 window.BLOG_POSTS = [
   {
     "id": "vague-a-l-ame",
@@ -1940,6 +1940,830 @@ window.BLOG_POSTS = [
     "imageCredit": "Visuel d’archive fourni par l’auteur",
     "imageWidth": 440,
     "imageHeight": 249,
+    "imageMode": "contain"
+  },
+  {
+    "id": "oxford-nov",
+    "category": "Histoires de voyage",
+    "date": "2015-11-24",
+    "title": "Oxford (Nov)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/11/24/oxford-nov-2/",
+    "archiveTitle": "Oxford (Nov)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Heathrow · Tamise · The Square · The Mythic Univ. · Dinner",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/oxford-nov/02.webp",
+        "alt": "Photographie d’archive : Tamise.",
+        "caption": "Tamise",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 240
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/oxford-nov/03.webp",
+        "alt": "Photographie d’archive : The Square.",
+        "caption": "The Square",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 254
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/oxford-nov/04.webp",
+        "alt": "Photographie d’archive : The Mythic Univ..",
+        "caption": "The Mythic Univ.",
+        "credit": "© Die 2 Lap 2015",
+        "width": 256,
+        "height": 350
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/oxford-nov/05.webp",
+        "alt": "Photographie d’archive : Dinner.",
+        "caption": "Dinner",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 258
+      }
+    ],
+    "image": "assets/travel-archive/oxford-nov/01.webp",
+    "imageAlt": "Photographie d’archive : Heathrow.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 454,
+    "imageHeight": 258,
+    "imageMode": "contain"
+  },
+  {
+    "id": "murgtal-oct",
+    "category": "Histoires de voyage",
+    "date": "2015-11-24",
+    "title": "Murgtal (Oct)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/11/24/murgtal-oct/",
+    "archiveTitle": "Murgtal (Oct)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Sunset · Valley · Birdview · Hamlet · Nature in the middle of no where · Twilight",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/murgtal-oct/02.webp",
+        "alt": "Photographie d’archive : Valley.",
+        "caption": "Valley",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 180
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/murgtal-oct/03.webp",
+        "alt": "Photographie d’archive : Birdview.",
+        "caption": "Birdview",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 156
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/murgtal-oct/04.webp",
+        "alt": "Photographie d’archive : Hamlet.",
+        "caption": "Hamlet",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 290
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/murgtal-oct/05.webp",
+        "alt": "Photographie d’archive : Nature in the middle of no where.",
+        "caption": "Nature in the middle of no where",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 132
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/murgtal-oct/06.webp",
+        "alt": "Photographie d’archive : Twilight.",
+        "caption": "Twilight",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 154
+      }
+    ],
+    "image": "assets/travel-archive/murgtal-oct/01.webp",
+    "imageAlt": "Photographie d’archive : Sunset.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 454,
+    "imageHeight": 156,
+    "imageMode": "contain"
+  },
+  {
+    "id": "yaounde-sept",
+    "category": "Histoires de voyage",
+    "date": "2015-10-06",
+    "title": "Yaoundé (Sept)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/10/06/yaounde-sept/",
+    "archiveTitle": "Yaoundé (Sept)",
+    "archiveCategories": [
+      "Africa",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Bird View · Close Encounters of the Third Kind · Platinium · Downtown · Nightlife · See u soon again",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/yaounde-sept/02.webp",
+        "alt": "Photographie d’archive : Close Encounters of the Third Kind.",
+        "caption": "Close Encounters of the Third Kind",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 228
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/yaounde-sept/03.webp",
+        "alt": "Photographie d’archive : Platinium.",
+        "caption": "Platinium",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/yaounde-sept/04.webp",
+        "alt": "Photographie d’archive : Downtown.",
+        "caption": "Downtown",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/yaounde-sept/05.webp",
+        "alt": "Photographie d’archive : Nightlife.",
+        "caption": "Nightlife",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/yaounde-sept/06.webp",
+        "alt": "Photographie d’archive : See u soon again.",
+        "caption": "See u soon again",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      }
+    ],
+    "image": "assets/travel-archive/yaounde-sept/01.webp",
+    "imageAlt": "Photographie d’archive : Bird View.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 228,
+    "imageHeight": 404,
+    "imageMode": "contain"
+  },
+  {
+    "id": "jyvaskyla-sept",
+    "category": "Histoires de voyage",
+    "date": "2015-09-18",
+    "title": "Jyväskylä (Sept)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/09/18/jyvaskyla-sept/",
+    "archiveTitle": "Jyväskylä (Sept)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Bye bye Helsinki · The perfect workplace · Jyväskylä · Paviljonki · Dinner · Return flight",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/jyvaskyla-sept/02.webp",
+        "alt": "Photographie d’archive : The perfect workplace.",
+        "caption": "The perfect workplace",
+        "credit": "© Die 2 Lap 2015",
+        "width": 228,
+        "height": 404
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/jyvaskyla-sept/03.webp",
+        "alt": "Photographie d’archive : Jyväskylä.",
+        "caption": "Jyväskylä",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/jyvaskyla-sept/04.webp",
+        "alt": "Photographie d’archive : Paviljonki.",
+        "caption": "Paviljonki",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 246
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/jyvaskyla-sept/05.webp",
+        "alt": "Photographie d’archive : Dinner.",
+        "caption": "Dinner",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/jyvaskyla-sept/06.webp",
+        "alt": "Photographie d’archive : Return flight.",
+        "caption": "Return flight",
+        "credit": "© Die 2 Lap 2015",
+        "width": 404,
+        "height": 232
+      }
+    ],
+    "image": "assets/travel-archive/jyvaskyla-sept/01.webp",
+    "imageAlt": "Photographie d’archive : Bye bye Helsinki.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 404,
+    "imageHeight": 232,
+    "imageMode": "contain"
+  },
+  {
+    "id": "ny-summer",
+    "category": "Histoires de voyage",
+    "date": "2015-08-01",
+    "title": "NY (Summer)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/08/01/ny-summer/",
+    "archiveTitle": "NY (Summer)",
+    "archiveCategories": [
+      "America",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Free at least · Mall · The garden · Never sleep · Falcon · Time square",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/ny-summer/02.webp",
+        "alt": "Photographie d’archive : Mall.",
+        "caption": "Mall",
+        "credit": "© Die 2 Lap 2015",
+        "width": 282,
+        "height": 302
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/ny-summer/03.webp",
+        "alt": "Photographie d’archive : The garden.",
+        "caption": "The garden",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 294
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/ny-summer/04.webp",
+        "alt": "Photographie d’archive : Never sleep.",
+        "caption": "Never sleep",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 168
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/ny-summer/05.webp",
+        "alt": "Photographie d’archive : Falcon.",
+        "caption": "Falcon",
+        "credit": "© Die 2 Lap 2015",
+        "width": 274,
+        "height": 304
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/ny-summer/06.webp",
+        "alt": "Photographie d’archive : Time square.",
+        "caption": "Time square",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      }
+    ],
+    "image": "assets/travel-archive/ny-summer/01.webp",
+    "imageAlt": "Photographie d’archive : Free at least.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 230,
+    "imageHeight": 302,
+    "imageMode": "contain"
+  },
+  {
+    "id": "helsinki-june",
+    "category": "Histoires de voyage",
+    "date": "2015-07-31",
+    "title": "Helsinki (June)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/31/helsinki-june/",
+    "archiveTitle": "Helsinki (June)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "On air · Welcome back · At airport mama Africa · North / South same struggle · Harbor Helsinki · Dinner",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/helsinki-june/02.webp",
+        "alt": "Photographie d’archive : Welcome back.",
+        "caption": "Welcome back",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 156
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/helsinki-june/03.webp",
+        "alt": "Photographie d’archive : At airport mama Africa.",
+        "caption": "At airport mama Africa",
+        "credit": "© Die 2 Lap 2015",
+        "width": 228,
+        "height": 304
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/helsinki-june/04.webp",
+        "alt": "Photographie d’archive : North / South same struggle.",
+        "caption": "North / South same struggle",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/helsinki-june/05.webp",
+        "alt": "Photographie d’archive : Harbor Helsinki.",
+        "caption": "Harbor Helsinki",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/helsinki-june/06.webp",
+        "alt": "Photographie d’archive : Dinner.",
+        "caption": "Dinner",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      }
+    ],
+    "image": "assets/travel-archive/helsinki-june/01.webp",
+    "imageAlt": "Photographie d’archive : On air.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 304,
+    "imageHeight": 172,
+    "imageMode": "contain"
+  },
+  {
+    "id": "berlin-july",
+    "category": "Histoires de voyage",
+    "date": "2015-07-28",
+    "title": "Berlin (July)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/28/berlin-july-14/",
+    "archiveTitle": "Berlin (July)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Berlin in the Horizon · Another perspective · Meet meat at meal in Berlin · Checkpoint Charlie · A lot of symbolism",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/berlin-july/02.webp",
+        "alt": "Photographie d’archive : Another perspective.",
+        "caption": "Another perspective",
+        "credit": "© Die 2 Lap 2014",
+        "width": 304,
+        "height": 160
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/berlin-july/03.webp",
+        "alt": "Photographie d’archive : Meet meat at meal in Berlin.",
+        "caption": "Meet meat at meal in Berlin",
+        "credit": "© Die 2 Lap 2014",
+        "width": 304,
+        "height": 170
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/berlin-july/04.webp",
+        "alt": "Photographie d’archive : Checkpoint Charlie.",
+        "caption": "Checkpoint Charlie",
+        "credit": "© Die 2 Lap 2014",
+        "width": 304,
+        "height": 186
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/berlin-july/05.webp",
+        "alt": "Photographie d’archive : A lot of symbolism.",
+        "caption": "A lot of symbolism",
+        "credit": "© Die 2 Lap 2014",
+        "width": 304,
+        "height": 228
+      }
+    ],
+    "image": "assets/travel-archive/berlin-july/01.webp",
+    "imageAlt": "Photographie d’archive : Berlin in the Horizon.",
+    "imageCredit": "© Die 2 Lap 2014",
+    "imageWidth": 304,
+    "imageHeight": 228,
+    "imageMode": "contain"
+  },
+  {
+    "id": "porto-may",
+    "category": "Histoires de voyage",
+    "date": "2015-07-24",
+    "title": "Porto (May)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/24/porto-may-15/",
+    "archiveTitle": "Porto (May)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "On the horizon, the portuguese coast · Turm at Casa della Musica · Grand Central · Light at the end of the Night",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/porto-may/02.webp",
+        "alt": "Photographie d’archive : Turm at Casa della Musica.",
+        "caption": "Turm at Casa della Musica",
+        "credit": "© Die 2 Lap 2015",
+        "width": 228,
+        "height": 260
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/porto-may/03.webp",
+        "alt": "Photographie d’archive : Grand Central.",
+        "caption": "Grand Central",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 186
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/porto-may/04.webp",
+        "alt": "Photographie d’archive : Light at the end of the Night.",
+        "caption": "Light at the end of the Night",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      }
+    ],
+    "image": "assets/travel-archive/porto-may/01.webp",
+    "imageAlt": "Photographie d’archive : On the horizon, the portuguese coast.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 228,
+    "imageHeight": 216,
+    "imageMode": "contain"
+  },
+  {
+    "id": "suzhou-feb",
+    "category": "Histoires de voyage",
+    "date": "2015-07-24",
+    "title": "Suzhou (Feb)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/24/suzhou-feb-15/",
+    "archiveTitle": "Suzhou (Feb)",
+    "archiveCategories": [
+      "Asia",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Long Trip, Great Weather · Enthousiastic View from the Hotel Room · The Geisha · Suzhou never sleep",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/suzhou-feb/02.webp",
+        "alt": "Photographie d’archive : Enthousiastic View from the Hotel Room.",
+        "caption": "Enthousiastic View from the Hotel Room",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 230
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/suzhou-feb/03.webp",
+        "alt": "Photographie d’archive : The Geisha.",
+        "caption": "The Geisha",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/suzhou-feb/04.webp",
+        "alt": "Photographie d’archive : Suzhou never sleep.",
+        "caption": "Suzhou never sleep",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      }
+    ],
+    "image": "assets/travel-archive/suzhou-feb/01.webp",
+    "imageAlt": "Photographie d’archive : Long Trip, Great Weather.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 304,
+    "imageHeight": 228,
+    "imageMode": "contain"
+  },
+  {
+    "id": "paris-may",
+    "category": "Histoires de voyage",
+    "date": "2015-07-24",
+    "title": "Paris (May)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/24/paris-may-15/",
+    "archiveTitle": "Paris (May)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Bourget · 300 meters pure steel",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/paris-may/02.webp",
+        "alt": "Photographie d’archive : 300 meters pure steel.",
+        "caption": "300 meters pure steel",
+        "credit": "© Die 2 Lap 2015",
+        "width": 172,
+        "height": 230
+      }
+    ],
+    "image": "assets/travel-archive/paris-may/01.webp",
+    "imageAlt": "Photographie d’archive : Bourget.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 304,
+    "imageHeight": 94,
+    "imageMode": "contain"
+  },
+  {
+    "id": "toulouse-june",
+    "category": "Histoires de voyage",
+    "date": "2015-07-24",
+    "title": "Toulouse (June)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/24/toulouse-june-15/",
+    "archiveTitle": "Toulouse (June)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Blaniac · Souris d’agneaux · Dessert",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/toulouse-june/02.webp",
+        "alt": "Photographie d’archive : Souris d’agneaux.",
+        "caption": "Souris d’agneaux",
+        "credit": "© Die 2 Lap 2015",
+        "width": 454,
+        "height": 234
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/toulouse-june/03.webp",
+        "alt": "Photographie d’archive : Dessert.",
+        "caption": "Dessert",
+        "credit": "© Die 2 Lap 2015",
+        "width": 396,
+        "height": 158
+      }
+    ],
+    "image": "assets/travel-archive/toulouse-june/01.webp",
+    "imageAlt": "Photographie d’archive : Blaniac.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 454,
+    "imageHeight": 412,
+    "imageMode": "contain"
+  },
+  {
+    "id": "amsterdam-june",
+    "category": "Histoires de voyage",
+    "date": "2015-07-24",
+    "title": "Amsterdam (June)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/07/24/amsterdam-june-15/",
+    "archiveTitle": "Amsterdam (June)",
+    "archiveCategories": [
+      "Europe",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Airport · Bones, skulls & harmony · The colossus · Marvellous view from my hotel room - Fletcher · Mouth-watering dinner · Cigar evening · Train station",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/02.webp",
+        "alt": "Photographie d’archive : Bones, skulls & harmony.",
+        "caption": "Bones, skulls & harmony",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 144
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/03.webp",
+        "alt": "Photographie d’archive : The colossus.",
+        "caption": "The colossus",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 116
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/04.webp",
+        "alt": "Photographie d’archive : Marvellous view from my hotel room - Fletcher.",
+        "caption": "Marvellous view from my hotel room - Fletcher",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/05.webp",
+        "alt": "Photographie d’archive : Mouth-watering dinner.",
+        "caption": "Mouth-watering dinner",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/06.webp",
+        "alt": "Photographie d’archive : Cigar evening.",
+        "caption": "Cigar evening",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 246
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/amsterdam-june/07.webp",
+        "alt": "Photographie d’archive : Train station.",
+        "caption": "Train station",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 148
+      }
+    ],
+    "image": "assets/travel-archive/amsterdam-june/01.webp",
+    "imageAlt": "Photographie d’archive : Airport.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 304,
+    "imageHeight": 218,
+    "imageMode": "contain"
+  },
+  {
+    "id": "shanghai-dec",
+    "category": "Histoires de voyage",
+    "date": "2015-12-08",
+    "title": "Shanghai (Dec)",
+    "deck": "Greetings from…",
+    "baseLikes": 0,
+    "sourceLabel": "Die 2 Lap · Greetings from…",
+    "sourceUrl": "http://diedelap.unblog.fr/2015/12/08/shanghai-dec/",
+    "archiveTitle": "Shanghai (Dec)",
+    "archiveCategories": [
+      "Asia",
+      "Greetings from..."
+    ],
+    "archiveComments": 0,
+    "archiveExcerpt": "Lobbyroom · Market · Garden · Dinner · Downtown · Tradition · Shanghai, c’est NY",
+    "layout": "photo-essay",
+    "content": [
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/02.webp",
+        "alt": "Photographie d’archive : Market.",
+        "caption": "Market",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 230
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/03.webp",
+        "alt": "Photographie d’archive : Garden.",
+        "caption": "Garden",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 172
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/04.webp",
+        "alt": "Photographie d’archive : Dinner.",
+        "caption": "Dinner",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/05.webp",
+        "alt": "Photographie d’archive : Downtown.",
+        "caption": "Downtown",
+        "credit": "© Die 2 Lap 2015",
+        "width": 230,
+        "height": 304
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/06.webp",
+        "alt": "Photographie d’archive : Tradition.",
+        "caption": "Tradition",
+        "credit": "© Die 2 Lap 2015",
+        "width": 230,
+        "height": 304
+      },
+      {
+        "type": "image",
+        "image": "assets/travel-archive/shanghai-dec/07.webp",
+        "alt": "Photographie d’archive : Shanghai, c’est NY.",
+        "caption": "Shanghai, c’est NY",
+        "credit": "© Die 2 Lap 2015",
+        "width": 304,
+        "height": 228
+      }
+    ],
+    "image": "assets/travel-archive/shanghai-dec/01.webp",
+    "imageAlt": "Photographie d’archive : Lobbyroom.",
+    "imageCredit": "© Die 2 Lap 2015",
+    "imageWidth": 304,
+    "imageHeight": 230,
     "imageMode": "contain"
   }
 ];

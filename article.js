@@ -100,8 +100,24 @@
   }
 
   const isPoem = post.category === "Poèmes";
+  const isFiction = post.category === "Nouvelles";
+  const isChronicle = post.category === "Chroniques";
+  const isTravel = post.category === "Histoires de voyage";
+  const isProse = !isPoem;
+
   document.body.classList.toggle("is-poem-article", isPoem);
+  document.body.classList.toggle("is-fiction-article", isFiction);
+  document.body.classList.toggle("is-chronicle-article", isChronicle);
+  document.body.classList.toggle("is-travel-article", isTravel);
+  document.body.classList.toggle("is-prose-article", isProse);
   article.classList.toggle("is-poem-article", isPoem);
+  article.classList.toggle("is-fiction-article", isFiction);
+  article.classList.toggle("is-chronicle-article", isChronicle);
+  article.classList.toggle("is-travel-article", isTravel);
+  article.classList.toggle("is-prose-article", isProse);
+
+  // Les œuvres restent en français même lorsque l'interface est en anglais ou en allemand.
+  document.querySelector("#article-body")?.setAttribute("lang", "fr");
 
   try {
     localStorage.setItem("die2lap:last-read:v12", JSON.stringify({ id: post.id, at: Date.now() }));

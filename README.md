@@ -211,3 +211,13 @@ La structure des strophes a été restaurée sur les poèmes dont les retours à
 ## V39 - Gabarit poésie premium
 
 Les articles de catégorie `Poèmes` utilisent désormais un gabarit de lecture distinct inspiré d'une revue littéraire : titre et métadonnées centrés, image plus contenue, colonne de lecture plus étroite, respiration renforcée entre les strophes, informations secondaires repoussées après le texte et adaptation dédiée mobile. Les mots, vers et strophes des poèmes ne sont pas modifiés par cette passe.
+
+## V40 - Lecture éditoriale premium
+
+- Nouvelles : justification éditoriale sur ordinateur avec césure française, largeur de ligne maîtrisée et retraits de paragraphes inspirés du livre.
+- Mobile : retour automatique à l'alignement à gauche afin d'éviter les grands blancs entre les mots.
+- Chroniques : composition de type revue littéraire, alignée à gauche.
+- Histoires de voyage : prose aérée et images intégrées plus généreusement.
+- Mode lecture : recentrage complet, disparition des éléments secondaires et outils de lecture conservés dans une barre flottante discrète.
+- Le corps des œuvres reste explicitement en français pour que la césure typographique soit correcte même lorsque l'interface est en anglais ou en allemand.
+- Aucun contenu littéraire n'a été modifié dans cette version.

@@ -3063,3 +3063,258 @@ body.focus-reading.is-poem-article .article-body {
     margin-top: 46px;
   }
 }
+
+/* =========================================================
+   V40 - Lecture éditoriale premium pour la prose
+   ========================================================= */
+
+/* Base typographique des textes longs */
+body.is-prose-article .article-main {
+  --reading-measure: 66ch;
+}
+
+body.is-prose-article .article-body {
+  width: min(100%, var(--reading-measure));
+  max-width: none;
+  margin-inline: auto;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  font-variant-ligatures: common-ligatures contextual;
+  hanging-punctuation: first last;
+}
+
+body.is-prose-article .article-body p {
+  line-height: 1.79;
+  text-wrap: pretty;
+  orphans: 3;
+  widows: 3;
+}
+
+/* Nouvelles : sensation de beau livre, justification éditoriale */
+body.is-fiction-article .article-body {
+  --reading-measure: 64ch;
+}
+
+body.is-fiction-article .article-body p {
+  text-align: justify;
+  text-justify: inter-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-character: "-";
+  hyphenate-limit-chars: 6 3 3;
+  margin: 0 0 .92em;
+}
+
+body.is-fiction-article .article-body p + p {
+  text-indent: 1.28em;
+}
+
+body.is-fiction-article .article-body blockquote + p,
+body.is-fiction-article .article-body figure + p,
+body.is-fiction-article .article-body p:first-child {
+  text-indent: 0;
+}
+
+/* Chroniques : plus proche d'une revue littéraire */
+body.is-chronicle-article .article-body {
+  --reading-measure: 66ch;
+}
+
+body.is-chronicle-article .article-body p {
+  text-align: left;
+  margin-bottom: 1.22em;
+}
+
+/* Voyages : prose aérée et iconographie qui peut respirer davantage */
+body.is-travel-article .article-body {
+  --reading-measure: 68ch;
+}
+
+body.is-travel-article .article-body p {
+  text-align: left;
+  margin-bottom: 1.18em;
+}
+
+body.is-travel-article .article-inline-figure {
+  width: min(860px, calc(100vw - 64px));
+  margin: 3.4em 50%;
+  transform: translateX(-50%);
+}
+
+body.is-travel-article .article-inline-figure img {
+  border-radius: 22px;
+  box-shadow: 0 18px 54px rgba(34, 28, 20, .10);
+}
+
+body.is-travel-article .article-inline-figure figcaption {
+  max-width: 68ch;
+  margin: 10px auto 0;
+}
+
+/* Entrée en lecture plus raffinée */
+body.is-prose-article .article-body > p:first-child::first-letter {
+  margin-right: .095em;
+  margin-top: .09em;
+  font-size: 4.35em;
+  line-height: .70;
+}
+
+/* Le rail reste informatif sans rivaliser avec le texte */
+body.is-prose-article .article-rail {
+  opacity: .84;
+}
+
+body.is-prose-article .rail-card {
+  padding-block: 12px;
+}
+
+/* Mode lecture : véritable espace immersif */
+body.focus-reading {
+  background: var(--bg);
+}
+
+body.focus-reading .article-page {
+  min-height: 100vh;
+}
+
+body.focus-reading .article-topbar {
+  position: sticky;
+  top: 12px;
+  z-index: 30;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 34px;
+  padding: 7px;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-solid) 90%, transparent);
+  box-shadow: 0 12px 36px rgba(32, 24, 16, .08);
+  backdrop-filter: blur(18px);
+}
+
+body.focus-reading .article-topbar .reading-tools {
+  margin: 0;
+}
+
+body.focus-reading .article-topbar .reading-tools button {
+  min-height: 38px;
+}
+
+body.focus-reading .article-header {
+  max-width: 760px;
+  margin-inline: auto;
+  padding-top: 8px;
+  text-align: center;
+}
+
+body.focus-reading .article-header .post-meta {
+  justify-content: center;
+}
+
+body.focus-reading .article-header h1 {
+  max-width: 12ch;
+  margin-inline: auto;
+  font-size: clamp(2.9rem, 7vw, 5.8rem);
+}
+
+body.focus-reading .article-deck,
+body.focus-reading .original-language-note,
+body.focus-reading .article-figure,
+body.focus-reading .article-media-note,
+body.focus-reading .article-signature,
+body.focus-reading .article-publication-notes,
+body.focus-reading .archive-discussion,
+body.focus-reading .article-actions,
+body.focus-reading .after-like-share,
+body.focus-reading .comments {
+  display: none !important;
+}
+
+body.focus-reading .article-layout {
+  display: block;
+  width: min(100%, 72ch);
+  margin-inline: auto;
+}
+
+body.focus-reading.is-prose-article .article-body {
+  width: min(100%, 65ch);
+  margin-inline: auto;
+}
+
+body.focus-reading .article-shell {
+  width: min(100% - 44px, 1180px);
+  padding-bottom: 92px;
+}
+
+/* Une progression de lecture plus fine et plus discrète */
+.reading-progress {
+  height: 3px;
+  background: transparent;
+}
+
+.reading-progress span {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+@media (max-width: 820px) {
+  /* Pas de justification forcée sur petit écran : priorité au confort. */
+  body.is-fiction-article .article-body p,
+  body.is-chronicle-article .article-body p,
+  body.is-travel-article .article-body p {
+    text-align: left;
+    -webkit-hyphens: none;
+    hyphens: none;
+    text-indent: 0;
+  }
+
+  body.is-fiction-article .article-body p + p {
+    text-indent: 0;
+    margin-bottom: 1.12em;
+  }
+
+  body.is-prose-article .article-body {
+    width: min(100%, 38rem);
+  }
+
+  body.is-travel-article .article-inline-figure {
+    width: min(100%, calc(100vw - 30px));
+    margin: 2.6em 50%;
+  }
+
+  body.focus-reading .article-shell {
+    width: min(100% - 28px, 1180px);
+  }
+
+  body.focus-reading .article-topbar {
+    top: 8px;
+    margin-bottom: 26px;
+  }
+
+  body.focus-reading .article-header h1 {
+    font-size: clamp(2.65rem, 10vw, 4.5rem);
+  }
+
+  body.focus-reading.is-prose-article .article-body {
+    width: min(100%, 38rem);
+  }
+}
+
+@media (max-width: 560px) {
+  body.is-prose-article .article-body p {
+    line-height: 1.74;
+  }
+
+  body.is-prose-article .article-body > p:first-child::first-letter {
+    font-size: 4em;
+  }
+
+  body.focus-reading .article-topbar {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  body.focus-reading .article-topbar .reading-tools {
+    width: 100%;
+    justify-content: center;
+  }
+}

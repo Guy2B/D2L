@@ -203,3 +203,11 @@ Les nombres de commentaires historiques déjà recensés dans les données des d
 ## V37 - Bulle de pensée
 
 La composition du hero a été recalibrée afin que la bulle de pensée ne recouvre jamais le visage. Sur ordinateur, tablette et mobile, le portrait et la grande bulle occupent des zones distinctes. Trois petites bulles croissantes assurent la liaison visuelle entre le portrait et la pensée.
+
+## V38 - Mise en forme des poèmes
+
+La structure des strophes a été restaurée sur les poèmes dont les retours à la ligne avaient été aplatis ou exagérés. Le rendu des poèmes utilise maintenant de vrais blocs de strophes, avec des vers rapprochés à l'intérieur et un espacement distinct entre quatrains, tercets, distiques et dédicaces. Aucun texte littéraire n'a été réécrit dans cette passe.
+
+## V39 - Gabarit poésie premium
+
+Les articles de catégorie `Poèmes` utilisent désormais un gabarit de lecture distinct inspiré d'une revue littéraire : titre et métadonnées centrés, image plus contenue, colonne de lecture plus étroite, respiration renforcée entre les strophes, informations secondaires repoussées après le texte et adaptation dédiée mobile. Les mots, vers et strophes des poèmes ne sont pas modifiés par cette passe.

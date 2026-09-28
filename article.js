@@ -99,6 +99,10 @@
     return;
   }
 
+  const isPoem = post.category === "Poèmes";
+  document.body.classList.toggle("is-poem-article", isPoem);
+  article.classList.toggle("is-poem-article", isPoem);
+
   try {
     localStorage.setItem("die2lap:last-read:v12", JSON.stringify({ id: post.id, at: Date.now() }));
   } catch {}
@@ -189,10 +193,22 @@
     if (block.type === "poem") {
       const poem = document.createElement("div");
       poem.className = "poem";
-      poem.textContent = String(block.text || "")
+
+      const normalized = String(block.text || "")
+        .replace(/\r\n?/g, "\n")
         .split("\n")
         .map(line => line.replace(/[ \t]{2,}/g, " ").trimEnd())
-        .join("\n");
+        .join("\n")
+        .trim();
+
+      const stanzas = normalized ? normalized.split(/\n\s*\n+/) : [];
+      stanzas.forEach(stanzaText => {
+        const stanza = document.createElement("div");
+        stanza.className = "poem-stanza";
+        stanza.textContent = stanzaText;
+        poem.appendChild(stanza);
+      });
+
       body.appendChild(poem);
       return;
     }

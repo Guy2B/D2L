@@ -174,17 +174,18 @@
     const figureLink = card.querySelector(".index-figure-link");
     const image = card.querySelector(".index-image");
     figureLink.href = href;
-    figureLink.classList.toggle("is-contained", post.imageMode === "contain");
+    const homeImage = post.coverImage || post.image || "";
+    figureLink.classList.toggle("is-contained", !post.coverImage && post.imageMode === "contain");
     image.alt = post.imageAlt || "";
     image.loading = "lazy";
     image.decoding = "async";
-    if (post.imageWidth) image.width = Number(post.imageWidth);
-    if (post.imageHeight) image.height = Number(post.imageHeight);
+    if (post.coverImageWidth || post.imageWidth) image.width = Number(post.coverImageWidth || post.imageWidth);
+    if (post.coverImageHeight || post.imageHeight) image.height = Number(post.coverImageHeight || post.imageHeight);
     const imageParent = image.parentElement;
     const cardMedia = imageTools
-      ? imageTools.createPicture(image, post.image || "", { resolver: rootHref, sizes: "(max-width: 760px) 94vw, (max-width: 1180px) 44vw, 380px", loading: "lazy" })
+      ? imageTools.createPicture(image, homeImage, { resolver: rootHref, sizes: "(max-width: 760px) 94vw, (max-width: 1180px) 44vw, 380px", loading: "lazy" })
       : image;
-    if (!imageTools) image.src = post.image || "";
+    if (!imageTools) image.src = homeImage;
     if (cardMedia !== image && imageParent) imageParent.replaceChildren(cardMedia);
     image.addEventListener("error", () => figureLink.remove(), { once: true });
 
@@ -274,19 +275,21 @@
     if (!post) return null;
     const card = document.createElement("article");
     card.className = "featured-card door-card reveal-on-scroll";
-    card.classList.toggle("is-contained", post.imageMode === "contain");
+    card.dataset.category = post.category;
+    const homeImage = post.coverImage || post.image || "";
+    card.classList.toggle("is-contained", !post.coverImage && post.imageMode === "contain");
     const link = document.createElement("a");
     link.href = articleHref(post);
     const img = document.createElement("img");
     img.alt = post.imageAlt || "";
     img.loading = "lazy";
     img.decoding = "async";
-    if (post.imageWidth) img.width = Number(post.imageWidth);
-    if (post.imageHeight) img.height = Number(post.imageHeight);
+    if (post.coverImageWidth || post.imageWidth) img.width = Number(post.coverImageWidth || post.imageWidth);
+    if (post.coverImageHeight || post.imageHeight) img.height = Number(post.coverImageHeight || post.imageHeight);
     const doorMedia = imageTools
-      ? imageTools.createPicture(img, post.image || "", { resolver: rootHref, sizes: "(max-width: 760px) 94vw, 46vw", loading: "lazy" })
+      ? imageTools.createPicture(img, homeImage, { resolver: rootHref, sizes: "(max-width: 760px) 94vw, 46vw", loading: "lazy" })
       : img;
-    if (!imageTools) img.src = post.image || "";
+    if (!imageTools) img.src = homeImage;
     const copy = document.createElement("div");
     copy.className = "featured-card-copy";
     const type = document.createElement("span");

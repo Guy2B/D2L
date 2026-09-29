@@ -5218,3 +5218,176 @@ body.is-poem-article .article-image-credit {
     max-height: none;
   }
 }
+
+
+/* =========================================================
+   V56 - Corrections lecture et couvertures d'accueil
+   ========================================================= */
+
+/* Les citations terminales restent présentes, mais deviennent des notes littéraires discrètes. */
+.article-body .literary-aside {
+  width: min(100%, 58ch);
+  margin: 2.05rem 0 .65rem !important;
+  padding: .2rem 0 .2rem 1.15rem;
+  border-left: 1px solid color-mix(in srgb, var(--accent) 62%, var(--line));
+  color: color-mix(in srgb, var(--text) 72%, var(--text-soft));
+  font-family: var(--serif);
+  font-size: .97em;
+  font-style: italic;
+  line-height: 1.58;
+  letter-spacing: -.005em;
+  text-indent: 0 !important;
+}
+.article-body .literary-aside + .literary-aside {
+  margin-top: .65rem !important;
+}
+
+/* Poèmes: largeur de lecture plus généreuse et meilleur équilibre après le visuel. */
+body.is-poem-article .article-layout {
+  width: min(100%, 56rem);
+}
+body.is-poem-article .article-body,
+body.focus-reading.is-poem-article .article-body {
+  width: min(100%, 48rem);
+}
+body.is-poem-article .poem {
+  font-size: calc(var(--reading-size) + .05rem);
+  gap: 1.95em;
+}
+body.is-poem-article .poem-stanza {
+  line-height: 1.72;
+}
+
+/* Le mode lecture garde le visuel: il simplifie la page, il ne l'ampute plus. */
+body.focus-reading .article-figure,
+body.focus-reading .article-image-credit {
+  display: block !important;
+}
+body.focus-reading .article-figure {
+  width: min(100%, 46rem) !important;
+  margin: 0 auto 3.2rem !important;
+}
+body.focus-reading .article-image-credit {
+  margin-top: .7rem !important;
+  text-align: left;
+}
+body.focus-reading.is-poem-article .article-shell {
+  display: block !important;
+}
+body.focus-reading.is-poem-article .article-header {
+  width: min(100%, 48rem);
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+body.focus-reading.is-poem-article .article-header .post-meta {
+  justify-content: center;
+}
+body.focus-reading.is-poem-article .article-header h1 {
+  max-width: 10ch;
+  margin-inline: auto;
+}
+body.focus-reading.is-poem-article .article-header::after {
+  margin-inline: auto;
+}
+body.focus-reading.is-poem-article .article-figure,
+body.focus-reading.is-poem-article .article-figure.is-contained {
+  width: min(100%, 31rem) !important;
+  margin: 0 auto 3.8rem !important;
+}
+body.focus-reading.is-poem-article .article-layout {
+  width: min(100%, 56rem) !important;
+}
+
+/* Couvertures de la page d'accueil: même cadre, base visuelle conservée, finition plus cinématographique. */
+.index-card[data-category="Chroniques"] .index-figure,
+.index-card[data-category="Nouvelles"] .index-figure,
+.index-card[data-category="Histoires de voyage"] .index-figure {
+  position: relative;
+  aspect-ratio: 1.03;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 80%, transparent);
+  background: #171512;
+  box-shadow: 0 14px 34px rgba(25, 20, 15, .10), inset 0 0 0 1px rgba(255,255,255,.04);
+  isolation: isolate;
+}
+.index-card[data-category="Chroniques"] .index-figure::after,
+.index-card[data-category="Nouvelles"] .index-figure::after,
+.index-card[data-category="Histoires de voyage"] .index-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 34%, rgba(17,13,10,.13) 100%),
+    radial-gradient(circle at 50% 42%, transparent 52%, rgba(16,12,9,.16) 100%);
+  mix-blend-mode: normal;
+}
+.index-card[data-category="Chroniques"] .index-image,
+.index-card[data-category="Nouvelles"] .index-image,
+.index-card[data-category="Histoires de voyage"] .index-image,
+.index-card[data-category="Chroniques"] .index-figure-link.is-contained .index-image,
+.index-card[data-category="Nouvelles"] .index-figure-link.is-contained .index-image,
+.index-card[data-category="Histoires de voyage"] .index-figure-link.is-contained .index-image {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.055) contrast(1.045) brightness(.985);
+  transform: scale(1.012);
+  transition: transform 420ms cubic-bezier(.2,.75,.25,1), filter 420ms ease;
+}
+.index-card[data-category="Chroniques"]:hover .index-image,
+.index-card[data-category="Nouvelles"]:hover .index-image,
+.index-card[data-category="Histoires de voyage"]:hover .index-image {
+  transform: scale(1.055);
+  filter: saturate(1.08) contrast(1.055) brightness(1.005);
+}
+
+/* Même traitement sur les portes éditoriales non-poétiques de l'accueil. */
+.featured-card[data-category="Chroniques"],
+.featured-card[data-category="Nouvelles"],
+.featured-card[data-category="Histoires de voyage"] {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--line-strong) 78%, transparent);
+  box-shadow: 0 28px 70px rgba(23,18,13,.13);
+}
+.featured-card[data-category="Chroniques"] img,
+.featured-card[data-category="Nouvelles"] img,
+.featured-card[data-category="Histoires de voyage"] img,
+.featured-card[data-category="Chroniques"].is-contained img,
+.featured-card[data-category="Nouvelles"].is-contained img,
+.featured-card[data-category="Histoires de voyage"].is-contained img {
+  padding: 0;
+  object-fit: cover;
+  filter: saturate(1.055) contrast(1.045) brightness(.97);
+}
+
+@media (max-width: 899px) {
+  body.is-poem-article .article-layout,
+  body.is-poem-article .article-body,
+  body.focus-reading.is-poem-article .article-body {
+    width: min(100%, 42rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .article-body .literary-aside {
+    width: 100%;
+    margin-top: 1.55rem !important;
+    padding-left: .95rem;
+    font-size: .94em;
+  }
+  body.is-poem-article .poem {
+    font-size: var(--reading-size);
+    gap: 1.62em;
+  }
+  body.is-poem-article .poem-stanza {
+    line-height: 1.64;
+  }
+  body.focus-reading .article-figure {
+    margin-bottom: 2.25rem !important;
+  }
+}

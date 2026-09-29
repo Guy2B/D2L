@@ -612,6 +612,7 @@
 
     const paragraph = document.createElement("p");
     paragraph.textContent = block.text || "";
+    if (/^\s*←/.test(paragraph.textContent)) paragraph.classList.add("literary-aside");
     body.appendChild(paragraph);
   }
 

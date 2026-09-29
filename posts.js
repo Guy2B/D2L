@@ -22,13 +22,13 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/vague-a-l-ame.webp",
-    "imageAlt": "Le Cri, visuel associé à Vague à l’âme.",
-    "imageCredit": "© universbroderie.com",
+    "imageAlt": "Quai brumeux sous la pluie, face à une ville portuaire illuminée.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 1,
     "featured": true,
-    "imageWidth": 611,
-    "imageHeight": 777,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "itinerance",
@@ -52,12 +52,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/itinerance.webp",
-    "imageAlt": "Fenêtre décorée de flocons, visuel associé à …Itinérance.",
-    "imageCredit": "© DHgate.com",
+    "imageAlt": "Silhouette métisse contemplant une ville enneigée derrière une fenêtre givrée.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 2,
-    "imageWidth": 600,
-    "imageHeight": 600,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "le-souffle-d-or",
@@ -81,11 +81,11 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/le-souffle-d-or.webp",
-    "imageAlt": "Panthère noire, visuel associé à Le souffle d’or.",
-    "imageCredit": "© hebus.com",
+    "imageAlt": "Panthère noire avançant dans une brume dorée.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 3,
-    "imageWidth": 1160,
-    "imageHeight": 670,
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -110,11 +110,11 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/l-abysse.webp",
-    "imageAlt": "Profondeurs marines, visuel associé à L’abysse.",
-    "imageCredit": "© greenhotelparis.com",
+    "imageAlt": "Petite embarcation affrontant une mer sombre et déchaînée.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 4,
-    "imageWidth": 798,
-    "imageHeight": 533,
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -139,11 +139,11 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/flash-back.webp",
-    "imageAlt": "Éclair lumineux, visuel associé à Flash-Back.",
-    "imageCredit": "© godinanutshell.com",
+    "imageAlt": "Souvenir d’étreinte reflété dans une vitre au-dessus d’une ville nocturne.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 5,
-    "imageWidth": 800,
-    "imageHeight": 450,
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -168,12 +168,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/la-fleur.webp",
-    "imageAlt": "Illustration florale, visuel associé à La fleur.",
-    "imageCredit": "© boutiquefoliefolie.com",
+    "imageAlt": "Silhouette féminine métisse aux traits voilés, entourée de fleurs profondes.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 6,
-    "imageWidth": 550,
-    "imageHeight": 550,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "l-eclair",
@@ -197,12 +197,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/l-eclair.webp",
-    "imageAlt": "Graffiti, visuel associé à L’éclair.",
-    "imageCredit": "© erwinprintworks.com",
+    "imageAlt": "Silhouette féminine dans un salon doré traversé par un rayon de lumière.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 7,
-    "imageWidth": 264,
-    "imageHeight": 303,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "du-froment-et-du-sucre",
@@ -226,12 +226,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/du-froment-et-du-sucre.webp",
-    "imageAlt": "Portrait à deux, visuel associé à Du froment et du sucre.",
-    "imageCredit": "© Die 2 Lap",
+    "imageAlt": "Blé, pain, sucre et traces d’une histoire d’amour dans une lumière chaude.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 8,
-    "imageWidth": 495,
-    "imageHeight": 495,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "le-coeur-serre",
@@ -255,12 +255,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/le-coeur-serre.webp",
-    "imageAlt": "Composition rouge sur fond clair, visuel associé à Le coeur serre.",
-    "imageCredit": "© congolais.cd",
+    "imageAlt": "Ombre solitaire dans un tram, face aux lumières pluvieuses de la ville.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 9,
-    "imageWidth": 500,
-    "imageHeight": 333,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "au-x-fil-s-du-temps",
@@ -284,12 +284,12 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/au-fil-du-temps.webp",
-    "imageAlt": "Portrait peint aux couleurs africaines, visuel associé à Au(x) fil(s) du temps.",
-    "imageCredit": "© pixels.com",
+    "imageAlt": "Photographies anciennes, montre et fil doré sur un bureau patiné.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "order": 10,
-    "imageWidth": 599,
-    "imageHeight": 466,
-    "imageMode": "contain"
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "singapour-sans-mon-amour",
@@ -298,8 +298,8 @@ window.BLOG_POSTS = [
     "title": "Singapour sans mon amour",
     "deck": "",
     "image": "assets/articles/singapour.webp",
-    "imageAlt": "Singapour de nuit.",
-    "imageCredit": "© blog.pickyourtrail.com",
+    "imageAlt": "Vue nocturne et pluvieuse sur Singapour depuis une chambre silencieuse.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "baseLikes": 0,
     "order": 11,
     "content": [
@@ -317,8 +317,8 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "featured": true,
-    "imageWidth": 1200,
-    "imageHeight": 800,
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -360,10 +360,10 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/souviens-toi.webp",
-    "imageAlt": "Route vue depuis l’habitacle d’une voiture.",
-    "imageCredit": "© Die 2 Lap",
-    "imageWidth": 2048,
-    "imageHeight": 1536,
+    "imageAlt": "Lettres, photographies et fleurs séchées devant un miroir embué.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -389,11 +389,11 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/par-dela-la-mer.webp",
-    "imageAlt": "Littoral et phare, visuel associé à Par-delà la mer.",
-    "imageCredit": "© Matteo Colombo / Digital Vision / Getty Images",
-    "imageWidth": 520,
-    "imageHeight": 200,
-    "imageMode": "contain"
+    "imageAlt": "Mer immense au couchant, sous un ciel traversé de nuages.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "je-souffle-aux-lucioles",
@@ -418,10 +418,10 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/je-souffle-aux-lucioles.webp",
-    "imageAlt": "Vue de Shanghai sous un ciel gris, avec deux hautes tours et un personnage de profil.",
-    "imageCredit": "Shanghai © Die 2 Lap",
-    "imageWidth": 1080,
-    "imageHeight": 817,
+    "imageAlt": "Silhouette masculine métisse aux traits familiers, entourée de lucioles dans la nuit.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -463,11 +463,11 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/a-travers-eux.webp",
-    "imageAlt": "Regard en gros plan.",
-    "imageCredit": "© Die 2 Lap",
-    "imageWidth": 548,
-    "imageHeight": 143,
-    "imageMode": "contain"
+    "imageAlt": "Enfants métis regardant vers la lumière à travers des reflets.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "de-la-sueur-et-de-la-suie",
@@ -778,11 +778,11 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/le-seuil.webp",
-    "imageAlt": "Main en silhouette devant une vitre embuée, avec les mots auf Wiedersehen, Adieu, Goodbye et Au revoir.",
-    "imageCredit": "auteur du visuel non indiqué dans l’archive fournie",
-    "imageWidth": 898,
-    "imageHeight": 597,
-    "imageMode": "contain"
+    "imageAlt": "Porte entrouverte laissant entrer une lumière chaude dans un couloir sombre.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "mon-talisman",
@@ -909,11 +909,11 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 0,
     "image": "assets/articles/loin-de-tes-yeux.webp",
-    "imageAlt": "Illustration d’une mère et d’un enfant.",
-    "imageCredit": "auteur du visuel non indiqué dans l’archive fournie",
-    "imageWidth": 599,
-    "imageHeight": 472,
-    "imageMode": "contain"
+    "imageAlt": "Présence discrète d’une grand-mère suggérée dans une pièce chargée de mémoire.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "la-vertu-de-l-echec",
@@ -1131,16 +1131,16 @@ window.BLOG_POSTS = [
       }
     ],
     "image": "assets/articles/le-murmure-de-la-mediterranee.webp",
-    "imageAlt": "Mains émergeant d’une mer sombre.",
-    "imageCredit": "Illustration proposée par l’auteur",
+    "imageAlt": "Méditerranée sombre au bleu du soir, marquée par une traversée et l’absence.",
+    "imageCredit": "Die 2 Lap × OpenAI",
     "archiveTitle": "Le murmure de la méditerranée",
     "archiveCategories": [
       "Chroniques d'ailleurs",
       "Feeling"
     ],
     "archiveComments": 2,
-    "imageWidth": 845,
-    "imageHeight": 446,
+    "imageWidth": 1122,
+    "imageHeight": 1402,
     "imageMode": "cover"
   },
   {
@@ -1586,11 +1586,11 @@ window.BLOG_POSTS = [
     ],
     "archiveComments": 2,
     "image": "assets/articles/artifices-de-petit-prince.webp",
-    "imageAlt": "Portrait en noir et blanc avec casquette Yaoundé.",
-    "imageCredit": "Visuel d’archive fourni par l’auteur",
-    "imageWidth": 440,
-    "imageHeight": 249,
-    "imageMode": "contain"
+    "imageAlt": "Table d’apparat couverte d’or, de documents et de signes de pouvoir sous des artifices nocturnes.",
+    "imageCredit": "Die 2 Lap × OpenAI",
+    "imageWidth": 1122,
+    "imageHeight": 1402,
+    "imageMode": "cover"
   },
   {
     "id": "les-pistes-vers-la-connaissance",

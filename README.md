@@ -100,7 +100,7 @@ This version updates the featured image for `Artifices de petit prince` using th
 ## V22
 
 - Impressum mis à jour avec les informations éditoriales fournies par l’auteur.
-- Contact ajouté : die2lap@gmail.com.
+- Contact éditorial : d2l@guybeaho.com.
 - Hébergement conservé avec la mention `in progress` en attendant les informations définitives.
 
 

@@ -5098,3 +5098,123 @@ body.photo-essay-premium .article-pagination .photo-story-pagination-card strong
 body.photo-essay-premium .photo-open > .responsive-picture {
   width: 100%;
 }
+
+
+/* === V54 PREMIUM POEM ARTWORK === */
+body.is-poem-article .article-figure {
+  overflow: visible;
+}
+
+body.is-poem-article .article-figure,
+body.is-poem-article .article-figure.is-contained {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+body.is-poem-article .article-figure img,
+body.is-poem-article .article-figure.is-contained img,
+body.is-poem-article .article-figure:not(.is-contained) img {
+  width: 100%;
+  max-height: none;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 72%, transparent);
+  box-shadow: 0 28px 70px rgba(25, 20, 15, .12), 0 4px 16px rgba(25, 20, 15, .06);
+}
+
+body.is-poem-article .article-image-credit {
+  margin-top: 12px;
+  color: var(--text-faint);
+  font-family: var(--sans);
+  font-size: .61rem;
+  font-style: normal;
+  letter-spacing: .085em;
+  line-height: 1.45;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+@media (min-width: 900px) {
+  body.is-poem-article .article-shell {
+    display: grid;
+    grid-template-columns: minmax(280px, .82fr) minmax(430px, 1.18fr);
+    column-gap: clamp(48px, 6vw, 96px);
+    align-items: start;
+  }
+
+  body.is-poem-article .article-topbar {
+    grid-column: 1 / -1;
+  }
+
+  body.is-poem-article .article-header {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    margin: 0;
+    text-align: left;
+  }
+
+  body.is-poem-article .article-header .post-meta {
+    justify-content: flex-start;
+  }
+
+  body.is-poem-article .article-header h1 {
+    max-width: 8.2ch;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: clamp(3.45rem, 5.25vw, 6.7rem);
+  }
+
+  body.is-poem-article .article-header::after {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  body.is-poem-article .article-deck,
+  body.is-poem-article .original-language-note {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  body.is-poem-article .article-figure,
+  body.is-poem-article .article-figure.is-contained {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    width: min(100%, 620px);
+    margin: 0;
+  }
+
+  body.is-poem-article .article-layout {
+    grid-column: 1 / -1;
+    width: min(100%, 760px);
+    margin-top: clamp(76px, 8vw, 116px);
+  }
+
+  body.is-poem-article .article-signature,
+  body.is-poem-article .article-publication-notes,
+  body.is-poem-article .archive-discussion,
+  body.is-poem-article .article-actions,
+  body.is-poem-article .after-like-share,
+  body.is-poem-article .comments {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 899px) {
+  body.is-poem-article .article-figure,
+  body.is-poem-article .article-figure.is-contained {
+    width: min(100%, 620px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  body.is-poem-article .article-figure img,
+  body.is-poem-article .article-figure.is-contained img,
+  body.is-poem-article .article-figure:not(.is-contained) img {
+    max-height: none;
+  }
+}

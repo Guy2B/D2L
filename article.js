@@ -174,8 +174,9 @@
   const absoluteArticleUrl = isPrettyArticle && canonicalNode?.href
     ? canonicalNode.href
     : new URL(articleHref(post.id), window.location.href).href;
-  const absoluteImageUrl = post.image
-    ? new URL(siteHref(post.image), window.location.href).href
+  const socialImage = post.coverImage || post.image;
+  const absoluteImageUrl = socialImage
+    ? new URL(siteHref(socialImage), window.location.href).href
     : new URL(siteHref("assets/die2lap-portrait.jpg"), window.location.href).href;
   const setMeta = (selector, value) => document.querySelector(selector)?.setAttribute("content", value);
 
@@ -469,19 +470,34 @@
     time.textContent = formatDate(post.date);
   }
 
-  if (post.image && !post.hideLeadImage) {
+  const leadImage = post.coverImage || post.image;
+  const hasPremiumCover = Boolean(post.coverImage);
+  if (leadImage && (hasPremiumCover || !post.hideLeadImage)) {
     const figure = document.querySelector("#article-figure");
     const image = document.querySelector("#article-image");
     const credit = document.querySelector("#article-image-credit");
     figure.hidden = false;
-    figure.classList.toggle("is-contained", post.imageMode === "contain");
-    image.src = siteHref(post.image);
-    image.alt = post.imageAlt || "";
+    figure.classList.toggle("article-cover-figure", hasPremiumCover);
+    figure.classList.toggle("is-contained", !hasPremiumCover && post.imageMode === "contain");
+    image.src = siteHref(leadImage);
+    image.alt = hasPremiumCover ? `Couverture de « ${post.title} ».` : (post.imageAlt || "");
     image.loading = "eager";
     image.decoding = "async";
     image.fetchPriority = "high";
-    if (post.imageWidth) image.width = Number(post.imageWidth);
-    if (post.imageHeight) image.height = Number(post.imageHeight);
+    const leadWidth = hasPremiumCover ? (post.coverImageWidth || 1030) : post.imageWidth;
+    const leadHeight = hasPremiumCover ? (post.coverImageHeight || 1000) : post.imageHeight;
+    if (leadWidth) image.width = Number(leadWidth);
+    if (leadHeight) image.height = Number(leadHeight);
+    if (hasPremiumCover && /assets\/articles\/cover-[^/]+\.webp$/i.test(leadImage)) {
+      const stem = leadImage.replace(/^assets\/articles\//, "").replace(/\.webp$/i, "");
+      image.srcset = [360, 720, 1030]
+        .map(size => `${siteHref(`assets/articles/responsive/${stem}-${size}.webp`)} ${size}w`)
+        .join(", ");
+      image.sizes = "(max-width: 760px) 94vw, min(1030px, 88vw)";
+    } else {
+      image.removeAttribute("srcset");
+      image.removeAttribute("sizes");
+    }
     image.addEventListener("error", () => figure.hidden = true, { once: true });
 
     if (post.imageCredit) {

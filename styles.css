@@ -5391,3 +5391,34 @@ body.focus-reading.is-poem-article .article-layout {
     margin-bottom: 2.25rem !important;
   }
 }
+
+
+/* V63 - La couverture premium de l'accueil devient aussi l'image d'ouverture du récit. */
+.article-figure.article-cover-figure {
+  width: min(1030px, calc(100vw - 48px));
+  margin: 0 auto clamp(54px, 7vw, 88px);
+}
+.article-figure.article-cover-figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1030 / 1000;
+  max-height: none;
+  object-fit: cover;
+  border-radius: clamp(18px, 2vw, 28px);
+  box-shadow: 0 28px 70px rgba(26, 20, 15, .14);
+}
+body.photo-essay-premium .article-figure.article-cover-figure {
+  width: min(1180px, calc(100vw - (var(--photo-gutter) * 2)));
+  margin-top: clamp(34px, 5vw, 72px);
+  margin-bottom: clamp(70px, 9vw, 126px);
+}
+body.photo-essay-premium .article-figure.article-cover-figure img {
+  border-radius: clamp(18px, 2vw, 30px);
+}
+@media (max-width: 760px) {
+  .article-figure.article-cover-figure,
+  body.photo-essay-premium .article-figure.article-cover-figure {
+    width: calc(100vw - 28px);
+    margin-bottom: 48px;
+  }
+}

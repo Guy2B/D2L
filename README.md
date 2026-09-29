@@ -256,3 +256,7 @@ Principales évolutions :
 - Les fichiers image originaux de l’ancien blog n’ayant pas pu être récupérés de façon fiable, aucune image de substitution n’a été inventée.
 - Galeries locales WebP, pages statiques, SEO, sitemap, recherche, filtres, navigation et compteurs mis à jour.
 - Aucun texte littéraire préexistant n’a été réécrit.
+
+
+## V63
+Les 38 couvertures premium de l’accueil sont aussi utilisées comme images d’ouverture sur les pages individuelles correspondantes. Les galeries des carnets de voyage restent inchangées.

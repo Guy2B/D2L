@@ -1,0 +1,6 @@
+COUVERTURES D’ACCUEIL V60
+
+Images maîtres : assets/articles/cover-
+Variantes responsive : assets/articles/responsive/cover-
+
+Les références correspondantes sont dans posts.js via la propriété coverImage.

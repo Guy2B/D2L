@@ -7,3 +7,7 @@ Je souffle aux lucioles :
 - référence en bas : Ta-Nehisi Coates, Between the World and Me, 2015.
 
 Les corrections V68/V69 précédentes restent incluses.
+
+V71 : Je souffle aux lucioles : suppression des astérisques, séparation uniquement par sauts de strophe, typographie identique aux autres poèmes.
+
+V72 : citation Ta-Nehisi Coates rétablie en fin de Je souffle aux lucioles, avec source nommée.

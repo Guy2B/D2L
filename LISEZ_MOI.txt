@@ -1,18 +1,9 @@
-CORRECTIONS V68
+V70 - corrections cumulatives
 
-1. Je souffle aux lucioles
-- mise en page de lecture élargie et plus lisible
-- texte et strophes inchangés
+Je souffle aux lucioles :
+- strophes séparées selon la structure visible de la publication d’origine ;
+- séparateurs *** conservés ;
+- espacement vertical renforcé ;
+- référence en bas : Ta-Nehisi Coates, Between the World and Me, 2015.
 
-2. Souviens-toi d’oublier…
-- suppression des deux citations terminales (Sense8 et Chateaubriand)
-- suppression également dans les données posts.js
-
-3. Romans
-- Qu’est-ce qui demeure n’est plus écrit en capitales
-- les corrections précédentes des romans sont conservées
-- aucune mention « En soumission »
-- E.S. I à IV utilisent le tiret court
-- E.S. IV - Le chemin reste en casse normale
-
-Copier le contenu de ce ZIP à la racine du dossier D2L et accepter le remplacement des fichiers.
+Les corrections V68/V69 précédentes restent incluses.

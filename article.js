@@ -527,12 +527,22 @@
       const stanzas = normalized ? normalized.split(/\n\s*\n+/) : [];
       stanzas.forEach(stanzaText => {
         const stanza = document.createElement("div");
-        stanza.className = "poem-stanza";
+        const isDivider = stanzaText.trim() === "***";
+        stanza.className = isDivider ? "poem-divider" : "poem-stanza";
+        if (isDivider) stanza.setAttribute("aria-hidden", "true");
         stanza.textContent = stanzaText;
         poem.appendChild(stanza);
       });
 
       body.appendChild(poem);
+      return;
+    }
+
+    if (block.type === "reference") {
+      const note = document.createElement("p");
+      note.className = "poem-source-note literary-aside";
+      note.textContent = block.text || "";
+      body.appendChild(note);
       return;
     }
 

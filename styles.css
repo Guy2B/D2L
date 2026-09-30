@@ -5424,43 +5424,73 @@ body.photo-essay-premium .article-figure.article-cover-figure img {
 }
 
 
-/* V68 - Je souffle aux lucioles: colonne de lecture plus ample et plus lisible. */
+/* V69 - Je souffle aux lucioles: retour à une respiration proche de la maquette d'origine. */
 body.lucioles-layout.is-poem-article .article-layout,
 body.focus-reading.lucioles-layout.is-poem-article .article-layout {
-  width: min(100%, 64rem);
+  width: min(100%, 44rem);
 }
 body.lucioles-layout.is-poem-article .article-main {
   width: 100%;
 }
 body.lucioles-layout.is-poem-article .article-body,
 body.focus-reading.lucioles-layout.is-poem-article .article-body {
-  width: min(100%, 56rem);
+  width: min(100%, 32rem);
   margin-inline: auto;
 }
 body.lucioles-layout.is-poem-article .poem {
-  font-size: clamp(1.20rem, 0.32vw + 1.11rem, 1.36rem);
-  gap: 2.35rem;
+  width: 100%;
+  margin-inline: auto;
+  font-size: clamp(1.02rem, 0.18vw + 0.98rem, 1.08rem);
+  gap: 1.95rem;
 }
 body.lucioles-layout.is-poem-article .poem-stanza {
-  line-height: 1.82;
+  text-align: center;
+  line-height: 1.92;
   letter-spacing: .002em;
+  text-wrap: pretty;
+}
+body.lucioles-layout.is-poem-article .poem-stanza + .poem-stanza {
+  margin-top: .35rem;
+}
+body.lucioles-layout.is-poem-article .poem-divider {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: .98rem;
+  letter-spacing: .18em;
+  color: color-mix(in srgb, var(--text) 72%, var(--text-soft));
+  margin: .15rem 0 .15rem;
+}
+body.lucioles-layout.is-poem-article .poem-source-note {
+  width: min(100%, 32rem);
+  margin: 2.1rem auto 0 !important;
+  padding-left: 1rem;
+  font-size: .96rem;
+  line-height: 1.65;
 }
 body.lucioles-layout.is-poem-article .article-body::before {
-  margin-bottom: 34px;
+  margin-bottom: 28px;
 }
 @media (max-width: 899px) {
   body.lucioles-layout.is-poem-article .article-layout,
   body.lucioles-layout.is-poem-article .article-body,
   body.focus-reading.lucioles-layout.is-poem-article .article-body {
-    width: min(100%, 46rem);
+    width: min(100%, 32rem);
   }
 }
 @media (max-width: 560px) {
+  body.lucioles-layout.is-poem-article .article-body,
+  body.focus-reading.lucioles-layout.is-poem-article .article-body {
+    width: min(100%, 100%);
+  }
   body.lucioles-layout.is-poem-article .poem {
-    font-size: var(--reading-size);
-    gap: 1.8rem;
+    font-size: .99rem;
+    gap: 1.2rem;
   }
   body.lucioles-layout.is-poem-article .poem-stanza {
-    line-height: 1.70;
+    line-height: 1.85;
+  }
+  body.lucioles-layout.is-poem-article .poem-source-note {
+    width: 100%;
+    font-size: .92rem;
   }
 }

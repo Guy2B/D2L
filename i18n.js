@@ -226,7 +226,6 @@
       "dynamic.seriesBanner": "{count} thrillers autonomes reliés par un même personnage et une même question : jusqu’où peut-on faire confiance à ce que l’on mesure lorsque les conséquences restent profondément humaines ?",
       "dynamic.completedNovel": "Roman inédit · achevé",
       "dynamic.esCompleted": "E.S. · achevé",
-      "dynamic.underSubmission": "En soumission",
       "dynamic.completedFallback": "Roman achevé",
       "dynamic.inProgress": "En cours d’écriture",
       "dynamic.otherManuscripts": "Autres manuscrits",
@@ -235,9 +234,7 @@
       "dynamic.seriesSection": "La série E.S.",
       "dynamic.thisVolume": "Ce volume : {title}",
       "dynamic.libraryLede": "{count} publications replacées dans leur chronologie et reliées à leurs sources d’origine.",
-      "dynamic.worksAside": "{books} romans terminés. {submissions} {verb} actuellement en soumission. Cliquez sur un titre pour lire son synopsis.",
-      "dynamic.worksVerbOne": "est",
-      "dynamic.worksVerbMany": "sont"
+      "dynamic.worksAside": "Cliquez sur un titre pour lire son synopsis.",
     },
 
     en: {
@@ -460,7 +457,6 @@
       "dynamic.seriesBanner": "{count} standalone thrillers linked by one character and one persistent question: how far can we trust what we measure when the consequences remain profoundly human?",
       "dynamic.completedNovel": "Unpublished novel · complete",
       "dynamic.esCompleted": "E.S. · complete",
-      "dynamic.underSubmission": "Under submission",
       "dynamic.completedFallback": "Completed novel",
       "dynamic.inProgress": "In progress",
       "dynamic.otherManuscripts": "Other manuscripts",
@@ -469,9 +465,7 @@
       "dynamic.seriesSection": "The E.S. series",
       "dynamic.thisVolume": "This volume: {title}",
       "dynamic.libraryLede": "{count} publications restored to their chronology and linked to their original sources.",
-      "dynamic.worksAside": "{books} completed novels. {submissions} currently under submission. Select a title to read its synopsis.",
-      "dynamic.worksVerbOne": "is",
-      "dynamic.worksVerbMany": "are"
+      "dynamic.worksAside": "Select a title to read its synopsis.",
     },
 
     de: {
@@ -694,7 +688,6 @@
       "dynamic.seriesBanner": "{count} eigenständige Thriller, verbunden durch dieselbe Figur und dieselbe Frage: Wie weit können wir dem vertrauen, was wir messen, wenn die Folgen zutiefst menschlich bleiben?",
       "dynamic.completedNovel": "Unveröffentlichter Roman · abgeschlossen",
       "dynamic.esCompleted": "E.S. · abgeschlossen",
-      "dynamic.underSubmission": "In Einreichung",
       "dynamic.completedFallback": "Abgeschlossener Roman",
       "dynamic.inProgress": "In Arbeit",
       "dynamic.otherManuscripts": "Weitere Manuskripte",
@@ -703,9 +696,7 @@
       "dynamic.seriesSection": "Die E.S.-Reihe",
       "dynamic.thisVolume": "Dieser Band: {title}",
       "dynamic.libraryLede": "{count} Veröffentlichungen, chronologisch wieder eingeordnet und mit ihren ursprünglichen Quellen verknüpft.",
-      "dynamic.worksAside": "{books} abgeschlossene Romane. {submissions} derzeit in Einreichung. Wählen Sie einen Titel, um die Synopsis zu lesen.",
-      "dynamic.worksVerbOne": "ist",
-      "dynamic.worksVerbMany": "sind"
+      "dynamic.worksAside": "Wählen Sie einen Titel, um die Synopsis zu lesen.",
     }
   };
 
@@ -845,9 +836,8 @@
     en: {
       demeure: {
         cardLabel: "Unpublished novel · complete",
-        status: "Under submission",
-        kicker: "Unpublished novel · Under submission",
-        meta: "Literary novel with psychological suspense · approx. 89,000 words",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 572 pages / 89,116 words · complete and standalone",
         paragraphs: [
           "The novel unfolds in five parts titled ÉLIAS, ÉLISA, ASILE, SALIE and AILES, five words built from the same letters.",
           "Élias Keller has five days to empty his mother Mara’s house in Seltz, Alsace, before handing over the keys. He has given himself a simple method: GARDER, DONNER, JETER.",
@@ -856,8 +846,8 @@
       },
       jamais: {
         cardLabel: "Unpublished novel · complete",
-        kicker: "Unpublished novel · Complete",
-        meta: "Contemporary psychological drama · approx. 82,000 words · ready for publication",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 209 pages / 74,647 words · complete and standalone",
         paragraphs: [
           "Jérôme believes he chose everything: to leave his wife, begin again with another woman, and save his company at the end of a decisive business trip to New York.",
           "What he does not know, as he steps into his mistress’s apartment that evening, is that she was about to leave him first. Nor does he know that his wife has known everything for months and has finally stopped waiting for a truth he will never give her.",
@@ -865,10 +855,9 @@
         ]
       },
       eau: {
-        cardLabel: "E.S. · complete",
-        status: "Under submission",
-        kicker: "Edmond Silla · E.S. · Under submission",
-        meta: "Unpublished novel · 83,194 words · complete and standalone",
+        cardLabel: "Unpublished novel · complete",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 195 pages / 76,363 words · complete and standalone",
         paragraphs: [
           "The story moves between Cameroon, Germany, Rwanda and the Democratic Republic of the Congo.",
           "Beneath Lake Kivu lie immense volumes of gas. When a clandestine group decides to exploit that threat during a peace summit on Idjwi Island, Edmond Silla, a Cameroonian lecturer and researcher based in Karlsruhe, becomes the only man capable of reading the plans stolen from his friend who died in Goma.",
@@ -876,9 +865,9 @@
         ]
       },
       java: {
-        cardLabel: "E.S. · complete",
-        kicker: "Edmond Silla · E.S. · Complete",
-        meta: "Unpublished novel · complete and standalone",
+        cardLabel: "Unpublished novel · complete",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 357 pages / 81,634 words · complete and standalone",
         paragraphs: [
           "The story unfolds between Karlsruhe and eastern Java, around the Ijen volcanic massif.",
           "When a geothermal project begins to register unexplained variations in springs, wells and underground flows, Edmond Silla is called in to examine data that no one can interpret in quite the same way anymore.",
@@ -887,23 +876,33 @@
         ]
       },
       "47secondes": {
-        cardLabel: "E.S. · complete",
-        kicker: "Edmond Silla · E.S. · Complete",
-        meta: "Unpublished novel · complete and standalone",
+        cardLabel: "Unpublished novel · complete",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 408 pages / 82,199 words · complete and standalone",
         paragraphs: [
           "The story moves between Karlsruhe, San Salvador, Lake Ilopango and the Río Jiboa valley.",
           "For forty-seven seconds, an oscillation runs through Central America’s regional electricity grid. At the same moment, pumps stop, sensors register unusual variations and, on Lake Ilopango, a fisherman watches the water withdraw before returning.",
           "Edmond Silla, brought in to audit the network’s measurement architecture, finds himself at the centre of an investigation in which every system tells a different chronology. With Valeria Cañas, Ximena Alfaro and Camila Sosa, he must separate coincidence from actual cause.",
           "But when the rains turn the lake’s outlet into a threat to the Jiboa, measurement is no longer enough: someone must decide where risk can be accepted, and by whom."
         ]
+      },
+      chemin: {
+        cardLabel: "Unpublished novel · complete",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 277 pages / 75,430 words · complete and standalone",
+        paragraphs: [
+          "The story unfolds between Karlsruhe, Berlin and Cadarache, within Europe’s scientific and energy landscape.",
+          "When an engineer facing anomalies in energy-continuity models asks for his help after a mysterious assault, Edmond Silla agrees to examine data whose provenance becomes as important as the results themselves.",
+          "Alongside Mathilde Roussel, he gradually uncovers a network where scientific research, energy sovereignty, critical infrastructure and decisions made in the name of still-hypothetical crises intersect.",
+          "As the boundary between simulation and reality begins to blur, one question takes hold: what happens when those who build the models also begin deciding which consequences are acceptable?"
+        ]
       }
     },
     de: {
       demeure: {
         cardLabel: "Unveröffentlichter Roman · abgeschlossen",
-        status: "In Einreichung",
-        kicker: "Unveröffentlichter Roman · In Einreichung",
-        meta: "Literarischer Roman mit psychologischer Spannung · ca. 89.000 Wörter",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 572 Seiten / 89.116 Wörter · abgeschlossen und eigenständig",
         paragraphs: [
           "Der Roman gliedert sich in fünf Teile mit den Titeln ÉLIAS, ÉLISA, ASILE, SALIE und AILES, fünf Wörter aus denselben Buchstaben.",
           "Élias Keller hat fünf Tage Zeit, das Haus seiner Mutter Mara in Seltz im Elsass zu räumen, bevor er die Schlüssel übergeben muss. Er hat sich eine einfache Methode auferlegt: GARDER, DONNER, JETER.",
@@ -912,8 +911,8 @@
       },
       jamais: {
         cardLabel: "Unveröffentlichter Roman · abgeschlossen",
-        kicker: "Unveröffentlichter Roman · Abgeschlossen",
-        meta: "Zeitgenössisches Psychodrama · ca. 82.000 Wörter · publikationsreif",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 209 Seiten / 74.647 Wörter · abgeschlossen und eigenständig",
         paragraphs: [
           "Jérôme glaubt, alles selbst gewählt zu haben: seine Frau zu verlassen, mit einer anderen Frau neu anzufangen und sein Unternehmen nach einer entscheidenden Geschäftsreise nach New York zu retten.",
           "Was er nicht weiß, als er an jenem Abend die Wohnung seiner Geliebten betritt: Sie war im Begriff, ihn zuerst zu verlassen. Ebenso wenig weiß er, dass seine Frau seit Monaten alles weiß und irgendwann aufgehört hat, auf eine Wahrheit zu warten, die er ihr niemals geben wird.",
@@ -921,10 +920,9 @@
         ]
       },
       eau: {
-        cardLabel: "E.S. · abgeschlossen",
-        status: "In Einreichung",
-        kicker: "Edmond Silla · E.S. · In Einreichung",
-        meta: "Unveröffentlichter Roman · 83.194 Wörter · abgeschlossen und eigenständig",
+        cardLabel: "Unveröffentlichter Roman · abgeschlossen",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 195 Seiten / 76.363 Wörter · abgeschlossen und eigenständig",
         paragraphs: [
           "Die Handlung führt durch Kamerun, Deutschland, Ruanda und die Demokratische Republik Kongo.",
           "Unter der Oberfläche des Kivusees lagern gewaltige Gasmengen. Als eine geheime Gruppe beschließt, diese Gefahr während eines Friedensgipfels auf der Insel Idjwi auszunutzen, wird Edmond Silla, ein kamerunischer Hochschullehrer und Forscher in Karlsruhe, zum einzigen Mann, der die Pläne lesen kann, die seinem in Goma verstorbenen Freund gestohlen wurden.",
@@ -932,9 +930,9 @@
         ]
       },
       java: {
-        cardLabel: "E.S. · abgeschlossen",
-        kicker: "Edmond Silla · E.S. · Abgeschlossen",
-        meta: "Unveröffentlichter Roman · abgeschlossen und eigenständig",
+        cardLabel: "Unveröffentlichter Roman · abgeschlossen",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 357 Seiten / 81.634 Wörter · abgeschlossen und eigenständig",
         paragraphs: [
           "Die Handlung spielt zwischen Karlsruhe und dem Osten Javas rund um das Vulkanmassiv Ijen.",
           "Als bei einem Geothermieprojekt unerklärliche Schwankungen in Quellen, Brunnen und unterirdischen Strömungen auftreten, wird Edmond Silla hinzugezogen, um Daten zu prüfen, die niemand mehr auf dieselbe Weise zu deuten vermag.",
@@ -943,14 +941,25 @@
         ]
       },
       "47secondes": {
-        cardLabel: "E.S. · abgeschlossen",
-        kicker: "Edmond Silla · E.S. · Abgeschlossen",
-        meta: "Unveröffentlichter Roman · abgeschlossen und eigenständig",
+        cardLabel: "Unveröffentlichter Roman · abgeschlossen",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 408 Seiten / 82.199 Wörter · abgeschlossen und eigenständig",
         paragraphs: [
           "Die Handlung führt von Karlsruhe nach San Salvador, an den Ilopangosee und in das Tal des Río Jiboa.",
           "Siebenundvierzig Sekunden lang läuft eine Schwingung durch das regionale Stromnetz Mittelamerikas. Im selben Augenblick fallen Pumpen aus, Sensoren registrieren ungewöhnliche Abweichungen und ein Fischer auf dem Ilopangosee sieht, wie sich das Wasser zurückzieht, bevor es wiederkehrt.",
           "Edmond Silla, der die Messarchitektur des Netzes prüfen soll, gerät in eine Untersuchung, in der jedes System eine andere Chronologie erzählt. Gemeinsam mit Valeria Cañas, Ximena Alfaro und Camila Sosa muss er Zufälle von tatsächlichen Ursachen unterscheiden.",
           "Doch als der Regen den Abfluss des Sees zu einer Bedrohung für den Jiboa macht, reicht Messen nicht mehr aus: Es muss entschieden werden, wo Risiko akzeptiert werden darf und von wem."
+        ]
+      },
+      chemin: {
+        cardLabel: "Unveröffentlichter Roman · abgeschlossen",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 277 Seiten / 75.430 Wörter · abgeschlossen und eigenständig",
+        paragraphs: [
+          "Die Handlung spielt zwischen Karlsruhe, Berlin und Cadarache im wissenschaftlichen und energiewirtschaftlichen Umfeld Europas.",
+          "Als ein Ingenieur, der mit Anomalien in Modellen zur Energiekontinuität konfrontiert ist, nach einem rätselhaften Angriff um seine Hilfe bittet, erklärt sich Edmond Silla bereit, Daten zu untersuchen, deren Herkunft ebenso wichtig wird wie die Ergebnisse selbst.",
+          "Gemeinsam mit Mathilde Roussel entdeckt er nach und nach ein Netzwerk, in dem wissenschaftliche Forschung, Energiesouveränität, kritische Infrastrukturen und Entscheidungen im Namen bislang hypothetischer Krisen aufeinandertreffen.",
+          "Je mehr die Grenzen zwischen Simulation und Realität verschwimmen, desto drängender wird eine Frage: Was geschieht, wenn diejenigen, die die Modelle bauen, zugleich zu entscheiden beginnen, welche Folgen akzeptabel sind?"
         ]
       }
     }

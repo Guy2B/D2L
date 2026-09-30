@@ -44,10 +44,9 @@
     demeure: {
       order: 1,
       cardLabel: "Roman inédit · achevé",
-      status: "En soumission",
-      kicker: "Roman inédit · En soumission",
-      title: "Qu’est-ce qui demeure",
-      meta: "Roman littéraire à suspense psychologique · environ 89 000 mots",
+      kicker: "Roman inédit · achevé",
+      title: "QU’EST-CE QUI DEMEURE",
+      meta: "Roman inédit · 572 pages / 89116 mots · complet et autonome",
       paragraphs: [
         "Le roman est construit en cinq parties intitulées ÉLIAS, ÉLISA, ASILE, SALIE et AILES, cinq mots formés des mêmes lettres.",
         "Élias Keller dispose de cinq jours pour vider la maison de sa mère Mara, à Seltz, en Alsace, avant la remise des clés. Il s’est donné une méthode simple : GARDER, DONNER, JETER.",
@@ -57,9 +56,9 @@
     jamais: {
       order: 2,
       cardLabel: "Roman inédit · achevé",
-      kicker: "Roman inédit · Achevé",
+      kicker: "Roman inédit · achevé",
       title: "Il ne saura jamais",
-      meta: "Drame psychologique contemporain · environ 82 000 mots · prêt à publication",
+      meta: "Roman inédit · 209 pages / 74647 mots · complet et autonome",
       paragraphs: [
         "Jérôme croit avoir tout choisi : quitter sa femme, refaire sa vie avec une autre, sauver son entreprise au terme d’un voyage professionnel décisif à New York.",
         "Ce qu’il ignore, en posant le pied dans l’appartement de sa maîtresse ce soir-là, c’est qu’elle s’apprêtait à le quitter la première. Ce qu’il ignore aussi, c’est que sa femme sait tout depuis des mois, et qu’elle a fini, elle, par cesser d’attendre une vérité qu’il ne lui donnera jamais.",
@@ -68,12 +67,11 @@
     },
     eau: {
       order: 3,
-      cardLabel: "E.S. · achevé",
-      status: "En soumission",
+      cardLabel: "Roman inédit · achevé",
       seriesES: true,
-      kicker: "Edmond Silla · E.S. · En soumission",
-      title: "L’eau qui dort",
-      meta: "Roman inédit · 83 194 mots · complet et autonome",
+      kicker: "Roman inédit · achevé",
+      title: "E.S. I - L’eau qui dort",
+      meta: "Roman inédit · 195 pages / 76363 mots · complet et autonome",
       paragraphs: [
         "L’action se déploie entre le Cameroun, l’Allemagne, le Rwanda et la République démocratique du Congo.",
         "Sous la surface du lac Kivu reposent d’immenses volumes de gaz. Lorsqu’un groupe clandestin décide d’exploiter cette menace pendant un sommet de paix sur l’île d’Idjwi, Edmond Silla, enseignant-chercheur camerounais installé à Karlsruhe, devient le seul homme capable de lire les plans volés à son ami mort à Goma.",
@@ -82,11 +80,11 @@
     },
     java: {
       order: 4,
-      cardLabel: "E.S. · achevé",
+      cardLabel: "Roman inédit · achevé",
       seriesES: true,
-      kicker: "Edmond Silla · E.S. · Achevé",
-      title: "Résurgence à Java",
-      meta: "Roman inédit · complet et autonome",
+      kicker: "Roman inédit · achevé",
+      title: "E.S. II - Résurgence à Java",
+      meta: "Roman inédit · 357 pages / 81634 mots · complet et autonome",
       paragraphs: [
         "L’action se déploie entre Karlsruhe et l’est de Java, autour du massif volcanique de l’Ijen.",
         "Lorsqu’un projet géothermique est confronté à des variations inexpliquées dans les sources, les puits et les circulations souterraines, Edmond Silla est appelé pour examiner des données que personne ne parvient plus à interpréter de la même manière.",
@@ -96,16 +94,30 @@
     },
     "47secondes": {
       order: 5,
-      cardLabel: "E.S. · achevé",
+      cardLabel: "Roman inédit · achevé",
       seriesES: true,
-      kicker: "Edmond Silla · E.S. · Achevé",
-      title: "47 secondes",
-      meta: "Roman inédit · complet et autonome",
+      kicker: "Roman inédit · achevé",
+      title: "E.S. III - 47 Secondes",
+      meta: "Roman inédit · 408 pages / 82199 mots · complet et autonome",
       paragraphs: [
         "L’action se déploie entre Karlsruhe, San Salvador, le lac Ilopango et la vallée du Río Jiboa.",
         "Pendant quarante-sept secondes, une oscillation traverse le réseau électrique régional d’Amérique centrale. Au même moment, des pompes s’arrêtent, des capteurs enregistrent des variations inhabituelles et, sur le lac Ilopango, un pêcheur voit l’eau se retirer avant de revenir.",
         "Edmond Silla, venu auditer l’architecture de mesure du réseau, se retrouve au centre d’une enquête où chaque système raconte une chronologie différente. Avec Valeria Cañas, Ximena Alfaro et Camila Sosa, il doit distinguer les coïncidences des causes réelles.",
-        "Mais lorsque les pluies transforment l’exutoire du lac en menace pour le Jiboa, mesurer ne suffit plus : il faut décider où le risque peut être accepté - et par qui."
+        "Mais lorsque les pluies transforment l’exutoire du lac en menace pour le Jiboa, mesurer ne suffit plus : il faut décider où le risque peut être accepté, et par qui."
+      ]
+    },
+    chemin: {
+      order: 6,
+      cardLabel: "Roman inédit · achevé",
+      seriesES: true,
+      kicker: "Roman inédit · achevé",
+      title: "E.S. IV - Le chemin",
+      meta: "Roman inédit · 277 pages / 75430 mots · complet et autonome",
+      paragraphs: [
+        "L’action se déploie entre Karlsruhe, Berlin et Cadarache, dans l’environnement scientifique et énergétique européen.",
+        "Lorsqu’un ingénieur confronté à des anomalies dans des modèles de continuité énergétique sollicite son aide après une mystérieuse agression, Edmond Silla accepte d’examiner des données dont la provenance devient aussi importante que les résultats eux-mêmes.",
+        "Aux côtés de Mathilde Roussel, il découvre progressivement un réseau où se croisent recherche scientifique, souveraineté énergétique, infrastructures critiques et décisions prises au nom de crises encore hypothétiques.",
+        "À mesure que les frontières entre simulation et réalité se brouillent, une question s’impose : que se passe-t-il lorsque ceux qui construisent les modèles commencent aussi à décider quelles conséquences sont acceptables ?"
       ]
     }
   };
@@ -389,14 +401,14 @@
         const banner = document.createElement("div");
         banner.className = "series-banner reveal-on-scroll";
         const esCount = entries.filter(([, candidate]) => candidate.seriesES).length;
-        const countLabel = i18n.language === "fr" && esCount === 3 ? "Trois" : esCount;
+        const countLabel = i18n.language === "fr" ? ({ 3: "Trois", 4: "Quatre" }[esCount] || esCount) : esCount;
         banner.innerHTML = `<div><p class="series-label">${t("dynamic.seriesTitle")}</p><h3>${t("dynamic.seriesHeading")}</h3></div><p>${t("dynamic.seriesBanner", { count: countLabel })}</p>`;
         grid.appendChild(banner);
         seriesBannerAdded = true;
       }
       const btn = document.createElement("button");
       const layoutClass = baseBook.seriesES ? "work-card-es" : "work-card-primary";
-      btn.className = `work-card work-card-button ${layoutClass} reveal-on-scroll ${baseBook.status ? "work-card-submission" : ""}`;
+      btn.className = `work-card work-card-button ${layoutClass} reveal-on-scroll`;
       btn.type = "button";
       btn.dataset.book = key;
       btn.setAttribute("aria-haspopup", "dialog");
@@ -406,12 +418,6 @@
       label.className = "work-kicker";
       label.textContent = book.cardLabel || (baseBook.seriesES ? t("dynamic.esCompleted") : t("dynamic.completedNovel"));
       top.appendChild(label);
-      if (baseBook.status) {
-        const status = document.createElement("span");
-        status.className = "work-status";
-        status.textContent = book.status || t("dynamic.underSubmission");
-        top.appendChild(status);
-      }
       const h = document.createElement("h3");
       h.textContent = book.title;
       const p = document.createElement("p");
@@ -635,19 +641,12 @@
 
   document.querySelector("#current-year").textContent = new Date().getFullYear();
   const bookCount = Object.keys(MANUSCRIPTS).length;
-  const submissionCount = Object.values(MANUSCRIPTS).filter(book => book.status === "En soumission").length;
   document.querySelector("#stat-posts").textContent = String(posts.length);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
   function updateDynamicHeadings() {
     if (libraryLede) libraryLede.textContent = t("dynamic.libraryLede", { count: posts.length });
-    if (worksAside) {
-      worksAside.textContent = t("dynamic.worksAside", {
-        books: bookCount,
-        submissions: submissionCount,
-        verb: submissionCount > 1 ? t("dynamic.worksVerbMany") : t("dynamic.worksVerbOne")
-      });
-    }
+    if (worksAside) worksAside.textContent = t("home.works.click");
   }
   updateDynamicHeadings();
 

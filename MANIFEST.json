@@ -1,0 +1,122 @@
+{
+  "assets/articles/je-souffle-aux-lucioles.webp": {
+    "size": [
+      1122,
+      1402
+    ],
+    "mode": "crop-to-fill",
+    "source": "je-souffle-aux-lucioles_source.jpg"
+  },
+  "assets/articles/artifices-de-petit-prince.webp": {
+    "size": [
+      1122,
+      1402
+    ],
+    "mode": "crop-to-fill",
+    "source": "artifices-de-petit-prince_asie_source.jpg"
+  },
+  "assets/articles/cover-ici-et-ailleurs.webp": {
+    "size": [
+      1030,
+      1000
+    ],
+    "mode": "crop-to-fill",
+    "source": "ici-et-ailleurs_paris_source.jpg"
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-360.webp": {
+    "size": [
+      360,
+      350
+    ]
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-360.avif": {
+    "size": [
+      360,
+      350
+    ]
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-720.webp": {
+    "size": [
+      720,
+      699
+    ]
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-720.avif": {
+    "size": [
+      720,
+      699
+    ]
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-1030.webp": {
+    "size": [
+      1030,
+      1000
+    ]
+  },
+  "assets/articles/responsive/cover-ici-et-ailleurs-1030.avif": {
+    "size": [
+      1030,
+      1000
+    ]
+  },
+  "assets/articles/ici-et-ailleurs.webp": {
+    "size": [
+      355,
+      500
+    ],
+    "mode": "crop-to-fill",
+    "source": "ici-et-ailleurs_paris_source.jpg"
+  },
+  "assets/articles/cover-traces-de-fumee-traces-de-vie.webp": {
+    "size": [
+      1030,
+      1000
+    ],
+    "mode": "crop-to-fill",
+    "source": "traces-de-fumee_amerique_source.jpg"
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-360.webp": {
+    "size": [
+      360,
+      350
+    ]
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-360.avif": {
+    "size": [
+      360,
+      350
+    ]
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-720.webp": {
+    "size": [
+      720,
+      699
+    ]
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-720.avif": {
+    "size": [
+      720,
+      699
+    ]
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-1030.webp": {
+    "size": [
+      1030,
+      1000
+    ]
+  },
+  "assets/articles/responsive/cover-traces-de-fumee-traces-de-vie-1030.avif": {
+    "size": [
+      1030,
+      1000
+    ]
+  },
+  "assets/articles/traces-de-fumee.webp": {
+    "size": [
+      355,
+      500
+    ],
+    "mode": "crop-to-fill",
+    "source": "traces-de-fumee_amerique_source.jpg"
+  }
+}

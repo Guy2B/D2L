@@ -5422,3 +5422,45 @@ body.photo-essay-premium .article-figure.article-cover-figure img {
     margin-bottom: 48px;
   }
 }
+
+
+/* V68 - Je souffle aux lucioles: colonne de lecture plus ample et plus lisible. */
+body.lucioles-layout.is-poem-article .article-layout,
+body.focus-reading.lucioles-layout.is-poem-article .article-layout {
+  width: min(100%, 64rem);
+}
+body.lucioles-layout.is-poem-article .article-main {
+  width: 100%;
+}
+body.lucioles-layout.is-poem-article .article-body,
+body.focus-reading.lucioles-layout.is-poem-article .article-body {
+  width: min(100%, 56rem);
+  margin-inline: auto;
+}
+body.lucioles-layout.is-poem-article .poem {
+  font-size: clamp(1.20rem, 0.32vw + 1.11rem, 1.36rem);
+  gap: 2.35rem;
+}
+body.lucioles-layout.is-poem-article .poem-stanza {
+  line-height: 1.82;
+  letter-spacing: .002em;
+}
+body.lucioles-layout.is-poem-article .article-body::before {
+  margin-bottom: 34px;
+}
+@media (max-width: 899px) {
+  body.lucioles-layout.is-poem-article .article-layout,
+  body.lucioles-layout.is-poem-article .article-body,
+  body.focus-reading.lucioles-layout.is-poem-article .article-body {
+    width: min(100%, 46rem);
+  }
+}
+@media (max-width: 560px) {
+  body.lucioles-layout.is-poem-article .poem {
+    font-size: var(--reading-size);
+    gap: 1.8rem;
+  }
+  body.lucioles-layout.is-poem-article .poem-stanza {
+    line-height: 1.70;
+  }
+}

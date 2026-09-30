@@ -342,16 +342,7 @@ window.BLOG_POSTS = [
       {
         "type": "p",
         "text": "À la lueur d’une bougie éteinte, je feuilletais désormais le journal plié en quatre dans la poche latérale de mon pyjama sans ouverture qui relatait avec déchéance l’actualité de gloires passées, en aspirant le liquide solidifié qui s’échappait du verre vide vers mes lèvres fermées, les deux mains posées sur la table… C’est alors que je pensai à lever la main, à prendre le verre ; puis je songeai à ce généreux donateur et au vieux-jeune ; bientôt je voulus ouvrir les yeux, ouvrir la fenêtre afin de regarder dehors… mais le trop-plein d’idées m’isolait dans le vide de la réalité, dans la vacuité bien fournie du rêve éveillé tant et si bien que je m’oubliai dans mes pensées. À l’extérieur, l’astre mort ensoleillait la soirée, de son éclat frénétique, de ses monstrueuses merveilles, qui en cette sombre journée faisait vivre l’intérieur tout comme ce souvenir qui ne se produisit que plus tard et que j’oubliai en me remémorant… en pleine nuit, ce jour-là !"
-      },
-      {
-        "type": "p",
-        "text": "← L’espoir est une déception encore inexplorée. Sense8"
-      },
-      {
-        "type": "p",
-        "text": "← Il faut être économe de son mépris étant donné le grand nombre des nécessiteux. Chateaubriand"
-      }
-    ],
+      }],
     "sourceLabel": "Chroniques d’ailleurs",
     "sourceUrl": "http://die2lap.unblog.fr/2017/10/23/un-souvenir-que-joubliai/",
     "archiveTitle": "Souviens toi d’oublier…",

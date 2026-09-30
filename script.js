@@ -45,7 +45,7 @@
       order: 1,
       cardLabel: "Roman inédit · achevé",
       kicker: "Roman inédit · achevé",
-      title: "QU’EST-CE QUI DEMEURE",
+      title: "Qu’est-ce qui demeure",
       meta: "Roman inédit · 572 pages / 89116 mots · complet et autonome",
       paragraphs: [
         "Le roman est construit en cinq parties intitulées ÉLIAS, ÉLISA, ASILE, SALIE et AILES, cinq mots formés des mêmes lettres.",

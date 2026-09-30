@@ -135,6 +135,7 @@
   const isProse = !isPoem;
 
   document.body.classList.toggle("is-poem-article", isPoem);
+  document.body.classList.toggle("lucioles-layout", post.id === "je-souffle-aux-lucioles");
   document.body.classList.toggle("is-fiction-article", isFiction);
   document.body.classList.toggle("is-chronicle-article", isChronicle);
   document.body.classList.toggle("is-travel-article", isTravel);

@@ -1,16 +1,4 @@
-<!-- V64.1: D’ailleurs pré-rendu dans index.html et cache-busting home JS/i18n. -->
-# Chroniques d’ailleurs - Die 2 Lap - V64.1
-
-## V64 - qualité des carnets photographiques
-
-- V63 conservée : 57 publications, 13 carnets, 67 photographies et 7 romans achevés.
-- `D’ailleurs…` : 226 pages / 56 359 mots, troisième roman de la liste.
-- Les 67 photographies des carnets ont reçu une passe de finition conservatrice : léger micro-contraste, saturation très modérée, netteté contrôlée et réencodage WebP de meilleure qualité.
-- Toutes les variantes responsive WebP existantes ont été régénérées à partir du fichier source local correspondant, sans changer cadrage, ordre ni légende.
-- Les pages de voyage privilégient désormais ces WebP haute qualité.
-- Aucune photo n’a été inventée ou remplacée. La qualité maximale reste limitée par les captures d’archive disponibles.
-- Audit crédits/licences, vérification automatique des liens/assets et workflow GitHub ajoutés.
-
+# Chroniques d’ailleurs - Die 2 Lap - V63
 
 V63 est une version de finition construite sur le `main` public de D2L. Elle ne reconstruit pas le site et ne modifie aucun texte littéraire publié.
 
@@ -288,17 +276,3 @@ Principales évolutions :
 
 ## V63
 Les 38 couvertures premium de l’accueil sont aussi utilisées comme images d’ouverture sur les pages individuelles correspondantes. Les galeries des carnets de voyage restent inchangées.
-
-
-## V64.2
-- Les trois premiers romans apparaissent sur une même ligne avec visuels.
-- D'ailleurs… conserve sa couverture existante.
-- Qu’est-ce qui demeure et Il ne saura jamais reçoivent deux nouvelles couvertures originales de style photographique.
-
-
-## V64.3
-- Les trois premiers romans sont sur une seule ligne sur desktop.
-- Les deux visuels générés de V64.2 ont été retirés.
-- Qu’est-ce qui demeure utilise une photo du domaine public.
-- Il ne saura jamais utilise une photo CC0.
-- D’ailleurs… conserve sa couverture existante.

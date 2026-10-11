@@ -5468,3 +5468,41 @@ body.lucioles-layout.is-poem-article .poem-source-citation {
     width: 100%;
   }
 }
+
+
+/* V63 - couverture éditoriale pour les manuscrits disposant d'un visuel */
+.work-card.has-book-cover{
+  display:grid;
+  grid-template-columns:minmax(112px,150px) 1fr;
+  grid-template-rows:auto auto 1fr auto;
+  column-gap:clamp(18px,2.6vw,34px);
+  align-items:start;
+}
+.work-card.has-book-cover .work-cover{
+  grid-row:1 / -1;
+  grid-column:1;
+  display:block;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  border-radius:2px;
+  background:var(--paper-2);
+  box-shadow:0 14px 34px rgba(20,25,30,.12);
+}
+.work-card.has-book-cover .work-cover img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+.work-card.has-book-cover .work-topline,
+.work-card.has-book-cover > h3,
+.work-card.has-book-cover > p,
+.work-card.has-book-cover .work-read{
+  grid-column:2;
+}
+@media (max-width:720px){
+  .work-card.has-book-cover{
+    grid-template-columns:86px 1fr;
+    column-gap:16px;
+  }
+}

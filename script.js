@@ -65,8 +65,23 @@
         "L’accident vasculaire cérébral qui le terrasse au moment précis de cette découverte le prive, à jamais, de la version réelle de sa propre histoire."
       ]
     },
-    eau: {
+
+    ailleurs: {
       order: 3,
+      cardLabel: "Roman inédit · achevé",
+      kicker: "Roman inédit · achevé",
+      title: "D’ailleurs…",
+      coverImage: "assets/books/dailleurs-cover.webp",
+      coverAlt: "Couverture illustrée du roman D’ailleurs…",
+      meta: "Roman inédit · 226 pages / 56 359 mots · complet et autonome",
+      paragraphs: [
+        "D’AILLEURS… raconte le parcours d’un enfant de Yaoundé pour qui le monde commence derrière les écrans, dans les objets venus d’ailleurs et dans les départs de ceux qu’il aime.",
+        "De Bonabéri à Karlsruhe, de New York à Shanghai, il apprend à vivre loin, à construire une famille, à perdre, à revenir et à transmettre.",
+        "Au fil des années, l’ailleurs cesse d’être une destination : il devient une part de lui-même."
+      ]
+    },
+    eau: {
+      order: 4,
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -79,7 +94,7 @@
       ]
     },
     java: {
-      order: 4,
+      order: 5,
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -93,7 +108,7 @@
       ]
     },
     "47secondes": {
-      order: 5,
+      order: 6,
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -107,7 +122,7 @@
       ]
     },
     chemin: {
-      order: 6,
+      order: 7,
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -411,6 +426,19 @@
       btn.className = `work-card work-card-button ${layoutClass} reveal-on-scroll`;
       btn.type = "button";
       btn.dataset.book = key;
+      if (baseBook.coverImage) {
+        btn.dataset.cover = baseBook.coverImage;
+        btn.classList.add("has-book-cover");
+        const cover = document.createElement("span");
+        cover.className = "work-cover";
+        const img = document.createElement("img");
+        img.src = baseBook.coverImage;
+        img.alt = baseBook.coverAlt || `Couverture de ${book.title}`;
+        img.loading = "lazy";
+        img.decoding = "async";
+        cover.appendChild(img);
+        btn.appendChild(cover);
+      }
       btn.setAttribute("aria-haspopup", "dialog");
       const top = document.createElement("div");
       top.className = "work-topline";

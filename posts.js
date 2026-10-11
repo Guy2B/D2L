@@ -1,4 +1,4 @@
-/* Chroniques d'ailleurs - données éditoriales V63 : couvertures premium actives sur l'accueil ET sur les pages individuelles; fichiers dans assets/articles; visages non floutés; textes littéraires et galeries de voyage inchangés. */
+/* Chroniques d'ailleurs - données éditoriales V64 : couvertures premium actives sur l'accueil ET sur les pages individuelles; fichiers dans assets/articles; visages non floutés; textes littéraires et galeries de voyage inchangés. */
 window.BLOG_POSTS = [
   {
     "id": "vague-a-l-ame",

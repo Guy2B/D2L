@@ -170,12 +170,12 @@
 
       "impressum.kicker": "Informations légales",
       "impressum.lede": "Informations éditoriales et d’hébergement du site <em>Chroniques d’ailleurs</em>.",
-      "impressum.alertTitle": "Hébergement en cours de finalisation",
-      "impressum.alertCopy": "Les informations relatives à l’hébergeur seront complétées dès que le choix d’hébergement définitif sera arrêté.",
+      "impressum.alertTitle": "Informations d’hébergement",
+      "impressum.alertCopy": "Le site est publié à l’adresse chroniques.guybeaho.com. Les coordonnées légales détaillées de l’hébergeur ne sont affichées qu’après vérification de la configuration d’hébergement effective.",
       "impressum.editorTitle": "Éditeur du site",
       "impressum.editorCopy": "<strong>Nom éditorial :</strong> Die 2 Lap<br><strong>Responsable éditorial :</strong> Die2Lap<br><strong>E-mail :</strong> <a href=\"mailto:d2l@guybeaho.com\">d2l@guybeaho.com</a>",
       "impressum.hostTitle": "Hébergement",
-      "impressum.hostCopy": "<strong>Hébergeur :</strong> in progress<br><strong>Adresse :</strong> in progress<br><strong>Site web :</strong> in progress",
+      "impressum.hostCopy": "<strong>Adresse publique :</strong> <a href=\"https://chroniques.guybeaho.com/\">chroniques.guybeaho.com</a><br><strong>Infrastructure :</strong> site statique ; coordonnées de l’hébergeur à compléter après vérification.",
       "impressum.purposeTitle": "Objet du site",
       "impressum.purposeCopy": "Site littéraire personnel consacré à la publication de textes, à la présentation de manuscrits et à la mise en valeur des archives éditoriales de l’auteur.",
       "impressum.contentTitle": "Responsabilité pour les contenus",
@@ -184,7 +184,7 @@
       "impressum.linksCopy": "Les liens vers des sites externes sont fournis pour contextualiser des publications ou renvoyer vers des sources d’origine. La responsabilité pour le contenu de ces sites incombe exclusivement à leurs exploitants respectifs.",
       "impressum.copyrightTitle": "Droit d’auteur",
       "impressum.copyrightCopy": "Les textes et éléments visuels du site sont soumis au droit d’auteur. Toute exploitation au-delà des limites prévues par la loi nécessite l’accord préalable du titulaire des droits.",
-      "impressum.footerNote": "Modèle informatif. Pensez à compléter les mentions légales avec vos informations réelles avant publication publique.",
+      "impressum.footerNote": "Informations éditoriales publiées. Les coordonnées techniques de l’hébergeur restent à compléter après vérification.",
 
       "error.kicker": "404",
       "error.title": "Cette page s’est égarée.",
@@ -401,12 +401,12 @@
 
       "impressum.kicker": "Legal information",
       "impressum.lede": "Editorial and hosting information for <em>Chroniques d’ailleurs</em>.",
-      "impressum.alertTitle": "Hosting details being finalised",
-      "impressum.alertCopy": "Hosting information will be completed once the final hosting arrangement has been confirmed.",
+      "impressum.alertTitle": "Hosting information",
+      "impressum.alertCopy": "The site is published at chroniques.guybeaho.com. Detailed legal hosting information is displayed only after the effective hosting configuration has been verified.",
       "impressum.editorTitle": "Site publisher",
       "impressum.editorCopy": "<strong>Editorial name:</strong> Die 2 Lap<br><strong>Editorially responsible:</strong> Die2Lap<br><strong>Email:</strong> <a href=\"mailto:d2l@guybeaho.com\">d2l@guybeaho.com</a>",
       "impressum.hostTitle": "Hosting",
-      "impressum.hostCopy": "<strong>Host:</strong> in progress<br><strong>Address:</strong> in progress<br><strong>Website:</strong> in progress",
+      "impressum.hostCopy": "<strong>Public address:</strong> <a href=\"https://chroniques.guybeaho.com/\">chroniques.guybeaho.com</a><br><strong>Infrastructure:</strong> static website; hosting-provider details to be completed after verification.",
       "impressum.purposeTitle": "Purpose of the site",
       "impressum.purposeCopy": "A personal literary website devoted to publishing texts, presenting manuscripts and preserving the author’s editorial archives.",
       "impressum.contentTitle": "Responsibility for content",
@@ -415,7 +415,7 @@
       "impressum.linksCopy": "Links to external sites are provided to contextualise publications or lead back to original sources. Responsibility for the content of those sites rests solely with their respective operators.",
       "impressum.copyrightTitle": "Copyright",
       "impressum.copyrightCopy": "The texts and visual elements of this site are protected by copyright. Any use beyond the limits permitted by law requires the prior consent of the rights holder.",
-      "impressum.footerNote": "Informational template. Complete the legal notice with your final hosting details before public publication.",
+      "impressum.footerNote": "Published editorial information. Technical hosting-provider details remain to be completed after verification.",
 
       "error.kicker": "404",
       "error.title": "This page has wandered off.",
@@ -632,12 +632,12 @@
 
       "impressum.kicker": "Rechtliche Informationen",
       "impressum.lede": "Redaktionelle Angaben und Informationen zum Hosting von <em>Chroniques d’ailleurs</em>.",
-      "impressum.alertTitle": "Hostingangaben werden noch ergänzt",
-      "impressum.alertCopy": "Die Angaben zum Hosting werden vervollständigt, sobald die endgültige Hostinglösung feststeht.",
+      "impressum.alertTitle": "Hostinginformationen",
+      "impressum.alertCopy": "Die Website ist unter chroniques.guybeaho.com veröffentlicht. Detaillierte rechtliche Angaben zum Hosting werden erst angezeigt, nachdem die tatsächlich verwendete Hostingkonfiguration verifiziert wurde.",
       "impressum.editorTitle": "Herausgeber der Website",
       "impressum.editorCopy": "<strong>Redaktioneller Name:</strong> Die 2 Lap<br><strong>Redaktionell verantwortlich:</strong> Die2Lap<br><strong>E-Mail:</strong> <a href=\"mailto:d2l@guybeaho.com\">d2l@guybeaho.com</a>",
       "impressum.hostTitle": "Hosting",
-      "impressum.hostCopy": "<strong>Hoster:</strong> in progress<br><strong>Adresse:</strong> in progress<br><strong>Website:</strong> in progress",
+      "impressum.hostCopy": "<strong>Öffentliche Adresse:</strong> <a href=\"https://chroniques.guybeaho.com/\">chroniques.guybeaho.com</a><br><strong>Infrastruktur:</strong> statische Website; Angaben zum Hostinganbieter werden nach Verifizierung ergänzt.",
       "impressum.purposeTitle": "Zweck der Website",
       "impressum.purposeCopy": "Persönliche Literaturwebsite zur Veröffentlichung von Texten, zur Vorstellung von Manuskripten und zur Bewahrung der redaktionellen Archive des Autors.",
       "impressum.contentTitle": "Verantwortung für Inhalte",
@@ -646,7 +646,7 @@
       "impressum.linksCopy": "Links zu externen Websites dienen der Einordnung von Veröffentlichungen oder führen zu ursprünglichen Quellen. Für die Inhalte dieser Websites sind ausschließlich deren jeweilige Betreiber verantwortlich.",
       "impressum.copyrightTitle": "Urheberrecht",
       "impressum.copyrightCopy": "Die Texte und visuellen Elemente dieser Website unterliegen dem Urheberrecht. Jede Nutzung über die gesetzlich zulässigen Grenzen hinaus bedarf der vorherigen Zustimmung des Rechteinhabers.",
-      "impressum.footerNote": "Hinweisvorlage. Ergänzen Sie die rechtlichen Angaben vor der öffentlichen Veröffentlichung um die endgültigen Hostinginformationen.",
+      "impressum.footerNote": "Veröffentlichte redaktionelle Angaben. Technische Angaben zum Hostinganbieter werden nach Verifizierung ergänzt.",
 
       "error.kicker": "404",
       "error.title": "Diese Seite hat sich verirrt.",
@@ -854,6 +854,17 @@
           "The stroke that strikes him at the exact moment of this discovery deprives him, forever, of the real version of his own story."
         ]
       },
+
+      ailleurs: {
+        cardLabel: "Unpublished novel · complete",
+        kicker: "Unpublished novel · complete",
+        meta: "Unpublished novel · 226 pages / 56,359 words · complete and standalone",
+        paragraphs: [
+          "D’AILLEURS… follows a child from Yaoundé for whom the world first begins behind screens, in objects arriving from elsewhere and in the departures of the people he loves.",
+          "From Bonabéri to Karlsruhe, from New York to Shanghai, he learns to live far from home, build a family, endure loss, return and pass things on.",
+          "Over the years, elsewhere ceases to be a destination: it becomes part of who he is."
+        ]
+      },
       eau: {
         cardLabel: "Unpublished novel · complete",
         kicker: "Unpublished novel · complete",
@@ -917,6 +928,17 @@
           "Jérôme glaubt, alles selbst gewählt zu haben: seine Frau zu verlassen, mit einer anderen Frau neu anzufangen und sein Unternehmen nach einer entscheidenden Geschäftsreise nach New York zu retten.",
           "Was er nicht weiß, als er an jenem Abend die Wohnung seiner Geliebten betritt: Sie war im Begriff, ihn zuerst zu verlassen. Ebenso wenig weiß er, dass seine Frau seit Monaten alles weiß und irgendwann aufgehört hat, auf eine Wahrheit zu warten, die er ihr niemals geben wird.",
           "Der Schlaganfall, der ihn im Augenblick dieser Entdeckung trifft, nimmt ihm für immer die wirkliche Version seiner eigenen Geschichte."
+        ]
+      },
+
+      ailleurs: {
+        cardLabel: "Unveröffentlichter Roman · abgeschlossen",
+        kicker: "Unveröffentlichter Roman · abgeschlossen",
+        meta: "Unveröffentlichter Roman · 226 Seiten / 56.359 Wörter · abgeschlossen und eigenständig",
+        paragraphs: [
+          "D’AILLEURS… erzählt den Weg eines Kindes aus Yaoundé, für das die Welt zunächst hinter Bildschirmen beginnt, in Dingen, die von anderswoher kommen, und in den Aufbrüchen der Menschen, die es liebt.",
+          "Von Bonabéri nach Karlsruhe, von New York nach Shanghai lernt es, fern der Heimat zu leben, eine Familie aufzubauen, Verlust zu erfahren, zurückzukehren und weiterzugeben.",
+          "Im Lauf der Jahre hört das Anderswo auf, ein Ziel zu sein: Es wird zu einem Teil seiner selbst."
         ]
       },
       eau: {

@@ -1,4 +1,4 @@
-/* Chroniques d’ailleurs V52 — responsive image delivery helpers. */
+/* Chroniques d’ailleurs V64 — responsive image delivery helpers. */
 (() => {
   "use strict";
 
@@ -53,7 +53,7 @@
     if (options.fetchPriority) img.fetchPriority = options.fetchPriority;
     img.dataset.responsivePhoto = "true";
 
-    picture.append(avif, webp, img);
+    picture.append(webp, img);
     return picture;
   }
 

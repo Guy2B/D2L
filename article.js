@@ -785,8 +785,8 @@
     const sourceWebp = dialog.querySelector(".photo-lightbox-source-webp");
     const asset = imageTools?.get(block.image || "");
     if (asset && imageTools) {
-      sourceAvif.srcset = imageTools.resolveSrcset(asset.avif, siteHref);
-      sourceAvif.sizes = "100vw";
+      sourceAvif.removeAttribute("srcset");
+      sourceAvif.removeAttribute("sizes");
       sourceWebp.srcset = imageTools.resolveSrcset(asset.webp, siteHref);
       sourceWebp.sizes = "100vw";
       image.src = siteHref(asset.lightbox);

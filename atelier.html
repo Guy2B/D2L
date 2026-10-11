@@ -52,9 +52,9 @@
 <body class="studio-page studio-locked">
   <section id="studio-gate" class="studio-gate studio-gate-overlay" aria-modal="true" role="dialog">
     <div class="studio-gate-card">
-      <p class="section-kicker">Accès protégé</p>
+      <p class="section-kicker">Accès auteur local</p>
       <h1>Atelier roman</h1>
-      <p>Cet espace d’écriture est protégé par un code d’accès.</p>
+      <p>Cet accès est vérifié dans votre navigateur. Il limite l’accès courant mais ne constitue pas une authentification serveur ; n’y stockez pas de contenu confidentiel non publié.</p>
       <form id="studio-gate-form" class="studio-gate-form" autocomplete="off" onsubmit="return D2LStudioUnlock(event)">
         <label>
           <span>Code</span>
@@ -62,7 +62,7 @@
         </label>
         <button class="button button-primary" type="submit">Entrer</button>
       </form>
-      <p id="studio-gate-help" class="studio-help">Accès réservé à l’auteur.</p>
+      <p id="studio-gate-help" class="studio-help">Barrière locale de confort : le code reste visible dans le code source et ne protège pas des données confidentielles.</p>
       <p id="studio-gate-error" class="studio-gate-error" hidden>Code incorrect.</p>
       <p><a class="text-link" href="index.html">Retour au site</a></p>
       <p class="studio-legal-links"><a class="text-link" href="disclaimer.html">Disclaimer</a> · <a class="text-link" href="impressum.html">Impressum</a></p>

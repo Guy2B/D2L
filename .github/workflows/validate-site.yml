@@ -1,0 +1,27 @@
+name: Validate D2L static site
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: JavaScript syntax
+        run: |
+          node --check script.js
+          node --check article.js
+          node --check i18n.js
+          node --check studio.js
+          node --check likes-api.js
+      - name: Local links and assets
+        run: python tools/verify_site.py

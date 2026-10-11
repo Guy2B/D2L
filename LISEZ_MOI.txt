@@ -1,13 +1,10 @@
-V70 - corrections cumulatives
+CORRECTIF V64.4
 
-Je souffle aux lucioles :
-- strophes séparées selon la structure visible de la publication d’origine ;
-- séparateurs *** conservés ;
-- espacement vertical renforcé ;
-- référence en bas : Ta-Nehisi Coates, Between the World and Me, 2015.
+1. Copiez index.html et script-v64-4.js dans votre dossier D2L.
+2. Acceptez de remplacer index.html.
+3. Vérifiez que ces deux images existent déjà dans D2L\assets\books\ :
+   Qu_est_ce_qui_demeure.webp
+   Il_ne_saura_jamais.webp
+4. Ouvrez index.html puis faites Ctrl + F5.
 
-Les corrections V68/V69 précédentes restent incluses.
-
-V71 : Je souffle aux lucioles : suppression des astérisques, séparation uniquement par sauts de strophe, typographie identique aux autres poèmes.
-
-V72 : citation Ta-Nehisi Coates rétablie en fin de Je souffle aux lucioles, avec source nommée.
+Le nouveau index.html ne contient plus les anciennes adresses Wikimedia.

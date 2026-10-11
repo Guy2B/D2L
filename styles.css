@@ -1,5 +1,5 @@
 /* =========================================================
-   CHRONIQUES D’AILLEURS - V11
+   CHRONIQUES D’AILLEURS - V64
    Une interface éditoriale chaude, lisible et immersive.
    ========================================================= */
 
@@ -2037,7 +2037,7 @@ body::before {
 }
 
 .work-card-primary {
-  grid-column: span 3;
+  grid-column: span 2;
   min-height: 285px;
 }
 
@@ -5466,5 +5466,92 @@ body.lucioles-layout.is-poem-article .poem-source-citation {
   body.focus-reading.lucioles-layout.is-poem-article .article-body,
   body.lucioles-layout.is-poem-article .poem-source-note {
     width: 100%;
+  }
+}
+
+
+/* V63 - couverture éditoriale pour les manuscrits disposant d'un visuel */
+.work-card.has-book-cover{
+  display:grid;
+  grid-template-columns:minmax(112px,150px) 1fr;
+  grid-template-rows:auto auto 1fr auto;
+  column-gap:clamp(18px,2.6vw,34px);
+  align-items:start;
+}
+.work-card.has-book-cover .work-cover{
+  grid-row:1 / -1;
+  grid-column:1;
+  display:block;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  border-radius:2px;
+  background:var(--paper-2);
+  box-shadow:0 14px 34px rgba(20,25,30,.12);
+}
+.work-card.has-book-cover .work-cover img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+.work-card.has-book-cover .work-topline,
+.work-card.has-book-cover > h3,
+.work-card.has-book-cover > p,
+.work-card.has-book-cover .work-read{
+  grid-column:2;
+}
+@media (max-width:720px){
+  .work-card.has-book-cover{
+    grid-template-columns:86px 1fr;
+    column-gap:16px;
+  }
+}
+
+
+/* V64 - accessibility/mobile finishing */
+@media (max-width:760px){
+  .language-select,.filter-chip,.year-chip,.text-button,.reading-tools button,.share-toggle,.comments-toggle{min-height:44px;}
+  .post-link,.read-link,.back-link{overflow-wrap:anywhere;}
+}
+@media (prefers-reduced-motion:reduce){
+  html:focus-within{scroll-behavior:auto;}
+}
+
+
+/* V64.3 - three primary novels on one row, discreet visuals */
+@media (min-width: 1041px) {
+  .works-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .work-card-primary {
+    grid-column: span 2;
+    min-width: 0;
+  }
+  .work-card-primary.has-book-cover {
+    grid-template-columns: 86px minmax(0, 1fr);
+    column-gap: 16px;
+    padding: 22px;
+    min-height: 280px;
+  }
+  .work-card-primary.has-book-cover .work-cover {
+    width: 86px;
+    height: 129px;
+    align-self: start;
+    border-radius: 2px;
+    box-shadow: 0 8px 20px rgba(20,25,30,.10);
+  }
+  .work-card-primary.has-book-cover h3 {
+    font-size: clamp(1.72rem, 2.15vw, 2.35rem);
+  }
+}
+@media (max-width: 760px) {
+  .work-card-primary.has-book-cover {
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 14px;
+    padding: 20px;
+  }
+  .work-card-primary.has-book-cover .work-cover {
+    width: 72px;
+    height: 108px;
   }
 }

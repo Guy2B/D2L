@@ -34,6 +34,12 @@
   // (synopsis et demande), pour rester valide et accessible au clavier.
   function enhanceCard(card) {
     const key = card.dataset.book;
+    // Romans publiés depuis l’Atelier : bouton actif seulement s’ils sont reliés à la liseuse.
+    const custom = window.CUSTOM_BOOKS && window.CUSTOM_BOOKS[key];
+    if (!byPublicKey.has(key) && custom && /^[a-z0-9-]{2,40}$/.test(custom.readerBookId || "")) {
+      byPublicKey.set(key, { id: custom.readerBookId, title: custom.title });
+      if (!BOOKS.some(b => b[1] === custom.readerBookId)) BOOKS.push([key, custom.readerBookId, custom.title]);
+    }
     const book = byPublicKey.get(key);
     if (!book || card.dataset.requestReady) return;
     const wrapper = document.createElement("div");

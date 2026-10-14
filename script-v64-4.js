@@ -676,6 +676,7 @@
   document.querySelector("#stat-posts").textContent = String(posts.length);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
+  const worksAside = document.querySelector("#works-aside");
   function updateDynamicHeadings() {
     if (libraryLede) libraryLede.textContent = t("dynamic.libraryLede", { count: posts.length });
     if (worksAside) worksAside.textContent = t("home.works.click");

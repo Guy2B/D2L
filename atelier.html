@@ -7,88 +7,50 @@
   <title>Atelier auteur | Chroniques d’ailleurs</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="custom-content.js" defer></script>
-  <script>
-    window.D2LStudioUnlock = function (event) {
-      if (event && event.preventDefault) event.preventDefault();
-      const ACCESS_CODE = "210815";
-      const gate = document.getElementById("studio-gate");
-      const input = document.getElementById("studio-gate-input");
-      const error = document.getElementById("studio-gate-error");
-      const app = document.getElementById("studio-app");
-      const value = String(input && input.value || "").trim();
-
-      if (value !== ACCESS_CODE) {
-        if (error) error.hidden = false;
-        if (input) { input.setAttribute("aria-invalid", "true"); input.focus(); input.select(); }
-        return false;
-      }
-
-      if (error) error.hidden = true;
-      if (input) input.removeAttribute("aria-invalid");
-      document.body.classList.remove("studio-locked");
-      if (gate) { gate.style.display = "none"; gate.setAttribute("aria-hidden", "true"); }
-      if (app) { app.removeAttribute("aria-hidden"); if ("inert" in app) app.inert = false; }
-      try { sessionStorage.setItem("die2lap:studio-access:v20", "ok"); } catch (_) {}
-      window.dispatchEvent(new CustomEvent("d2l-studio-unlocked"));
-      return false;
-    };
-
-    window.addEventListener("DOMContentLoaded", function () {
-      const app = document.getElementById("studio-app");
-      const input = document.getElementById("studio-gate-input");
-      if (app && "inert" in app) app.inert = true;
-      let granted = false;
-      try { granted = sessionStorage.getItem("die2lap:studio-access:v20") === "ok"; } catch (_) {}
-      if (granted) {
-        if (input) input.value = "210815";
-        D2LStudioUnlock();
-      } else if (input) {
-        input.focus();
-      }
-    });
-  </script>
-  <script src="studio.js" defer></script>
+<script src="studio.js" defer></script>
+  <script src="atelier-dashboard.js" defer></script>
+<script src="atelier-operations.js" defer></script>
+<link rel="stylesheet" href="atelier-premium.css" />
+<style id="d2l-dashboard-theme">
+  .studio-tabs{flex-wrap:wrap} .dash-note{background:#f6f0e8;border:1px solid #dbcbbb;padding:16px;border-radius:12px;margin:12px 0;color:#43372b}
+  .dash-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;margin:18px 0}
+  .dash-card{background:var(--surface,#fffaf3);border:1px solid #d9cdbd;border-radius:12px;padding:20px}
+  .dash-card strong{display:block;font-size:1.8rem;font-family:Georgia,serif;margin-top:8px}
+  .dash-list{display:grid;gap:11px;margin-top:18px}.dash-item{border:1px solid #d9cdbd;border-radius:12px;padding:14px;background:#fffaf4}
+  .dash-item p{margin:6px 0 12px}.dash-buttons{display:flex;flex-wrap:wrap;gap:10px}
+  .dash-form{display:grid;gap:14px;max-width:730px}.dash-form label{display:grid;gap:5px}.dash-form input,.dash-form textarea,.dash-form select{padding:11px;border:1px solid #b9a993;border-radius:7px;font:inherit;background:#fff;color:#292520}
+  .dash-form textarea{min-height:165px}.dash-form button{justify-self:start}
+  @media(prefers-color-scheme:dark){html[data-theme="dark"] .dash-item,html[data-theme="dark"] .dash-card{background:#29241f;color:#f3e9dc}}
+</style>
 </head>
-<body class="studio-page studio-locked">
-  <section id="studio-gate" class="studio-gate studio-gate-overlay" aria-modal="true" role="dialog">
-    <div class="studio-gate-card">
-      <p class="section-kicker">Accès auteur local</p>
-      <h1>Atelier roman</h1>
-      <p>Cet accès est vérifié dans votre navigateur. Il limite l’accès courant mais ne constitue pas une authentification serveur ; n’y stockez pas de contenu confidentiel non publié.</p>
-      <form id="studio-gate-form" class="studio-gate-form" autocomplete="off" onsubmit="return D2LStudioUnlock(event)">
-        <label>
-          <span>Code</span>
-          <input id="studio-gate-input" type="password" inputmode="numeric" placeholder="Entrez le code" aria-describedby="studio-gate-help" required />
-        </label>
-        <button class="button button-primary" type="submit">Entrer</button>
-      </form>
-      <p id="studio-gate-help" class="studio-help">Barrière locale de confort : le code reste visible dans le code source et ne protège pas des données confidentielles.</p>
-      <p id="studio-gate-error" class="studio-gate-error" hidden>Code incorrect.</p>
-      <p><a class="text-link" href="index.html">Retour au site</a></p>
-      <p class="studio-legal-links"><a class="text-link" href="disclaimer.html">Disclaimer</a> · <a class="text-link" href="impressum.html">Impressum</a></p>
-    </div>
-  </section>
-
-  <div id="studio-app" aria-hidden="true">
+<body class="studio-page">
+<div id="studio-app">
     <header class="studio-header shell">
-      <a class="brand" href="index.html"><span class="brand-avatar"><img src="assets/die2lap-avatar.jpg" alt="" /></span><span class="brand-copy"><strong>Atelier auteur</strong><small>Chroniques d’ailleurs</small></span></a>
-      <a class="button button-ghost" href="index.html">Voir le site</a>
+      <a class="brand" href="https://chroniques.guybeaho.com/"><span class="brand-avatar"><img src="assets/die2lap-avatar.jpg" alt="" /></span><span class="brand-copy"><strong>Atelier auteur</strong><small>Chroniques d’ailleurs</small></span></a>
+      <div class="premium-header-actions"><span class="premium-local-dot">Administration privée · Cloudflare Access</span><a class="button button-ghost" href="https://chroniques.guybeaho.com/">Voir le site</a><a class="button button-primary" href="https://d2l-reader-api.guybeaho.workers.dev/reader" target="_blank" rel="noopener noreferrer" title="Un lien personnel actif reste nécessaire">Ma liseuse ↗</a></div>
     </header>
     <main class="shell studio-main">
       <section class="studio-intro">
         <p class="section-kicker">Sans toucher au code</p>
-        <h1>Publier un nouveau texte ou un nouveau roman.</h1>
-        <p>Créez le contenu ici, vérifiez l’aperçu, puis exportez <code>custom-content.js</code>. Remplacez ensuite le fichier du même nom dans le dossier du site et publiez le dossier mis à jour sur votre hébergement.</p>
-        <div class="studio-steps"><span>1. Écrire</span><span>2. Prévisualiser</span><span>3. Exporter</span><span>4. Remplacer le fichier</span></div>
+        <h1>Votre univers, à portée de main.</h1>
+        <p>Écriture, romans, correspondance et invitations : votre espace de travail réuni. <strong>Atelier Premium · gestion des couvertures et chapitres</strong> — la publication directe, les invitations et les données réelles restent à connecter.</p>
+        <div class="studio-steps"><span>7 romans</span><span>181 sections</span><span>Module serveur inclus · à configurer</span><span>Édition et export opérationnels</span></div>
       </section>
 
       <div class="studio-tabs" role="tablist" aria-label="Type de contenu">
-        <button class="studio-tab is-active" type="button" data-tab="text" aria-selected="true">Nouveau texte</button>
+        <button class="studio-tab" type="button" data-tab="text" aria-selected="false">Nouveau texte</button>
         <button class="studio-tab" type="button" data-tab="book" aria-selected="false">Nouveau roman</button>
         <button class="studio-tab" type="button" data-tab="manage" aria-selected="false">Contenu ajouté</button>
+        <button class="studio-tab is-active" type="button" data-tab="dashboard" aria-selected="true">Vue d’ensemble</button>
+        <button class="studio-tab" type="button" data-tab="operations" aria-selected="false">Gestion des lecteurs ✦</button>
+        <button class="studio-tab" type="button" data-tab="requests" aria-selected="false">Demandes</button>
+        <button class="studio-tab" type="button" data-tab="emails" aria-selected="false">E-mails</button>
+        <button class="studio-tab" type="button" data-tab="catalog" aria-selected="false">Romans</button>
+        <button class="studio-tab" type="button" data-tab="readers" aria-selected="false">Lecteurs et accès</button>
+        <button class="studio-tab" type="button" data-tab="stats" aria-selected="false">Statistiques</button>
       </div>
 
-      <section class="studio-panel" data-panel="text">
+      <section class="studio-panel" data-panel="text" hidden>
         <form id="post-form" class="studio-form">
           <div class="field-grid">
             <label><span>Type</span><select name="category" required><option>Poèmes</option><option value="Chroniques">Chroniques / récits</option><option>Nouvelles</option><option>Histoires de voyage</option></select></label>
@@ -107,7 +69,7 @@
         <div class="studio-preview" id="post-preview" hidden></div>
       </section>
 
-      <section class="studio-panel" data-panel="book" hidden>
+      <section class="studio-panel" data-panel="book" hidden><div class="premium-publish-guide"><strong>Écrire → Prévisualiser → Publier</strong><p>« Enregistrer le brouillon » sauvegarde le roman et sa couverture dans ce navigateur. La couverture n’est mise en ligne qu’après validation de la publication. Pour le rendre visible sur le site public, exportez actuellement <code>custom-content.js</code>, puis publiez ce fichier dans le dépôt public D2L. Le bouton « Publier » est disponible dans Contenu ajouté. Il requiert une liaison GitHub sécurisée et votre confirmation.</p><a href="https://chroniques.guybeaho.com/#romans" target="_blank" rel="noopener noreferrer">Voir la page Romans ↗</a></div>
         <form id="book-form" class="studio-form">
           <div class="field-grid">
             <label class="wide"><span>Titre</span><input name="title" required /></label>
@@ -115,17 +77,52 @@
             <label><span>Nombre de mots, optionnel</span><input name="words" inputmode="numeric" placeholder="82000" /></label>
             <label><span>Statut</span><select name="status"><option value="">Achevé</option><option>En soumission</option></select></label>
             <label class="check-label"><input name="seriesES" type="checkbox" /><span>Volume de la série E.S.</span></label>
+            <label class="wide premium-cover-field"><span>4. Image de couverture (JPG, PNG ou WebP, 8 Mo maximum)</span><input id="book-cover-file" name="coverFile" type="file" accept="image/jpeg,image/png,image/webp"/><small>L’image sera optimisée et affichée sur la page Romans lors de la publication.</small></label>
+            <label class="wide"><span>Texte alternatif de la couverture (facultatif)</span><input name="coverAlt" maxlength="180" placeholder="Description de la couverture pour les lecteurs malvoyants" /></label>
             <label class="wide"><span>Synopsis</span><textarea name="synopsis" rows="12" required placeholder="Séparez les paragraphes par une ligne vide."></textarea></label>
           </div>
-          <button class="button button-primary" type="submit">Ajouter le roman</button>
+          <button class="button button-primary" type="submit">Enregistrer le brouillon du roman</button>
         </form>
+        <div class="studio-preview premium-book-preview" id="book-preview" hidden></div>
       </section>
 
       <section class="studio-panel" data-panel="manage" hidden>
-        <div class="studio-manage-head"><div><p class="section-kicker">Ajouts locaux</p><h2>Prêts à publier</h2></div><button id="export-content" class="button button-primary" type="button">Exporter custom-content.js</button></div>
-        <div id="custom-list" class="custom-list"></div>
-        <p class="studio-help">Important : l’atelier n’écrit pas directement dans les fichiers de votre ordinateur. Après export, remplacez l’ancien <code>custom-content.js</code> par le nouveau. C’est ce fichier qui rend les ajouts visibles à tous les visiteurs après publication du site.</p>
+        <div class="studio-manage-head"><div><p class="section-kicker">Ajouts locaux</p><h2>Brouillons · fiches · chapitres · couvertures</h2></div><button id="export-content" class="button button-primary" type="button">Exporter pour publication (.js)</button></div>
+        <div id="custom-list" class="custom-list"></div><p id="publish-feedback" role="status" class="premium-publish-feedback"></p>
+        <p class="studio-help">Pour les chapitres privés, choisissez un fichier JSON de sections et préparez l’import. Une connexion au Worker sécurisé est indispensable pour déposer les textes dans R2/D1. Important : l’atelier n’écrit pas directement dans les fichiers de votre ordinateur. Après export, remplacez l’ancien <code>custom-content.js</code> par le nouveau. C’est ce fichier qui rend les ajouts visibles à tous les visiteurs après publication du site.</p>
       </section>
+
+      <section class="studio-panel" data-panel="dashboard"><div class="premium-status-strip"><div><span class="premium-ok">●</span><strong>Atelier privé</strong><small>Cloudflare Access configuré</small></div><div><span class="premium-ok">●</span><strong>Éditeur de romans</strong><small>Brouillons et export fonctionnels</small></div><div><span class="premium-wip">●</span><strong>Publication en un clic</strong><small>Configuration GitHub nécessaire</small></div><div><span class="premium-wip">●</span><strong>Invitations et e-mails</strong><small>API de gestion incluse · activation requise</small></div></div>
+        <div class="premium-panel-heading"><div><p class="section-kicker">L’essentiel d’un seul regard</p><h2>Tableau de bord de l’auteur</h2></div><span class="premium-pill">Vue d’ensemble</span></div>
+        <p class="dash-note"><strong>Version préparatoire.</strong> Aucune donnée personnelle n’est chargée ici. Les demandes et les statistiques seront connectées après installation de l’authentification serveur.</p>
+        <div class="dash-cards"><div class="dash-card">Romans dans D1<strong>7</strong><small>Comptage précédemment vérifié</small></div><div class="dash-card">Sections dans D1<strong>181</strong><small>Comptage précédemment vérifié</small></div><div class="dash-card">Demandes reçues<strong>—</strong><small>Connexion à créer</small></div><div class="dash-card">Invitations actives<strong>—</strong><small>Connexion à créer</small></div></div>
+        <div class="premium-feature"><div><small>VOTRE BIBLIOTHÈQUE PRIVÉE</small><h3>Sept histoires. Un seul espace.</h3><p>Préparez les invitations, personnalisez les messages et gardez la main sur chaque autorisation de lecture.</p><button class="button button-ghost" type="button" data-jump="catalog">Explorer mes romans →</button></div><div class="premium-feature-art" aria-hidden="true"><span>CD</span><i>VII</i></div></div><h3>Accès rapide</h3><div class="dash-buttons"><button class="button button-primary" type="button" data-jump="operations">Gérer les demandes</button><button class="button button-ghost" type="button" data-jump="emails">Préparer un e-mail</button><button class="button button-ghost" type="button" data-jump="readers">Ma liseuse</button></div>
+      </section>
+
+<section class="studio-panel" data-panel="operations" hidden>
+  <p class="section-kicker">Centre de gestion</p><h2>Demandes · Invitations · Correspondance</h2>
+  <p class="dash-note" id="ops-status">Connexion aux données privées en cours…</p>
+  <div class="ops-summary" id="ops-summary"></div>
+  <div class="ops-columns"><div><h3>Demandes reçues</h3><div id="ops-requests" aria-live="polite"></div></div>
+  <div><h3>Préparer une invitation ou une réponse</h3>
+  <form id="ops-message-form" class="studio-form">
+   <label>Demande sélectionnée<select id="ops-selected" required><option value="">Choisir une demande</option></select></label>
+   <label>Modèle<select id="ops-kind"><option value="accepted">Invitation acceptée</option><option value="receipt">Accusé de réception</option><option value="declined">Réponse négative</option><option value="other">Message libre</option></select></label>
+   <label>Objet<input id="ops-subject" required maxlength="170"></label>
+   <label>Message<textarea id="ops-text" required rows="13"></textarea></label>
+   <label>Lien personnel — visible une seule fois<textarea id="ops-invite-url" rows="3" readonly placeholder="Générez une invitation après avoir sélectionné une demande."></textarea></label>
+   <div class="dash-buttons"><button class="button button-ghost" type="button" id="ops-create">Générer un lien privé</button><button class="button button-ghost" type="button" id="ops-copy">Copier le message</button><button class="button button-primary" type="submit" id="ops-send">Envoyer l’e-mail</button></div>
+   <p id="ops-feedback" aria-live="polite" class="studio-help">Aucun e-mail n'est envoyé sans votre confirmation.</p>
+  </form></div></div>
+</section>
+
+      <section class="studio-panel" data-panel="requests" hidden><h2>Demandes de lecture</h2><p class="dash-note">Les demandes ne sont pas encore enregistrées dans Cloudflare. La liste apparaîtra après connexion du formulaire public à une API sécurisée. Aucun accès automatique ne sera accordé.</p><div class="premium-empty"><span aria-hidden="true">✉</span><h3>Votre boîte de réception vous attend.</h3><p>Les demandes apparaîtront ici après liaison du formulaire public avec Cloudflare D1. Aucun visiteur fictif n’est affiché.</p><button type="button" class="button button-ghost" data-jump="emails">Voir les réponses préparées →</button></div></section>
+      <section class="studio-panel" data-panel="emails" hidden><h2>Messages prêts à personnaliser</h2><p class="dash-note">Préparez ici votre texte. Les modèles peuvent être prévisualisés. La génération de liens et l’envoi réel resteront désactivés jusqu’à la connexion sécurisée au Worker et au service d’e-mails. Les invitations acceptées ne pourront pas être expédiées sans lien valide.</p>
+        <div class="dash-form"><label>Modèle <select id="dash-template"><option value="accepted">Accès à la lecture accepté</option><option value="receipt">Accusé de réception</option><option value="declined">Demande refusée</option><option value="reminder">Rappel d’activation</option><option value="expired">Accès expiré</option></select></label><label>Roman <select id="dash-book"></select></label><label>Prénom du lecteur <input id="dash-reader-name" placeholder="Ex. Marie" autocomplete="off"></label><label>Adresse e-mail du lecteur <input id="dash-reader-email" type="email" placeholder="lecteur@exemple.com" autocomplete="off"></label><div class="dash-invitation-stage"><strong>Invitation personnelle</strong><p>Le lien sera créé par votre Worker après validation de la demande. Ne créez pas de faux liens et ne saisissez pas de secret ici.</p><label>Lien sécurisé <input id="dash-invite-link" readonly placeholder="En attente de connexion Cloudflare" aria-label="Lien d’invitation non disponible"></label><button class="button button-ghost" type="button" disabled title="Disponible après connexion sécurisée au Worker">Générer le lien personnel — à connecter</button></div><label>Objet <input id="dash-subject"></label><label>Message <textarea id="dash-message"></textarea></label><div class="dash-buttons"><button class="button button-primary" id="dash-copy-email" type="button">Copier le message</button><button class="button button-ghost" id="dash-open-email" type="button">Ouvrir ma messagerie (sans lien)</button></div><small id="dash-email-feedback" role="status"></small></div>
+      </section>
+      <section class="studio-panel" data-panel="catalog" hidden><h2>Mes sept romans</h2><p class="dash-note">Catalogue de référence basé sur votre base D1. Les résumés et couvertures existants du site seront reliés ici après connexion du catalogue de publication.</p><div class="premium-catalog-tools"><label>Rechercher un roman <input id="premium-search-book" type="search" placeholder="Titre ou série…" /></label><span>Bibliothèque · 7 titres</span></div><div class="dash-list premium-book-grid" id="dash-catalog"></div></section>
+      <section class="studio-panel" data-panel="readers" hidden><h2>Lecteurs, invitations et ma liseuse</h2><p class="dash-note"><strong>Votre compte de test test01</strong> possède l’autorisation des sept romans dans D1. Pour lire, ouvrez votre <strong>lien d’invitation personnel encore valide</strong>. L’espace administrateur ne contourne pas cette vérification.</p><div class="dash-item"><strong>Ma liseuse</strong><p>Conservez votre lien personnel dans vos favoris. Si l’invitation est expirée, une nouvelle devra être créée via l’administration sécurisée.</p><a class="button button-ghost" href="https://d2l-reader-api.guybeaho.workers.dev/reader" target="_blank" rel="noopener noreferrer">Ouvrir la liseuse (invitation nécessaire)</a></div><p class="dash-note">Gestion des lecteurs, droits par roman et création d’invitations : à relier au Worker sous authentification forte.</p></section>
+      <section class="studio-panel" data-panel="stats" hidden><h2>Statistiques</h2><p class="dash-note">Les chiffres d’activité ne sont pas disponibles dans cet aperçu. Nous afficherons les vraies demandes, activations, invitations et lectures uniquement après branchement de la collecte et de l’API privée.</p><div class="dash-cards"><div class="dash-card">Demandes par roman<strong>—</strong></div><div class="dash-card">Invitations envoyées<strong>—</strong></div><div class="dash-card">Taux d’activation<strong>—</strong></div><div class="dash-card">Lectures<strong>—</strong></div></div></section>
     </main>
   </div>
     <footer class="site-footer studio-footer">
@@ -133,15 +130,15 @@
         <div class="footer-inner">
           <div class="footer-brand-block"><strong>Chroniques d’ailleurs</strong><span>Die 2 Lap</span></div>
           <nav class="footer-nav" aria-label="Liens de pied de page">
-            <a href="index.html#textes">Textes</a>
-            <a href="index.html#romans">Romans</a>
+            <a href="https://chroniques.guybeaho.com/#textes">Textes</a>
+            <a href="https://chroniques.guybeaho.com/#romans">Romans</a>
             <a href="disclaimer.html">Disclaimer</a>
             <a href="impressum.html">Impressum</a>
             <a class="studio-link" href="atelier.html">Atelier auteur</a>
           </nav>
           <p>© <span id="current-year"></span> Die 2 Lap. Tous droits réservés.</p>
         </div>
-        <p class="footer-note">Espace atelier protégé. Les ajouts réalisés ici restent locaux tant que vous ne publiez pas les fichiers mis à jour.</p>
+        <p class="footer-note">Atelier réservé à l’auteur par Cloudflare Access. Les brouillons enregistrés dans ce navigateur ne sont pas publiés automatiquement. Ne saisissez aucune clé secrète dans les pages du site.</p>
       </div>
     </footer>
 </body>

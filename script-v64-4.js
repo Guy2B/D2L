@@ -28,6 +28,7 @@
   const menuToggle = document.querySelector(".menu-toggle");
   const mobileNav = document.querySelector("#mobile-nav");
   const featuredPosts = document.querySelector("#featured-posts");
+  const worksAside = document.querySelector("#works-aside");
 
   const STORAGE_THEME = "die2lap:theme:v11";
   let activeFilter = "all";
@@ -86,6 +87,8 @@
     },
     eau: {
       order: 4,
+      coverImage: "assets/books/ES_I_Eau_qui_dort.webp",
+      coverAlt: "Couverture du roman E.S. I - L’eau qui dort",
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -99,6 +102,8 @@
     },
     java: {
       order: 5,
+      coverImage: "assets/books/ES_II_Resurgence_Java.webp",
+      coverAlt: "Couverture du roman E.S. II - Résurgence à Java",
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -113,6 +118,8 @@
     },
     "47secondes": {
       order: 6,
+      coverImage: "assets/books/ES_III_47_Secondes.webp",
+      coverAlt: "Couverture du roman E.S. III - 47 Secondes",
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -127,6 +134,8 @@
     },
     chemin: {
       order: 7,
+      coverImage: "assets/books/ES_IV_Le_chemin.webp",
+      coverAlt: "Couverture du roman E.S. IV - Le chemin",
       cardLabel: "Roman inédit · achevé",
       seriesES: true,
       kicker: "Roman inédit · achevé",
@@ -676,7 +685,6 @@
   document.querySelector("#stat-posts").textContent = String(posts.length);
   document.querySelector("#stat-books").textContent = String(bookCount);
   const libraryLede = document.querySelector("#library-lede");
-  const worksAside = document.querySelector("#works-aside");
   function updateDynamicHeadings() {
     if (libraryLede) libraryLede.textContent = t("dynamic.libraryLede", { count: posts.length });
     if (worksAside) worksAside.textContent = t("home.works.click");

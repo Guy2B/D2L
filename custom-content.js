@@ -6,16 +6,16 @@ window.CUSTOM_BOOKS = {
     "custom": true,
     "seriesES": false,
     "cardLabel": "",
-    "status": "Test technique",
+    "status": "",
     "kicker": "",
-    "title": "Vérification Atelier (test)",
+    "title": "Vérification Atelier (test, corrigée)",
     "meta": "Fiche de test",
-    "cardText": "Fiche de test",
+    "cardText": "",
     "paragraphs": [
-      "Fiche de vérification technique, retirée immédiatement."
+      "Synopsis corrigé."
     ],
     "coverImage": "assets/books/atelier-verification-atelier.webp",
-    "coverAlt": "Couverture de Vérification Atelier (test)",
+    "coverAlt": "Couverture de Vérification Atelier (test, corrigée)",
     "readerBookId": "es2"
   }
 };
